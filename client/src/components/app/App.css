@@ -1,0 +1,25 @@
+.app {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #f8f8f8;
+}
+.app__heading {
+  color: var(--text-primary);
+  font-size: 20px;
+}
+.app__main {
+  padding: 0 24px;
+  margin-left: var(--nav-size);
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page__heading {
+  font-weight: 600;
+  font-size: 20px;
+}

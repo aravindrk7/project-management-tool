@@ -1,0 +1,90 @@
+.sidenav__item {
+    padding: 8px 0;
+    border-bottom: 1px solid #2a323f;
+}
+.sidenav__itemHeader {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    padding: 0 24px 0 24px;
+    width: 100%;
+    align-items: center;
+}
+.sidenav__itemHeader:hover .sidenav__itemHeaderName,
+.sidenav__itemHeader:hover .sidenav__itemHeaderIcon {
+    color: #cbd4db;
+}
+.sidenav__itemHeader > div {
+    display: flex;
+}
+
+.sidenav__itemHeaderName,
+.sidenav__itemHeaderIcon,
+.sidenav__itemHeaderCount {
+    font-size: 13px;
+    color: #6f7782;
+    font-weight: 500;
+    transition: 0.5s;
+}
+.sidenav__itemHeaderCount {
+    margin-left: 5px;
+}
+
+.sidenav__itemContents {
+    display: flex;
+    flex-direction: column;
+}
+.sidenav__itemContent {
+    padding: 0 24px 0 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.5s;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+.sidenav__itemContent:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.sidenav__itemContentName {
+    color: #cbd4db;
+    font-size: 13px;
+    padding: 8px 0;
+}
+
+.sidenav__itemButtonIcon {
+    color: #6f7782;
+    font-weight: 500;
+    transition: 0.5s;
+}
+
+.sidenav__itemButton {
+    padding: 0 24px;
+    background: transparent;
+    margin-top: 8px;
+    cursor: pointer;
+    display: flex;
+    height: 40px;
+    padding: 0 24px 0 24px;
+    width: 100%;
+    align-items: center;
+}
+.sidenav__itemButtonIcon {
+    font-size: 18px;
+}
+
+.sidenav__itemButtonName {
+    margin-left: 4px;
+    font-size: 13px;
+    color: #6f7782;
+    font-weight: 500;
+    transition: 0.5s;
+}
+
+.sidenav__itemButton:hover .sidenav__itemButtonName,
+.sidenav__itemButton:hover .sidenav__itemButtonIcon {
+    color: #cbd4db;
+}

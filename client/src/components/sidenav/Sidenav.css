@@ -1,0 +1,73 @@
+.sidenav {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width:var(--nav-size);
+    background: var(--color-secondary);
+    box-shadow: 0 0 10px gainsboro, 0 0 5px gainsboro;
+    user-select: none;
+}
+.sidenav__logo {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+}
+/*.sidenav__logo--small {
+    display: none;
+    font-size: 16px;
+    font-weight: bold;
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-primary);
+    font-family: Mulish-black;
+}*/
+.sidenav__logoImage {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+} 
+.sidenav__logoName{
+    font-weight: 500;
+    font-size: 16px;
+    color: #fff;
+    margin-left: 5px;
+}
+.sidenav__routes {
+    border-bottom: 1px solid #2a323f;
+    padding-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidenav__items {
+    height: calc(100% - 200px);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+
+/* @media (max-width: 1024px) {
+    .sidenav {
+        width: 50px;
+    }
+    .sidenav__name {
+        display: none;
+    }
+    .sidenav__logo {
+        display: none;
+    }
+    .sidenav__logo--small {
+        display: flex;
+    }
+    .sidenav__menu {
+        width: 100%;
+        border-radius: 0px;
+        height: 70px;
+    }
+} */

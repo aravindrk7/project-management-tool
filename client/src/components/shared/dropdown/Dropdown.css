@@ -1,0 +1,29 @@
+.dropdown {
+    position: absolute;
+    left: calc(100% - 40px);
+    max-width: 500px;
+    min-width: 185px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    border: 1px solid gainsboro;
+}
+.dropdown:hover{
+    background: #fff !important;
+}
+.dropdown > p {
+    font-size: 13px;
+    width: 100%;
+    padding: 0 8px;
+    height: 35px;
+    transition: 0.5s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #151b26;
+}
+
+.dropdown > p:hover {
+    background: #e8ecee;
+}

@@ -1,0 +1,33 @@
+.sidenavRoute {
+    text-decoration: none;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    height: 35px;
+    padding: 0 24px;
+    align-items: center;
+    transition: 0.5s;
+}
+
+.sidenavRoute:hover:not(.is-active-sidenavRoute) {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.is-active-sidenavRoute {
+    background: rgba(255, 255, 255, 0.16);
+}
+.is-active-sidenavRoute .sidenavRoute__icon {
+    color: #cbd4db;
+}
+
+.sidenavRoute__icon {
+    font-size: 20px;
+    color: #646a6e;
+    height: 100%;
+    margin-right: 8px;
+}
+.sidenavRoute__name {
+    font-size: 14px;
+    color: #cbd4db;
+    height: 100%;
+}

@@ -1,0 +1,9 @@
+.sidenav__itemContentIcon {
+    font-size: 15px;
+    color: #6f7782;
+    font-weight: 500;
+    transition: 0.5s;
+}
+.sidenav__itemContentIcon:hover {
+    color: #cbd4db;
+}
