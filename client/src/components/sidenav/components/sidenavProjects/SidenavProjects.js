@@ -7,27 +7,31 @@ import { FiPlus } from "react-icons/fi";
 import DropdownIcon from '../dropdownIcon/DropdownIcon';
 import './../SidenavItem.css';
 
-function SidenavProjects({ projects ,refresh}) {
+function SidenavProjects({ projects, refresh }) {
     const api_url = config.url.API_URL;
     // Animations
     const slide = useSpring({
-        from: { opacity: 0 },
+        from: { marginTop:-150,opacity: 0 },
         opacity: 1,
+        marginTop:0
     });
-    const addToFavorites = (id) => {
-        axios.patch(api_url + 'project/add-favorites/' + id).then(response => {
-            refresh();
-            console.log(response);
-        });
+    const addToFavorites = (project) => {
+        if (!project.favorite) {
+            axios.patch(api_url + 'project/add-favorites/' + project._id).then(response => {
+                refresh();
+                console.log(response);
+            });
+        }
+
     };
     return (
         <animated.div style={slide}>
             < div className="sidenav__itemContents">
                 {projects?.map((project) => (
-                    <NavLink to={`/project/${project._id}`} key={project._id} className="sidenav__itemContent">
+                    <NavLink to={`/project/${project._id}`} key={project._id} activeClassName='is-active-sidenavRoute' className="sidenav__itemContent">
                         <p className="sidenav__itemContentName">{project.name}</p>
                         <DropdownIcon>
-                            <p onClick={() => addToFavorites(project._id)}>Add to Favorites</p>
+                            <p onClick={() => addToFavorites(project)}>Add to Favorites</p>
                             <p onClick={() => console.log('Delete Project ' + project.name)}>Delete Project</p>
                         </DropdownIcon>
                     </NavLink>

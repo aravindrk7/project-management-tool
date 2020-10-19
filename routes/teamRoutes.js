@@ -13,6 +13,16 @@ router.get('/', async (req, res) => {
             .json({ error: error.message });
     }
 });
+router.get('/:id', async (req, res) => {
+    try {
+        const team = await Team.findOne({ _id: req.params.id });
+        res.json(team);
+    } catch (error) {
+        res
+            .status(500)
+            .json({ error: error.message });
+    }
+});
 
 // router.delete('/delete', auth, async (req, res) => {
 //     try {

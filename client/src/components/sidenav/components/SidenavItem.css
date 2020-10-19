@@ -2,6 +2,10 @@
     padding: 8px 0;
     border-bottom: 1px solid #2a323f;
 }
+
+.sidenav__itemContentsContainer{
+    overflow: hidden;
+}
 .sidenav__itemHeader {
     cursor: pointer;
     display: flex;
@@ -25,7 +29,7 @@
     font-size: 13px;
     color: #6f7782;
     font-weight: 500;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 .sidenav__itemHeaderCount {
     margin-left: 5px;
@@ -45,7 +49,7 @@
     text-decoration: none;
 
 }
-.sidenav__itemContent:hover {
+.sidenav__itemContent:hover:not(.is-active-sidenavRoute) {
     background: rgba(255, 255, 255, 0.08);
 }
 

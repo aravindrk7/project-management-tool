@@ -20,6 +20,7 @@
 }
 
 .page__heading {
+  color: var(--text-primary);
   font-weight: 600;
   font-size: 20px;
 }

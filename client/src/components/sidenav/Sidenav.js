@@ -27,7 +27,7 @@ function Sidenav(props) {
         }
         getProjects();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [refreshFavorites])
     useEffect(() => {
         const getTeams = async () => {
             const teamData = await axios.get(api_url + 'team');
@@ -40,6 +40,7 @@ function Sidenav(props) {
         const getFavorites = async () => {
             const favoriteData = await axios.get(api_url + 'project/favorites');
             setFavorites(favoriteData.data);
+      
         }
         getFavorites();
         // eslint-disable-next-line react-hooks/exhaustive-deps

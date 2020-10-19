@@ -1,0 +1,6 @@
+.team{
+    padding: 10px 0px;
+}
+.team__heading{
+    color: var(--text-primary);
+}

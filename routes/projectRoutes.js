@@ -45,8 +45,8 @@ router.patch('/remove-favorites/:id', async (req, res) => {
 });
 router.get('/:id', async (req, res) => {
     try {
-        const projects = await Project.findOne({ _id: req.params.id });
-        res.json(projects);
+        const project = await Project.findOne({ _id: req.params.id });
+        res.json(project);
     } catch (error) {
         res
             .status(500)

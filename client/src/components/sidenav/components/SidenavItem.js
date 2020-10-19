@@ -1,29 +1,44 @@
 import React, { useState } from 'react';
-import { FiChevronUp } from "react-icons/fi";
+
 import { FiChevronDown } from "react-icons/fi";
 function SidenavItem(props) {
-    const [showItems, setShowItems] = useState(true);
+    const [showItems, setShowItems] = useState(false);
+    const [rotation, setRotation] = useState({
+        transform: 'rotate(0deg)'
+    });
 
     const handleDropdown = () => {
-        setShowItems(prev => !prev)
+        setShowItems(prev => !prev);
+        if (showItems) {
+            setRotation({
+                transform: 'rotate(360deg)'
+            })
+        }
+        else {
+            setRotation({
+                transform: 'rotate(180deg)'
+            })
+        }
+
     };
 
     return (
-        <div className="sidenav__item">
+        <div className="sidenav__item" >
             <div className="sidenav__itemHeader" onClick={handleDropdown}>
                 <div>
                     <p className="sidenav__itemHeaderName">{props.title}</p>
-                    <span className="sidenav__itemHeaderCount">({props.children.props.projects?.length || props.children.props.teams?.length})</span>
+                    {(props.children.props.projects?.length || props.children.props.teams?.length)
+                        &&
+                        <span className="sidenav__itemHeaderCount">({props.children.props.projects?.length || props.children.props.teams?.length})</span>
+                    }
                 </div>
-
-                {showItems
-                    ? (<FiChevronUp className="sidenav__itemHeaderIcon" />)
-                    : (<FiChevronDown className="sidenav__itemHeaderIcon" />)
+                <FiChevronDown className="sidenav__itemHeaderIcon" style={rotation} />
+            </div>
+            <div className="sidenav__itemContentsContainer" >
+                {
+                    showItems && props.children
                 }
             </div>
-            {
-                showItems && props.children
-            }
         </div>
     )
 }

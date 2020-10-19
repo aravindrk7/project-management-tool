@@ -15,6 +15,11 @@ function DropdownIcon(props) {
         setTop(e.currentTarget.getBoundingClientRect().y);
         setIsComponentVisible(prev => !prev);
     };
+    const handleClose = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsComponentVisible(false);
+    };
 
 
     return (
@@ -22,7 +27,7 @@ function DropdownIcon(props) {
             <FiMoreHorizontal className="sidenav__itemContentIcon" onClick={(e) => handleOpen(e)} />
             <div >
                 {isComponentVisible &&
-                    <Dropdown top={top}>
+                    <Dropdown top={top} close={handleClose}>
                         {props.children}
                     </Dropdown>
                 }

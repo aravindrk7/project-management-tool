@@ -14,6 +14,7 @@ import NoMatch from '../noMatch/NoMatch';
 import MyTasks from '../myTasks/MyTasks';
 import Goals from '../goals/Goals';
 import Project from '../project/Project';
+import Team from '../team/Team';
 import Sidenav from '../sidenav/Sidenav';
 import SidenavRoute from '../sidenav/components/sidenavRoute/SidenavRoute';
 
@@ -89,6 +90,9 @@ function App() {
               </Route>
               <Route path="/project/:id">
                 <Project />
+              </Route>
+              <Route path="/team/:id">
+                <Team />
               </Route>
               <Route path="/login">
                 <Login />
