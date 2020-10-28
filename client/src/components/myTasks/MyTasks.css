@@ -1,0 +1,118 @@
+/* My Tasks */
+.myTasks {
+    --cols: 5;
+    --grid-gap: 10px;
+    --task-column: 250px;
+    height: 100%;
+}
+.myTasks__header {
+    display: flex;
+    align-items: center;
+    padding: 10px 24px;
+    height: 50px;
+    background: #fff;
+    box-shadow: 1px 0px 3px rgb(184, 183, 183);
+}
+.myTasks__heading {
+    color: var(--text-primary);
+}
+
+.myTasks__content {
+    position: relative;
+    height: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Due Tasks */
+.dueTasks__dueWhen {
+    margin-bottom: 60px;
+}
+.dueTasks__columnHeadingContainer {
+    display: grid;
+    grid-template-columns: var(--task-column) repeat(
+            var(--cols),
+            calc((100% - (var(--task-column) + (var(--cols) * var(--grid-gap)))) / var(--cols))
+        );
+    grid-gap: var(--grid-gap);
+    min-height: 40px;
+    padding: 0 10px;
+}
+
+.dueTasks__columnHeading {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+.dueWhen {
+    font-size: 17px;
+    color: gray;
+}
+
+.dueTasks__Row {
+    height: calc(100% - 50px);
+}
+
+/* Task */
+.task {
+    display: grid;
+    grid-template-columns: var(--task-column) repeat(
+            var(--cols),
+            calc((100% - (var(--task-column) + (var(--cols) * var(--grid-gap)))) / var(--cols))
+        );
+    grid-gap: var(--grid-gap);
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 0 0 2px gainsboro, 0 0 1px gray;
+    margin-bottom: 8px;
+    padding: 0 10px;
+    cursor: pointer;
+    user-select: none;
+}
+.task:hover {
+    background: rgb(246, 250, 253);
+}
+.task__item {
+    width: 100%;
+    padding: 10px 0px;
+    display: flex;
+    align-items: center;
+}
+
+.task__itemValue,
+.task__itemSubtitle {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.task__itemValue {
+    width: 100%;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis !important;
+}
+.task__itemSubtitle {
+    margin-right: 8px;
+}
+.task__itemIcon {
+    font-size: 14px;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    stroke-width: 4;
+}
+.fi-check-circle {
+    color: var(--success-green) !important;
+}
+.fi-circle {
+    color: var(--color-primary) !important;
+}
+.fa-circle {
+    font-size: 10px; 
+}

@@ -1,14 +1,13 @@
 const mongoose = require('mongoose');
 
-const projectSchema = mongoose.Schema({
-    user_id: {
-        type: String,
+const taskSchema = mongoose.Schema({
+    assigned_to: {
+        type: Object,
         required: true,
     },
-    name: {
-        type: String,
+    assigned_by: {
+        type: Object,
         required: true,
-        unique:true
     },
     created_at: {
         type: Date,
@@ -18,22 +17,22 @@ const projectSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    team_id: {
+    associated_team: {
+        type: Object,
+        required: true
+    },
+    title: {
         type: String,
         required: true
     },
-    owner: {
+    description: {
         type: String,
         required: true
     },
-    privacy: {
-        type: String,
-        required: true
-    },
-    favorite: {
-        type: Boolean,
+    due_date: {
+        type: Date,
         required: true
     },
 });
 
-module.exports = mongoose.model('projects', projectSchema);
+module.exports = mongoose.model('tasks', taskSchema);

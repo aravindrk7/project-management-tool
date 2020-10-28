@@ -17,7 +17,7 @@ function Project(props) {
     }, [id])
     return (
         <div className="project">
-            <h1 className="project__heading page__heading">Project</h1>
+            <h1 className="project__heading">Project</h1>
             <p className="project__name ">{project.name}</p>
             <p className="project__name ">{project.created_at}</p>
             <p className="project__name ">{project.owner}</p>

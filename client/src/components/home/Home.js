@@ -30,7 +30,7 @@ function Home() {
 
     return (
         <div className="home">
-            <h1 className="home__heading page__heading">Home</h1>
+            <h1 className="home__heading">Home</h1>
             {/* <animated.span>{props.number}</animated.span> */}
         </div>
     )

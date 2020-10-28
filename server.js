@@ -8,6 +8,7 @@ require('dotenv').config();
 const userRoutes = require('./routes/userRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 const teamRoutes = require('./routes/teamRoutes');
+const taskRoutes = require('./routes/taskRoutes');
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use(express.json());
 app.use('/api/user',userRoutes);
 app.use('/api/project',projectRoutes);
 app.use('/api/team',teamRoutes);
+app.use('/api/task',taskRoutes);
 
 app.listen(port, () => {
     console.log(`Server running in ${port}`);

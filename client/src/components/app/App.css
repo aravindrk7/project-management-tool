@@ -9,7 +9,7 @@
   font-size: 20px;
 }
 .app__main {
-  padding: 0 24px;
+  height: 100%;
   margin-left: var(--nav-size);
 }
 
@@ -19,8 +19,4 @@
   align-items: center;
 }
 
-.page__heading {
-  color: var(--text-primary);
-  font-weight: 600;
-  font-size: 20px;
-}
+

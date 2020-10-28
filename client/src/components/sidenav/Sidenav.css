@@ -7,7 +7,7 @@
     bottom: 0;
     width:var(--nav-size);
     background: var(--color-secondary);
-    box-shadow: 0 0 10px gainsboro, 0 0 5px gainsboro;
+    /* box-shadow: 0 0 10px gainsboro, 0 0 5px gainsboro; */
     user-select: none;
 }
 .sidenav__logo {

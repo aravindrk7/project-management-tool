@@ -11,7 +11,7 @@ const teamSchema = mongoose.Schema({
         unique: true
     },
     created_at: {
-        type: String,
+        type: Date,
         required: true
     },
     status: {
@@ -23,7 +23,7 @@ const teamSchema = mongoose.Schema({
         required: true
     },
     head: {
-        type: String,
+        type: Object,
         required: true
     },
     privacy: {

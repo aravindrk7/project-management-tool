@@ -4,7 +4,7 @@ function Goals() {
     
     return (
         <div className="goals">
-            <h1 className="goals__heading page__heading">Goals</h1>
+            <h1 className="goals__heading">Goals</h1>
         </div>
     )
 }
