@@ -1,26 +1,58 @@
 @font-face {
-  font-family: Mulish;
-  src: url(fonts/Mulish-Regular.ttf);
-}
-@font-face {
-  font-family: Mulish-medium;
-  src: url(fonts/Mulish-Medium.ttf);
-}
-@font-face {
-  font-family: Mulish-black;
-  src: url(fonts/Mulish-Black.ttf);
-}
-@font-face {
   font-family: Questrial;
   src: url(fonts/Questrial-Regular.ttf);
 }
+@font-face {
+  font-family: maven;
+  src: url(fonts/MavenPro-Regular.ttf);
+}
+@font-face {
+  font-family: maven-bold;
+  src: url(fonts/MavenPro-Bold.ttf);
+}
+@font-face {
+  font-family: inter;
+  src: url(fonts/Inter-Regular-slnt=0.ttf);
+}
+@font-face {
+  font-family: inter-medium;
+  src: url(fonts/Inter-Medium-slnt=0.ttf);
+}
+@font-face {
+  font-family: inter-bold;
+  src: url(fonts/Inter-Bold-slnt=0.ttf);
+}
+@font-face {
+  font-family: acumin;
+  src: url(fonts/Acumin-RPro.woff);
+}
+@font-face {
+  font-family: open-sans;
+  src: url(fonts/OpenSans-Regular.ttf);
+}
+@font-face {
+  font-family: open-sans-bold;
+  src: url(fonts/OpenSans-SemiBold.ttf);
+}
+@font-face {
+  font-family: open-sans-black;
+  src: url(fonts/OpenSans-Bold.ttf);
+}
 :root {
-  --color-primary: #5863f8;
-  /* --color-secondary: #151b26; */
-  --color-secondary: #121212;
-  --text-primary: #151b26;
+  /* --color-primary: #5863f8; */
+  --color-primary: #313cd6;
+  --bg-primary: #fff;
+  --bg-secondary: #f6f7f9;
+  /* --color-secondary: #121212; */
+  --text-primary: #090909;
+  --text-secondary: #88898b;
+  --text-tertiary: #b6b6b6;
+
+  --box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.1);
   --nav-size: 240px;
-  --border: 1px solid gainsboro;
+  --border: 1px solid #f0f1f2;
+  --border-dark: 1px solid #a6a7a8;
+  --border-dashed: 1px dashed #c0c0c0;
   --border-radius: 3px;
   --speed: 500ms;
 
@@ -33,11 +65,9 @@
   box-sizing: border-box;
   border: none;
   outline: none;
-  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-    "Helvetica Neue", sans-serif; */
-  /* font-family: mulish; */
-  font-family: Questrial;
+  font-family: open-sans;
   scroll-behavior: smooth;
+  /* letter-spacing: 0.5px; */
 }
 
 /* width */
@@ -69,21 +99,15 @@
 
 h1 {
   color: var(--text-primary);
-  font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
+  font-family: open-sans-black;
 }
 h2 {
-  color: var(--text-primary);
-  font-weight: 500;
-  font-size: 15px;
+  color: var(--text-secondary);
+  font-size: 14px;
   color: #888;
+  font-family: open-sans-bold;
 }
-H1 {
-  font-family: Mulish-black;
-}
-/* H2 {
-  font-family: Mulish-medium;
-} */
 
 /* B,
 I,

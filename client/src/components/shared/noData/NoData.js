@@ -4,7 +4,7 @@ import './NoData.css';
 function NoData(props) {
     return (
         <div className="noData">
-            <p>{props.message}</p>
+            <p className="noData__message">{props.message}</p>
         </div>
     )
 }

@@ -24,7 +24,42 @@ router.get('/all/:id', async (req, res) => {
             .json({ error: error.message });
     }
 });
+router.get('/user/:id', async (req, res) => {
+    try {
+        const tasks = await Task.find({ "assigned_to.id": req.params.id });
+        const splitedTasks = splitStatus(tasks);
+        res.json(splitedTasks);
+    } catch (error) {
+        res
+            .status(500)
+            .json({ error: error.message });
+    }
+});
 
+const splitStatus = (tasks) => {
+    const current = new Date();
+    let total = 0;
+    let splitedTasks = {
+        'open': [],
+        'inProgress': [],
+        'completed': [],
+    };
+    tasks.filter(task => {
+        if (task.status == 'open') {
+            splitedTasks['open'].push(task);
+            total++;
+        }
+        else if (task.status == 'inProgress') {
+            splitedTasks['inProgress'].push(task);
+            total++;
+        }
+        else {
+            splitedTasks['completed'].push(task);
+            total++;
+        }
+    });
+    return { total: total, splitedTasks: splitedTasks };
+};
 const splitDueTime = (tasks) => {
     const current = new Date();
     let total = 0;

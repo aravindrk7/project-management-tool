@@ -27,7 +27,6 @@ function MyTasks() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userData.user,refreshTask]);
     const handleTaskChange = () => {
-        console.log('j=aja');
         setRefreshTask(prev => prev + 1);
     };
     return (

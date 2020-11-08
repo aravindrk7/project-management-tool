@@ -1,0 +1,66 @@
+.header {
+    background: var(--bg-primary);
+    border-bottom: var(--border);
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: var(--nav-size);
+    padding: 10px 24px;
+}
+.header__search {
+    /* border: var(--border); */
+    display: flex;
+    height: 100%;
+    width: 80%;
+}
+.header__searchIcon{
+    font-size: 18px;
+    height: 100%;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+}
+.header__search input {
+    font-size: 14px;
+    color: var(--text-secondary);
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header__user {
+    display: flex;
+    align-items: center;
+    user-select: none;
+    transition: 0.3s ease-in-out;
+}
+.header__userDetails {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+.header__userName {
+    font-size: 14px;
+    color: var(--text-primary);
+    font-weight: 500;
+    text-align: right;
+    margin-bottom: 2px;
+}
+.header__userEmail {
+    font-size: 10px;
+    color: var(--text-tertiary);
+    text-align: right;
+}
+
+.header__userCard {
+    border-radius: 50%;
+    border: var(--border);
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+}
+.header__userIcon {
+    font-size: 17px;
+}

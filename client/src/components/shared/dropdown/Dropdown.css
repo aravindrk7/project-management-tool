@@ -2,28 +2,35 @@
     position: absolute;
     left: calc(100% - 40px);
     max-width: 500px;
-    min-width: 185px;
-    background: #fff;
+    min-width: 230px;
+    background: var(--bg-primary);
     display: flex;
+    align-items: center;
     flex-direction: column;
     border-radius: 3px;
-    border: 1px solid gainsboro;
+    box-shadow: var(--box-shadow);
+    border: var(--border);
+    z-index: 10000;
+    transform-origin: top left;
 }
-.dropdown:hover{
-    background: #fff !important;
-}
+
 .dropdown > p {
+    border-bottom: var(--border);
     font-size: 13px;
     width: 100%;
     padding: 0 8px;
-    height: 35px;
-    transition: 0.5s;
+    height: 40px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    color: #151b26;
+    color: var(--text-secondary);
+    transition: 0.3s ease-in-out;
+    font-family: open-sans-bold;
 }
-
+.dropdown > p:last-child{
+    border: none;
+}
 .dropdown > p:hover {
-    background: #e8ecee;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
 }

@@ -22,6 +22,7 @@ import SidenavRoute from '../sidenav/components/sidenavRoute/SidenavRoute';
 import { FiHome } from "react-icons/fi";
 import { FiCheckCircle } from "react-icons/fi";
 import { FiTarget } from "react-icons/fi";
+import Header from '../shared/header/Header';
 
 function App() {
   const api_url = config.url.API_URL;
@@ -67,7 +68,7 @@ function App() {
     <Router>
       <UserContext.Provider value={{ userData, setUserData }}>
         <div className="app">
-          {/* <Header /> */}
+          <Header/>
           <Sidenav >
             <SidenavRoute parent="/" path='home' name='Home' icon={<FiHome />} id='1' />
             <SidenavRoute parent="/" path='myTasks' name='My Tasks' icon={<FiCheckCircle />} id='2' />

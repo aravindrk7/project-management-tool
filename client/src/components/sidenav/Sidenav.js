@@ -3,15 +3,11 @@ import axios from 'axios';
 
 import './Sidenav.css';
 import { config } from './../../constants/apiRoute';
-import SidenavProjects from './components/sidenavProjects/SidenavProjects';
-import SidenavTeams from './components/sidenavTeams/SidenavTeams';
-import SidenavFavorites from './components/sidenavFavorites/SidenavFavorites';
-import SidenavItem from './components/SidenavItem';
-
-import logo from './../../images/pmt.png';
-
-
-
+import SidenavProjects from './components/SidenavProjects';
+import SidenavTeams from './components/SidenavTeams';
+import SidenavFavorites from './components/SidenavFavorites';
+import Accordion from './../shared/accordion/Accordion';
+import Logo from '../shared/logo/Logo';
 
 function Sidenav(props) {
     const api_url = config.url.API_URL;
@@ -40,7 +36,7 @@ function Sidenav(props) {
         const getFavorites = async () => {
             const favoriteData = await axios.get(api_url + 'project/favorites');
             setFavorites(favoriteData.data);
-      
+
         }
         getFavorites();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,26 +48,20 @@ function Sidenav(props) {
 
     return (
         <div className="sidenav">
-            <div className="sidenav__logo">
-                <img className="sidenav__logoImage" src={logo} alt="" />
-                <p className="sidenav__logoName">Project Management</p>
-            </div>
-            {/* <div className="sidenav__logo--small">
-                <img className="sidenav__logoImage" src={logo} alt="" />
-            </div> */}
+            <Logo />
             <div className="sidenav__routes">
                 {props.children}
             </div>
             <div className="sidenav__items">
-                <SidenavItem title="Favorites">
+                <Accordion title="Favorites" value={favorites?.length}>
                     <SidenavFavorites projects={favorites} refresh={handleFavoritesChange} />
-                </SidenavItem>
-                <SidenavItem title="Teams">
+                </Accordion>
+                <Accordion title="Teams" value={teams?.length}>
                     <SidenavTeams teams={teams} />
-                </SidenavItem>
-                <SidenavItem title="Projects">
+                </Accordion>
+                <Accordion title="Projects" value={projects?.length}>
                     <SidenavProjects projects={projects} refresh={handleFavoritesChange} />
-                </SidenavItem>
+                </Accordion>
             </div>
         </div>
     )

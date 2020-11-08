@@ -46,6 +46,7 @@
     font-size: 12px;
     display: flex;
     align-items: center;
+    color: rgb(170, 170, 170);
 }
 .dueWhen {
     font-size: 17px;
@@ -66,14 +67,22 @@
     grid-gap: var(--grid-gap);
     border-radius: 3px;
     background: #fff;
-    box-shadow: 0 0 2px gainsboro, 0 0 1px gray;
-    margin-bottom: 8px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1), 
+    0 2px 2px rgba(0,0,0,0.1), 
+    0 4px 4px rgba(0,0,0,0.05);
+
+    margin-bottom: 10px;
     padding: 0 10px;
     cursor: pointer;
     user-select: none;
+    transition: .3s ease-in-out;
 }
 .task:hover {
-    background: rgb(246, 250, 253);
+    background: rgb(251, 253, 255);
+    transform: translateY(-1px);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.2), 
+    0 2px 2px rgba(0,0,0,0.2), 
+    0 4px 4px rgba(0,0,0,0.1);
 }
 .task__item {
     width: 100%;
@@ -86,8 +95,8 @@
 .task__itemSubtitle {
     display: flex;
     align-items: center;
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: 500;
     color: var(--text-primary);
 }
 .task__itemValue {

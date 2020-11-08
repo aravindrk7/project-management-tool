@@ -2,9 +2,9 @@ import React from 'react';
 import { useSpring, animated } from 'react-spring';
 import { NavLink } from "react-router-dom";
 import axios from 'axios';
-import { config } from './../../../../constants/apiRoute';
-import './../SidenavItem.css';
-import DropdownIcon from '../dropdownIcon/DropdownIcon';
+import { config } from '../../../constants/apiRoute';
+import './../../shared/accordion/Accordion.css';
+import DropdownIcon from './dropdownIcon/DropdownIcon';
 
 
 function SidenavFavorites({ projects ,refresh}) {
@@ -25,7 +25,7 @@ function SidenavFavorites({ projects ,refresh}) {
         <animated.div style={slide}>
             <div className="sidenav__itemContents">
                 {projects?.map((project) => (
-                    <NavLink to={`/project/${project._id}`} key={project._id} activeClassName='is-active-sidenavRoute' className="sidenav__itemContent">
+                    <NavLink to={`/project/${project._id}`} key={project._id} activeClassName='is-active-sidenavItem' className="sidenav__itemContent">
                         <p className="sidenav__itemContentName">{project.name}</p>
                         <DropdownIcon>
                             <p onClick={() => removeFromFavorites(project._id)}>Remove from Favorites</p>

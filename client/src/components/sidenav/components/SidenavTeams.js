@@ -4,13 +4,13 @@ import { NavLink } from "react-router-dom";
 
 import { FiPlus } from "react-icons/fi";
 
-import axios from 'axios';
-import { config } from './../../../../constants/apiRoute';
-import DropdownIcon from '../dropdownIcon/DropdownIcon';
-import './../SidenavItem.css';
+// import axios from 'axios';
+// import { config } from '../../../constants/apiRoute';
+import DropdownIcon from './dropdownIcon/DropdownIcon';
+import './../../shared/accordion/Accordion.css';
 
 function SidenavTeams({ teams }) {
-    const api_url = config.url.API_URL;
+    // const api_url = config.url.API_URL;
     // Animations
     const slide = useSpring({
         from: { marginTop:-150,opacity: 0 },
@@ -23,7 +23,7 @@ function SidenavTeams({ teams }) {
             <div className="sidenav__itemContents" >
 
                 {teams?.map((team) => (
-                    <NavLink to={`/team/${team._id}`} key={team._id} activeClassName='is-active-sidenavRoute' className="sidenav__itemContent">
+                    <NavLink to={`/team/${team._id}`} key={team._id} activeClassName='is-active-sidenavItem' className="sidenav__itemContent">
                         <p className="sidenav__itemContentName">{team.name}</p>
 
                         <DropdownIcon>

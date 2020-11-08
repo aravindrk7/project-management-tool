@@ -2,7 +2,7 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: #f8f8f8;
+  background: var(--bg-secondary);
 }
 .app__heading {
   color: var(--text-primary);
@@ -18,5 +18,3 @@
   justify-content: center;
   align-items: center;
 }
-
-

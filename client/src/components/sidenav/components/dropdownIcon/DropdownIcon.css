@@ -1,9 +1,11 @@
 .sidenav__itemContentIcon {
     font-size: 15px;
-    color: #6f7782;
+    color:var(--text-primary);
     font-weight: 500;
     transition: 0.5s;
+    display: flex;
+    align-items: center;
 }
 .sidenav__itemContentIcon:hover {
-    color: #cbd4db;
+    color: var(--color-primary);
 }

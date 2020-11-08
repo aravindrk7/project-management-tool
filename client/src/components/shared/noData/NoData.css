@@ -4,3 +4,8 @@
     top: 50%;
     transform: translate(-50%, -50%);
 }
+.noData__message{
+    /* font-size: 13px ; */
+    color: var(--text-primary);
+    font-weight: 600;
+}

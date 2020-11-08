@@ -1,0 +1,38 @@
+.accordion {
+    padding: 8px 0;
+    border-bottom: var(--border);
+}
+
+.accordion__content{
+    overflow: hidden;
+}
+.accordion__header {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    padding: 0 24px 0 24px;
+    width: 100%;
+    align-items: center;
+}
+.accordion__header:hover .accordion__title,
+.accordion__header:hover .accordion__headerIcon,
+.accordion__header:hover .accordion__titleValue {
+    color:var(--color-primary);
+}
+.accordion__header > div {
+    display: flex;
+}
+
+.accordion__title,
+.accordion__headerIcon,
+.accordion__titleValue {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: 0.3s;
+    font-family: open-sans-bold;
+}
+.accordion__titleValue {
+    margin-left: 5px;
+}

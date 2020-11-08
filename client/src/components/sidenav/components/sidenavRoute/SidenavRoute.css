@@ -1,33 +1,43 @@
 .sidenavRoute {
     text-decoration: none;
-    width: 100%;
+    width: calc(100% - 24px);
     cursor: pointer;
     display: flex;
-    height: 35px;
+    height: 40px;
     padding: 0 24px;
     align-items: center;
     transition: 0.5s;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .sidenavRoute:hover:not(.is-active-sidenavRoute) {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-secondary);
 }
 
 .is-active-sidenavRoute {
-    background: rgba(255, 255, 255, 0.16);
+    background: var(--bg-secondary);
 }
-.is-active-sidenavRoute .sidenavRoute__icon {
-    color: #cbd4db;
+.is-active-sidenavRoute .sidenavRoute__icon,
+.is-active-sidenavRoute .sidenavRoute__name {
+    color: var(--color-primary);
+    font-family: open-sans-black;
 }
 
 .sidenavRoute__icon {
-    font-size: 20px;
-    color: #646a6e;
+    font-size: 18px;
+    color: var(--text-secondary);
+    /* color: var(--color-primary); */
     height: 100%;
-    margin-right: 8px;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
 }
 .sidenavRoute__name {
-    font-size: 14px;
-    color: #cbd4db;
+    font-family: open-sans-bold;
+    font-size: 13px;
+    color: var(--text-secondary);
     height: 100%;
+    display: flex;
+    align-items: center;
 }

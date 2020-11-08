@@ -1,0 +1,24 @@
+.button {
+    border: var(--border);
+    display: flex;
+    align-items: center;
+    background: var(--color-primary);
+    padding: 0px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 35px;
+}
+.button__icon {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: #fff;
+    margin-right: 10px;
+}
+.button__text {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    color: #fff;
+    font-family: open-sans-bold;
+}

@@ -11,8 +11,9 @@ function Dropdown(props) {
     };
     // Animations
     const slide = useSpring({
-        from: { opacity: 0 },
-        opacity: 1
+        from: { transform: 'scale(0)' },
+        transform: 'scale(1)',
+        config: { duration: 200 }
     });
     return (
         <animated.div className="dropdown" style={Object.assign(style, slide)} onClick={(e) => props.close(e)}>
