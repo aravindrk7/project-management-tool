@@ -6,7 +6,7 @@
     padding: 0px 10px;
     border-radius: 4px;
     cursor: pointer;
-    height: 35px;
+    height: 30px;
 }
 .button__icon {
     display: flex;
@@ -20,5 +20,5 @@
     align-items: center;
     font-size: 13px;
     color: #fff;
-    font-family: open-sans-bold;
+    font-family: poppins-bold;
 }

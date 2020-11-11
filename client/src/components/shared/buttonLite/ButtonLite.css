@@ -1,0 +1,28 @@
+.buttonLite {
+    border: 1px solid gainsboro;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    padding: 0px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 30px;
+    transition: .3s ease-in-out;
+}
+.buttonLite__icon {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-right: 5px;
+}
+.buttonLite__text {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-family: poppins-bold;
+}
+.buttonLite:hover{
+    background: var(--bg-secondary);
+}

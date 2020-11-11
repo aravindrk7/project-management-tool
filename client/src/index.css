@@ -31,12 +31,24 @@
   src: url(fonts/OpenSans-Regular.ttf);
 }
 @font-face {
-  font-family: open-sans-bold;
+  font-family: acumin;
   src: url(fonts/OpenSans-SemiBold.ttf);
 }
 @font-face {
   font-family: open-sans-black;
   src: url(fonts/OpenSans-Bold.ttf);
+}
+@font-face {
+  font-family: poppins;
+  src: url(fonts/Poppins-Regular.ttf);
+}
+@font-face {
+  font-family: poppins-bold;
+  src: url(fonts/Poppins-SemiBold.ttf);
+}
+@font-face {
+  font-family: poppins-black;
+  src: url(fonts/Poppins-Black.ttf);
 }
 :root {
   /* --color-primary: #5863f8; */
@@ -51,7 +63,7 @@
   --box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.1);
   --nav-size: 240px;
   --border: 1px solid #f0f1f2;
-  --border-dark: 1px solid #a6a7a8;
+  --border-dark: 1px solid gainsboro;
   --border-dashed: 1px dashed #c0c0c0;
   --border-radius: 3px;
   --speed: 500ms;
@@ -65,9 +77,8 @@
   box-sizing: border-box;
   border: none;
   outline: none;
-  font-family: open-sans;
+  font-family: poppins;
   scroll-behavior: smooth;
-  /* letter-spacing: 0.5px; */
 }
 
 /* width */
@@ -99,27 +110,12 @@
 
 h1 {
   color: var(--text-primary);
-  font-size: 16px;
-  font-family: open-sans-black;
+  font-size: 14px;
+  font-family: poppins-bold;
 }
 h2 {
   color: var(--text-secondary);
   font-size: 14px;
   color: #888;
-  font-family: open-sans-bold;
+  font-family: poppins-bold;
 }
-
-/* B,
-I,
-STRONG,
-EM {
-  color: #00006f;
-  font-size: 30px !important;
-} */
-
-/*
-H1
-{ 
-   font-size: 2em; 
-   margin-bottom: 1em;
-} */

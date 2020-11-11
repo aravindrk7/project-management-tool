@@ -7,7 +7,8 @@ import Loader from '../shared/loader/Loader';
 import AccordionV2 from '../shared/accordionV2/AccordionV2';
 import TaskStatus from './TaskStatus';
 import NoData from '../shared/noData/NoData';
-
+import { FiPlus } from "react-icons/fi";
+import Button from '../shared/button/Button';
 function Project(props) {
     const api_url = config.url.API_URL;
     const [project, setProject] = useState({});
@@ -40,16 +41,21 @@ function Project(props) {
             }
         });
     };
+    const addTask = () => {
+        console.log('Add Task');
+    };
     return (
         <div className="project">
             <div className="project__header">
-                <h1>{project.name}</h1>
-                <span className="project__privacy">{project.privacy}</span>
+                <div className="project__heading">
+                    <h1>{project.name}</h1>
+                </div>
+                <Button text={"Add Task"} icon={<FiPlus />} clicked={addTask} />
             </div>
             {!loading ?
                 (<div className="project__main">
                     <div className="project__task">
-                        <h2>Project's Tasks</h2>
+                        <h2>Tasks</h2>
                         <div className="project__taskContainer">
                             {currentTask
                                 ? (<div>

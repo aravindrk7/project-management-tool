@@ -5,7 +5,7 @@ import { FaCircle } from "react-icons/fa";
 import axios from 'axios';
 import { config } from './../../../constants/apiRoute';
 
-function Task({ task, index, refresh }) {
+function Task({ task, status, index, viewTask, refresh }) {
     const api_url = config.url.API_URL;
     const getDate = (date) => {
         date = new Date(date);
@@ -17,30 +17,35 @@ function Task({ task, index, refresh }) {
         let month = date.toLocaleString('default', { month: 'short' });
         return month;
     };
-    const markCompleted = (id) => {
+    const markCompleted = (e, id) => {
+        e.preventDefault();
+        e.stopPropagation();
         const taskData = axios.patch(api_url + 'task/' + id + '/completed');
         refresh();
     };
-    const markOpen = (id) => {
+    const markOpen = (e, id) => {
+        e.preventDefault();
+        e.stopPropagation();
         const taskData = axios.patch(api_url + 'task/' + id + '/open');
         refresh();
     };
     return (
-        <div className='task'>
+        <div className='task' onClick={() => viewTask(status, task._id)}>
             <div title={task.title} className='task__item'>
                 {
                     (task.status == 'open')
-                        ? (<FiCircle className='task__itemIcon fi-circle' onClick={() => { markCompleted(task._id) }} />)
-                        : (<FiCheckCircle className='task__itemIcon fi-check-circle' onClick={() => { markOpen(task._id) }} />)
+                        ? (<FiCircle className='task__itemIcon fi-circle' onClick={(e) => { markCompleted(e, task._id) }} />)
+                        : (<FiCheckCircle className='task__itemIcon fi-check-circle' onClick={(e) => { markOpen(e, task._id) }} />)
                 }
-                <span className='task__itemValue'>Task {index + 1} :&nbsp;&nbsp;{task.title}</span>
+                {/* <span className='task__itemValue'>Task {index + 1} :&nbsp;&nbsp;{task.title}</span> */}
+                <span className='task__itemValue'>{task.title}</span>
             </div>
-            <div title={task.assigned_by.name} className='task__item'>
+            {/* <div title={task.assigned_by.name} className='task__item'>
                 <span className='task__itemValue'>{task.assigned_by.name}</span>
-            </div>
-            <div title={task.created_at} className='task__item'>
+            </div> */}
+            {/* <div title={task.created_at} className='task__item'>
                 <span className='task__itemValue'>{getDate(task.created_at)}</span>
-            </div>
+            </div> */}
             <div title={task.due_date} className='task__item'>
                 <span className='task__itemValue'>{getDate(task.due_date)}</span>
             </div>

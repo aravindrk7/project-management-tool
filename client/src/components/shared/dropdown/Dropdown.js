@@ -1,8 +1,6 @@
 import React from 'react';
 import { useSpring, animated } from 'react-spring';
 
-import useComponentVisible from './../../sidenav/components/hook';
-
 import './Dropdown.css';
 
 function Dropdown(props) {

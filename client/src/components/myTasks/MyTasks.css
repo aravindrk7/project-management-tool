@@ -1,35 +1,129 @@
 /* My Tasks */
 .myTasks {
-    --cols: 5;
+    --cols: 3;
     --grid-gap: 10px;
-    --task-column: 250px;
+    --task-column: 200px;
     height: 100%;
+    user-select: none;
 }
 .myTasks__header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 10px 24px;
     height: 50px;
     background: #fff;
-    box-shadow: 1px 0px 3px rgb(184, 183, 183);
+    border-bottom: var(--border);
 }
 .myTasks__heading {
     color: var(--text-primary);
+    display: flex;
+    display: flex;
+    align-items: center;
+}
+.myTasks__subHeading,
+.myTasks__symbol {
+    color: var(--text-primary);
+    display: flex;
+    margin-left: 5px;
+}
+.myTasks__symbol{
+    font-size: 20px;
 }
 
-.myTasks__content {
+.myTasks__main {
+    width: 100%;
+    height: calc(100% - 105px);
+    display: grid;
+    grid-template-columns: 50% calc(50% - 24px);
+    grid-gap: 24px;
+}
+.myTasks__list {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: var(--bg-primary);
+    box-shadow: var(--box-shadow);
+}
+.myTasks__summary {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: var(--bg-primary);
+    box-shadow: var(--box-shadow);
+}
+.summary {
+    height: 100%;
     position: relative;
+}
+.summary__heading {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    border-bottom: var(--border);
+}
+.summary__main {
     height: calc(100% - 50px);
     display: flex;
     flex-direction: column;
     padding: 24px;
-    overflow-y: auto;
-    overflow-x: hidden;
+}
+.summary__details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.summary__details div {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+}
+.summary__details label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+}
+.summary__details p {
+    font-size: 13px;
+    color: var(--text-primary);
+}
+
+.summary__AdditionalDetails {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.summary__AdditionalDetails div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: var(--border-dark);
+    padding: 10px;
+}
+.summary__AdditionalDetails div:last-child {
+    border: none;
+}
+.summary__AdditionalDetails label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+}
+.summary__AdditionalDetails p {
+    font-size: 13px;
+    color: var(--text-primary);
 }
 
 /* Due Tasks */
 .dueTasks__dueWhen {
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 .dueTasks__columnHeadingContainer {
     display: grid;
@@ -65,28 +159,26 @@
             calc((100% - (var(--task-column) + (var(--cols) * var(--grid-gap)))) / var(--cols))
         );
     grid-gap: var(--grid-gap);
-    border-radius: 3px;
-    background: #fff;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1), 
-    0 2px 2px rgba(0,0,0,0.1), 
-    0 4px 4px rgba(0,0,0,0.05);
-
-    margin-bottom: 10px;
+    /* border-radius: 3px; */
+    /* background: #fff; */
+    /* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.05); */
+    /* margin-bottom: 10px; */
+    /* padding: 0 10px; */
+    border-bottom: 1px solid gainsboro;
     padding: 0 10px;
     cursor: pointer;
     user-select: none;
-    transition: .3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+.task:first-child {
+    border-top: 1px solid gainsboro;
 }
 .task:hover {
-    background: rgb(251, 253, 255);
-    transform: translateY(-1px);
-    box-shadow: 0 1px 1px rgba(0,0,0,0.2), 
-    0 2px 2px rgba(0,0,0,0.2), 
-    0 4px 4px rgba(0,0,0,0.1);
+    background: rgb(236, 236, 236);
 }
 .task__item {
     width: 100%;
-    padding: 10px 0px;
+    padding: 12px 0px;
     display: flex;
     align-items: center;
 }
@@ -96,8 +188,9 @@
     display: flex;
     align-items: center;
     font-size: 13px;
-    font-weight: 500;
-    color: var(--text-primary);
+    /* font-weight: 500; */
+    color: var(--text-secondary);
+    color: #666;
 }
 .task__itemValue {
     width: 100%;
@@ -123,5 +216,5 @@
     color: var(--color-primary) !important;
 }
 .fa-circle {
-    font-size: 10px; 
+    font-size: 10px;
 }

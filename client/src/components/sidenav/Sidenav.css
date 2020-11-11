@@ -45,7 +45,6 @@
 
 .is-active-sidenavItem .sidenav__itemContentName {
     color: var(--color-primary);
-    font-family: open-sans-black;
 }
 
 .sidenav__itemContent:hover:not(.is-active-sidenavItem) {
@@ -56,7 +55,6 @@
     color: var(--text-primary);
     font-size: 13px;
     padding: 8px 0;
-    font-family: open-sans-bold;
 }
 
 .sidenav__itemButtonIcon {

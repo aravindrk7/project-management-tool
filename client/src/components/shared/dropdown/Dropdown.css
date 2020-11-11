@@ -25,7 +25,6 @@
     align-items: center;
     color: var(--text-secondary);
     transition: 0.3s ease-in-out;
-    font-family: open-sans-bold;
 }
 .dropdown > p:last-child{
     border: none;

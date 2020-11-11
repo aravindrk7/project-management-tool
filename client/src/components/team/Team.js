@@ -38,7 +38,7 @@ function Team(props) {
         <div className="team">
             <div className="team__header">
                 <div className="team__heading">
-                    <h1 className="team__heading">{team.name}</h1>
+                    <h1>{team.name}</h1>
                 </div>
                 <Button text={"Add Project"} icon={<FiPlus />} clicked={addProject} />
             </div>

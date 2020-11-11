@@ -82,11 +82,10 @@
     border-radius: 2px;
     font-size: 10px;
     color:var(--color-primary);
+    font-weight: bold;
 }
 .project__dueTime > span {
     margin-left: 5px;
-    font-family: open-sans-bold !important;
-
 }
 
 /* Project Details */
@@ -225,9 +224,7 @@
 .team__memberName {
     font-size: 15px;
     color: var(--text-primary);
-    /* font-weight: 500; */
     margin-bottom: 1px;
-    font-family: open-sans-bold;
 }
 .team__memberEmail {
     font-size: 13px;
