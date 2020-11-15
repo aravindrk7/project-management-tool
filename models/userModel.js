@@ -14,6 +14,10 @@ const userSchema = mongoose.Schema({
         minlength: 5,
         required: true
     },
+    projects: {
+        type: Array,
+        required: true
+    },
 });
 
 module.exports = mongoose.model('users', userSchema);

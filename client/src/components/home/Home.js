@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useSpring, animated } from 'react-spring';
-
-
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
@@ -12,6 +10,8 @@ import { config } from './../../constants/apiRoute';
 function Home() {
     const api_url = config.url.API_URL;
     const { userData } = useContext(UserContext);
+    console.log(userData);
+
     const history = useHistory();
 
     // const props = useSpring({ number: num, from: { number: 0 } })
@@ -30,8 +30,15 @@ function Home() {
 
     return (
         <div className="home">
-            <h1 className="home__heading">Home</h1>
-            {/* <animated.span>{props.number}</animated.span> */}
+            <div className="home__header">
+                <div className="home__heading">
+                    <h1>Home</h1>
+                </div>
+            </div>
+            <main className="home__main">
+                <span className="home__greeting">Hello,</span>
+                <h1 className="home__name">{userData.user?.displayName}</h1>
+            </main>
         </div>
     )
 }

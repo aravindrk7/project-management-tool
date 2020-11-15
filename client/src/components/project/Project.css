@@ -29,12 +29,12 @@
 }
 .project__taskContainer {
     position: relative;
-    padding:10px;
+    padding: 10px;
     margin-top: 10px;
-    height: calc(100% - 70px);
+    height: calc(100% - 30px);
     border-radius: 3px;
     background: #fff;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--box-shadow);
 }
 .project__taskStatus {
     height: 100%;
@@ -44,15 +44,13 @@
     overflow: auto;
 }
 
-
 /* Project's Tasks */
-
 .taskStatus {
     position: relative;
     background: #fff;
     border: 1px solid gainsboro;
     overflow: auto;
-    height: 120px;
+    height: 100px;
 }
 .taskStatus__content {
     display: flex;
@@ -61,7 +59,7 @@
     padding: 2px 12px;
     border-bottom: 1px solid rgb(238, 238, 238);
     cursor: pointer;
-    transition: .3s ease-in-out;
+    transition: 0.3s ease-in-out;
 }
 .taskStatus__content:hover {
     background: #eee;

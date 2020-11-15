@@ -6,13 +6,14 @@ import './MyTasks.css';
 import NoData from '../shared/noData/NoData';
 import Loader from '../shared/loader/Loader';
 import DueTasks from './components/DueTasks';
-
 import Summary from './components/Summary';
-
 function MyTasks() {
     const api_url = config.url.API_URL;
     const [tasks, setTasks] = useState();
+    const [filteredTasks, setFilteredTasks] = useState();
+    const [myProjects, setMyProjects] = useState();
     const [currentTask, setCurrentTask] = useState();
+    const [currentProject, setCurrentProject] = useState();
     const [currentStatus, setCurrentStatus] = useState();
     const [currentId, setCurrentId] = useState();
     const [loading, setLoading] = useState(true);
@@ -23,6 +24,9 @@ function MyTasks() {
         const getTaskData = async () => {
             const taskData = await axios.get(api_url + 'task/all/' + id);
             setTasks(taskData.data);
+            setFilteredTasks(taskData.data);
+            setCurrentProject("All");
+            console.log(taskData.data);
             setLoading(false);
         }
         if (typeof userData.user !== 'undefined') {
@@ -30,6 +34,18 @@ function MyTasks() {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userData.user, refreshTask]);
+
+    useEffect(() => {
+        const getMyProjects = async () => {
+            const myProjects = await axios.get(api_url + 'user/projects/' + id);
+            setMyProjects(myProjects.data.projects);
+            setLoading(false);
+        }
+        if (typeof userData.user !== 'undefined') {
+            getMyProjects();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userData.user]);
 
     useEffect(() => {
         if (currentStatus && currentId) {
@@ -50,6 +66,39 @@ function MyTasks() {
             }
         });
     };
+    const filterByProject = (e) => {
+        console.log(e.currentTarget.value);
+        let id = e.currentTarget.value.split(',')[0];
+        let name = e.currentTarget.value.split(',')[1];
+        setCurrentProject(name);
+        let selectedProjectID = id;
+        let total = 0;
+        let filteredTask = {
+            'Past Due': [],
+            'Today': [],
+            'Tomorrow': [],
+            'Upcoming': []
+        };
+        if (selectedProjectID == 'All') {
+            setFilteredTasks(tasks);
+            setCurrentProject("All");
+        }
+        else {
+            Object.keys(tasks.splitedTasks).filter(due => {
+                filteredTask[due] = tasks.splitedTasks[due].filter(task => {
+                    if (task.associated_project.id == selectedProjectID) {
+                        total++;
+                        return true;
+                    };
+                });
+            });
+            setFilteredTasks({
+                'splitedTasks': filteredTask,
+                'total': total
+            });
+            setCurrentTask();
+        }
+    };
 
     return (
         <div className="myTasks">
@@ -57,15 +106,23 @@ function MyTasks() {
                 <div className="myTasks__heading">
                     <h1>My Tasks</h1>
                     <span className="myTasks__symbol">{'>'}</span>
-                    <h1 className="myTasks__subHeading">All</h1>
+                    <h1 className="myTasks__subHeading">{currentProject}</h1>
+                </div>
+                <div className="myTasks__dropdown">
+                    <select onChange={(e) => filterByProject(e)}>
+                        <option defaultChecked value="All">All</option>
+                        {myProjects?.map(project => (
+                            <option key={project.id} value={project.id + ',' + project.name} name={project.name}>{project.name}</option>
+                        ))}
+                    </select>
                 </div>
             </div>
             <main className="myTasks__main">
                 <section className="myTasks__list">
                     {!loading
                         ? (
-                            tasks.total > 0
-                                ? (<DueTasks tasks={tasks.splitedTasks} viewTask={viewTask} refresh={handleTaskChange} />)
+                            filteredTasks?.total > 0
+                                ? (<DueTasks tasks={filteredTasks.splitedTasks} viewTask={viewTask} refresh={handleTaskChange} />)
                                 : (<NoData message='No task scheduled for you' />)
                         )
                         : (<Loader />)}

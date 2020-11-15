@@ -1,10 +1,15 @@
 import React from 'react';
+import './Goals.css';
 
 function Goals() {
     
     return (
         <div className="goals">
-            <h1 className="goals__heading">Goals</h1>
+            <div className="goals__header">
+                <div className="goals__heading">
+                    <h1>Goals</h1>
+                </div>
+            </div>
         </div>
     )
 }

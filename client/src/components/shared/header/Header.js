@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Header.css';
 import { AiOutlineUser } from "react-icons/ai";
 import { AiOutlineSearch } from "react-icons/ai";
+import UserContext from '../../../context/userContext';
 
 function Header() {
+    const { userData } = useContext(UserContext);;
     return (
         <header className="header">
             <section className="header__search">
@@ -12,8 +14,8 @@ function Header() {
             </section>
             <section className="header__user">
                 <div className="header__userDetails">
-                    <div className="header__userName">Aravind R</div>
-                    <div className="header__userEmail">aravindark30@gmail.com</div>
+                    <div className="header__userName">{userData.user?.displayName}</div>
+                    <div className="header__userEmail">{userData.user?.email}</div>
                 </div>
                 <div className="header__userCard center">
                     <AiOutlineUser className="header__userIcon" />

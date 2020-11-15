@@ -1,46 +1,10 @@
 @font-face {
-  font-family: Questrial;
-  src: url(fonts/Questrial-Regular.ttf);
-}
-@font-face {
-  font-family: maven;
-  src: url(fonts/MavenPro-Regular.ttf);
-}
-@font-face {
-  font-family: maven-bold;
-  src: url(fonts/MavenPro-Bold.ttf);
-}
-@font-face {
-  font-family: inter;
-  src: url(fonts/Inter-Regular-slnt=0.ttf);
-}
-@font-face {
-  font-family: inter-medium;
-  src: url(fonts/Inter-Medium-slnt=0.ttf);
-}
-@font-face {
-  font-family: inter-bold;
-  src: url(fonts/Inter-Bold-slnt=0.ttf);
-}
-@font-face {
-  font-family: acumin;
-  src: url(fonts/Acumin-RPro.woff);
-}
-@font-face {
-  font-family: open-sans;
-  src: url(fonts/OpenSans-Regular.ttf);
-}
-@font-face {
-  font-family: acumin;
-  src: url(fonts/OpenSans-SemiBold.ttf);
-}
-@font-face {
-  font-family: open-sans-black;
-  src: url(fonts/OpenSans-Bold.ttf);
-}
-@font-face {
   font-family: poppins;
   src: url(fonts/Poppins-Regular.ttf);
+}
+@font-face {
+  font-family: poppins-medium;
+  src: url(fonts/Poppins-Medium.ttf);
 }
 @font-face {
   font-family: poppins-bold;
@@ -51,11 +15,9 @@
   src: url(fonts/Poppins-Black.ttf);
 }
 :root {
-  /* --color-primary: #5863f8; */
   --color-primary: #313cd6;
   --bg-primary: #fff;
   --bg-secondary: #f6f7f9;
-  /* --color-secondary: #121212; */
   --text-primary: #090909;
   --text-secondary: #88898b;
   --text-tertiary: #b6b6b6;

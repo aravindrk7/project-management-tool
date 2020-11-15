@@ -82,10 +82,10 @@
     border-radius: 2px;
     font-size: 10px;
     color:var(--color-primary);
-    font-weight: bold;
 }
 .project__dueTime > span {
     margin-left: 5px;
+    font-family: poppins-bold;
 }
 
 /* Project Details */
@@ -104,7 +104,7 @@
 .team__projectName {
     color: var(--text-primary) !important;
     font-size: 14px !important;
-    font-weight: 600;
+    font-family: poppins-bold;
 }
 .team__projectDetails > p > span {
     margin: 5px 0;

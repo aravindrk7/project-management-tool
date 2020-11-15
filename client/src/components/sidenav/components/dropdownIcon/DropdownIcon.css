@@ -1,7 +1,6 @@
 .sidenav__itemContentIcon {
     font-size: 15px;
     color:var(--text-primary);
-    font-weight: 500;
     transition: 0.5s;
     display: flex;
     align-items: center;

@@ -45,6 +45,7 @@
 
 .is-active-sidenavItem .sidenav__itemContentName {
     color: var(--color-primary);
+    font-family: poppins-bold;
 }
 
 .sidenav__itemContent:hover:not(.is-active-sidenavItem) {
@@ -81,7 +82,7 @@
     margin-left: 4px;
     font-size: 13px;
     color: var(--text-secondary);
-    font-weight: 500;
+    font-family: poppins-bold;
     transition: 0.5s;
 }
 

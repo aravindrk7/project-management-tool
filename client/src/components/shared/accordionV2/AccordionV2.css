@@ -1,6 +1,5 @@
 .accordionV2 {
     padding: 8px 0;
-    /* border-bottom: 1px solid #2a323f; */
 }
 
 .accordionV2__header {
@@ -8,9 +7,7 @@
     display: flex;
     justify-content: space-between;
     height: 40px;
-    /* padding: 0 24px 0 24px; */
     padding: 0 12px 0 12px;
-
     width: 100%;
     align-items: center;
     border-radius: 3px;
@@ -19,10 +16,6 @@
     0 2px 2px rgba(0,0,0,0.1), 
     0 4px 4px rgba(0,0,0,0.05);
 }
-/* .accordionV2__header:hover .accordionV2__title,
-.accordionV2__header:hover .accordionV2__headerIcon {
-    color: #cbd4db;
-} */
 .accordionV2__header > div {
     display: flex;
 }
@@ -32,7 +25,7 @@
 .accordionV2__titleValue {
     font-size: 13px;
     color: #6f7782;
-    font-weight: 500;
+    font-family: poppins-bold;
     transition: 0.3s;
 }
 .accordionV2__titleValue {

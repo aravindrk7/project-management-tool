@@ -1,7 +1,4 @@
-.home {
-    height: 100%;
-}
-.home__header {
+.goals__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -10,23 +7,13 @@
     background: #fff;
     border-bottom: var(--border);
 }
-.home__heading {
+.goals__heading {
     color: var(--text-primary);
     display: flex;
 }
 
-.home__main {
+.goals__main {
     width: 100%;
     height: calc(100% - 105px);
     padding: 24px;
-}
-.home__greeting {
-    font-size: 30px;
-    color: var(--text-secondary);
-    font-family: poppins-bold;
-}
-.home__name {
-    font-size: 60px;
-    color: var(--text-primary);
-    font-family: poppins-bold;
 }

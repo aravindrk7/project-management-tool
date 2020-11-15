@@ -43,7 +43,7 @@
 .header__userName {
     font-size: 15px;
     color: var(--text-primary);
-    font-weight: 500;
+    font-family: poppins-bold;
     text-align: right;
 }
 .header__userEmail {

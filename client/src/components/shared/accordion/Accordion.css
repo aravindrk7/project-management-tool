@@ -29,7 +29,6 @@
 .accordion__titleValue {
     font-size: 13px;
     color: var(--text-secondary);
-    font-weight: 500;
     transition: 0.3s;
     font-family: poppins-bold;
 }

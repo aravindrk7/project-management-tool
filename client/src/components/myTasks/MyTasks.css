@@ -21,13 +21,28 @@
     display: flex;
     align-items: center;
 }
+.myTasks__dropdown {
+    /* position: relative; */
+}
+.myTasks__dropdown select {
+    border: 1px solid gainsboro;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    padding: 0px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 30px;
+    transition: 0.3s ease-in-out;
+}
+
 .myTasks__subHeading,
 .myTasks__symbol {
     color: var(--text-primary);
     display: flex;
     margin-left: 5px;
 }
-.myTasks__symbol{
+.myTasks__symbol {
     font-size: 20px;
 }
 
@@ -39,6 +54,7 @@
     grid-gap: 24px;
 }
 .myTasks__list {
+    position: relative;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -92,6 +108,7 @@
 .summary__details p {
     font-size: 13px;
     color: var(--text-primary);
+    font-family: poppins-medium;
 }
 
 .summary__AdditionalDetails {
@@ -119,6 +136,7 @@
 .summary__AdditionalDetails p {
     font-size: 13px;
     color: var(--text-primary);
+    font-family: poppins-medium;
 }
 
 /* Due Tasks */
@@ -159,16 +177,11 @@
             calc((100% - (var(--task-column) + (var(--cols) * var(--grid-gap)))) / var(--cols))
         );
     grid-gap: var(--grid-gap);
-    /* border-radius: 3px; */
-    /* background: #fff; */
-    /* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.05); */
-    /* margin-bottom: 10px; */
-    /* padding: 0 10px; */
     border-bottom: 1px solid gainsboro;
     padding: 0 10px;
     cursor: pointer;
     user-select: none;
-    transition: 0.3s ease-in-out;
+    /* transition: 0.3s ease-in-out; */
 }
 .task:first-child {
     border-top: 1px solid gainsboro;
@@ -188,9 +201,9 @@
     display: flex;
     align-items: center;
     font-size: 13px;
-    /* font-weight: 500; */
     color: var(--text-secondary);
     color: #666;
+    font-family: poppins-medium;
 }
 .task__itemValue {
     width: 100%;
