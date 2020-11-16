@@ -9,6 +9,7 @@
     background: var(--bg-primary);
     user-select: none;
     box-shadow: var(--box-shadow);
+    z-index: 20;
 }
 
 .sidenav__routes {

@@ -59,9 +59,9 @@ function Sidenav(props) {
                 <Accordion title="Teams" value={teams?.length}>
                     <SidenavTeams teams={teams} />
                 </Accordion>
-                <Accordion title="Projects" value={projects?.length}>
+                {/* <Accordion title="Projects" value={projects?.length}>
                     <SidenavProjects projects={projects} refresh={handleFavoritesChange} />
-                </Accordion>
+                </Accordion> */}
             </div>
         </div>
     )

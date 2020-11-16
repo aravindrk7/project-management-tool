@@ -19,14 +19,19 @@
     width: 100%;
     height: calc(100% - 105px);
     padding: 24px;
+    background: var(--bg-primary);
 }
 .home__greeting {
+    display: flex;
+    align-items: center;
+}
+.home__greetingText {
     font-size: 30px;
     color: var(--text-secondary);
     font-family: poppins-bold;
 }
-.home__name {
-    font-size: 60px;
+.home__greetingUser {
+    font-size: 30px;
     color: var(--text-primary);
     font-family: poppins-bold;
 }

@@ -1,5 +1,6 @@
 .accordionV2 {
     padding: 8px 0;
+    width: 100%;
 }
 
 .accordionV2__header {
@@ -15,6 +16,7 @@
     box-shadow: 0 1px 1px rgba(0,0,0,0.1), 
     0 2px 2px rgba(0,0,0,0.1), 
     0 4px 4px rgba(0,0,0,0.05);
+    margin-bottom: 3px;
 }
 .accordionV2__header > div {
     display: flex;

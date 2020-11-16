@@ -18,22 +18,7 @@
 .myTasks__heading {
     color: var(--text-primary);
     display: flex;
-    display: flex;
     align-items: center;
-}
-.myTasks__dropdown {
-    /* position: relative; */
-}
-.myTasks__dropdown select {
-    border: 1px solid gainsboro;
-    display: flex;
-    align-items: center;
-    background: transparent;
-    padding: 0px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    height: 30px;
-    transition: 0.3s ease-in-out;
 }
 
 .myTasks__subHeading,
@@ -44,6 +29,18 @@
 }
 .myTasks__symbol {
     font-size: 20px;
+}
+
+.myTasks__dropdown select {
+    border: 1px solid gainsboro;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    padding: 0px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 30px;
+    transition: 0.3s ease-in-out;
 }
 
 .myTasks__main {
@@ -63,6 +60,7 @@
     overflow-x: hidden;
     background: var(--bg-primary);
     box-shadow: var(--box-shadow);
+    z-index: 10;
 }
 .myTasks__summary {
     height: 100%;
@@ -181,13 +179,14 @@
     padding: 0 10px;
     cursor: pointer;
     user-select: none;
-    /* transition: 0.3s ease-in-out; */
+    transition: transform 0.3s ease-in-out;
 }
 .task:first-child {
     border-top: 1px solid gainsboro;
 }
 .task:hover {
-    background: rgb(236, 236, 236);
+    background: rgb(251, 253, 255);
+    transform: scale(1.03);
 }
 .task__item {
     width: 100%;

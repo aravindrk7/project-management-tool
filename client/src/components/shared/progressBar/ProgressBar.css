@@ -1,0 +1,29 @@
+.progress {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.progress__details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.progress__details > label {
+    font-size: 13px;
+    color: var(--text-primary);
+}
+.progress__bar {
+    position: relative;
+    height: 5px;
+    width: 100%;
+    background: #eee;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+.progress__barFill {
+    position: absolute;
+    height: 100%;
+    width: 67%;
+    background: var(--color-primary);
+    border-radius: 5px;
+}

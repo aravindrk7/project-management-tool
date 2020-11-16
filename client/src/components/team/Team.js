@@ -11,6 +11,7 @@ import { FiPlus } from "react-icons/fi";
 import './Team.css';
 import Loader from '../shared/loader/Loader';
 import Button from '../shared/button/Button';
+import ProgressBar from '../shared/progressBar/ProgressBar';
 
 function Team(props) {
     const api_url = config.url.API_URL;
@@ -61,16 +62,8 @@ function Team(props) {
                                     <div className="team__projectDetails">
                                         <p className="team__projectName">{project.name}</p>
                                         <p className="team__projectDesc">A tool for tracking your personal work and managing profits</p>
-                                        <p className="team__projectTask">Task done :&nbsp;&nbsp;<span>3</span> / 25</p>
-                                        <div className="team__projectProgress">
-                                            <p className="team__projectProgressDetails">
-                                                <label>Progress</label>
-                                                <label>67%</label>
-                                            </p>
-                                            <span className="team__projectProgressbar">
-                                                <span className="team__projectProgressbarFill"></span>
-                                            </span>
-                                        </div>
+                                        <p className="team__projectTask">Task done :&nbsp;&nbsp;<span>16</span> / 25</p>
+                                        <ProgressBar />
                                     </div>
                                     <div className="team__projectFooter">
                                         <div className="team__projectFooterCard center">
@@ -87,7 +80,6 @@ function Team(props) {
                                         </div>
                                     </div>
                                 </NavLink>
-
                             ))
                             }
                         </div>

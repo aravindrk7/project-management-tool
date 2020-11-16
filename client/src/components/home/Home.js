@@ -36,8 +36,10 @@ function Home() {
                 </div>
             </div>
             <main className="home__main">
-                <span className="home__greeting">Hello,</span>
-                <h1 className="home__name">{userData.user?.displayName}</h1>
+                <span className="home__greeting">
+                    <p className="home__greetingText">Hello,&nbsp;</p>
+                    <h1 className="home__greetingUser">{userData.user?.displayName}</h1>
+                </span>
             </main>
         </div>
     )

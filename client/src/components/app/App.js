@@ -13,7 +13,8 @@ import Register from '../register/Register';
 import NoMatch from '../noMatch/NoMatch';
 import MyTasks from '../myTasks/MyTasks';
 import Goals from '../goals/Goals';
-import Project from '../project/Project';
+import Projects from '../projects/Projects';
+import ProjectDetails from '../projectDetails/ProjectDetails';
 import Team from '../team/Team';
 import Sidenav from '../sidenav/Sidenav';
 import SidenavRoute from '../sidenav/components/sidenavRoute/SidenavRoute';
@@ -22,6 +23,8 @@ import SidenavRoute from '../sidenav/components/sidenavRoute/SidenavRoute';
 import { FiHome } from "react-icons/fi";
 import { FiCheckCircle } from "react-icons/fi";
 import { FiTarget } from "react-icons/fi";
+import { FiEdit } from "react-icons/fi";
+
 import Header from '../shared/header/Header';
 
 function App() {
@@ -68,10 +71,11 @@ function App() {
     <Router>
       <UserContext.Provider value={{ userData, setUserData }}>
         <div className="app">
-          <Header/>
+          <Header />
           <Sidenav >
             <SidenavRoute parent="/" path='home' name='Home' icon={<FiHome />} id='1' />
             <SidenavRoute parent="/" path='myTasks' name='My Tasks' icon={<FiCheckCircle />} id='2' />
+            <SidenavRoute parent="/" path='projects' name='Projects' icon={<FiEdit />} id='4' />
             <SidenavRoute parent="/" path='goals' name='Goals' icon={<FiTarget />} id='3' />
           </Sidenav>
           <div className="app__main">
@@ -89,8 +93,11 @@ function App() {
               <Route path="/goals">
                 <Goals />
               </Route>
+              <Route path="/projects">
+                <Projects />
+              </Route>
               <Route path="/project/:id">
-                <Project />
+                <ProjectDetails />
               </Route>
               <Route path="/team/:id">
                 <Team />

@@ -7,6 +7,7 @@
     border-radius: 4px;
     cursor: pointer;
     height: 30px;
+    transition: .3s ease-in-out;
 }
 .button__icon {
     display: flex;
@@ -21,4 +22,7 @@
     font-size: 13px;
     color: #fff;
     font-family: poppins-bold;
+}
+.button:hover{
+    background: rgb(6, 6, 224);
 }

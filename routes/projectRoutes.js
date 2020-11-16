@@ -53,6 +53,17 @@ router.get('/:id', async (req, res) => {
             .json({ error: error.message });
     }
 });
+router.get('/user/:id', async (req, res) => {
+    try {
+        // const project = await Project.find({ "head.id": req.params.id });
+        const project = await Project.find().or([{ "members.id": req.params.id },{ "head.id": req.params.id }]);
+        res.json(project);
+    } catch (error) {
+        res
+            .status(500)
+            .json({ error: error.message });
+    }
+});
 
 
 // router.delete('/delete', auth, async (req, res) => {
