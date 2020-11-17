@@ -1,0 +1,38 @@
+.dragDrop {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 24px;
+}
+.dragDrop__group {
+    position: relative;
+    width: 100%;
+}
+.dragDrop__groupHeading {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    padding: 0 12px 0 12px;
+    width: 100%;
+    align-items: center;
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 3px;
+    font-size: 13px;
+    color: #6f7782;
+    font-family: poppins-bold;
+    transition: 0.3s;
+    margin-bottom: 20px;
+}
+.dragDrop__box {
+    background: #eee;
+}
+.dragDrop__item--current {
+    opacity: 0;
+}
+.dragDrop__item {
+    opacity: 1;
+    cursor: move;
+}

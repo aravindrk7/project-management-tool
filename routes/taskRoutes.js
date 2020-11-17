@@ -3,6 +3,18 @@ const Task = require('../models/taskModel');
 
 const auth = require('./../middlewares/auth');
 
+router.patch('/update', async (req, res) => {
+    console.log("updated");
+    // try {
+    //     const updatedTask = await Task.findByIdAndUpdate(req.params.id, { status: req.params.status });
+    //     res.json(updatedTask);
+    // } catch (error) {
+    //     res
+    //         .status(500)
+    //         .json({ error: error.message });
+    // }
+});
+
 router.patch('/:id/:status', async (req, res) => {
     try {
         const updatedTask = await Task.findByIdAndUpdate(req.params.id, { status: req.params.status });

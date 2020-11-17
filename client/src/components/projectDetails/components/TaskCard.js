@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSpring, animated } from 'react-spring';
-import NoData from '../../shared/noData/NoData';
 import './TaskCard.css';
 import { FiPlus } from "react-icons/fi";
 import { AiOutlineUser } from "react-icons/ai";

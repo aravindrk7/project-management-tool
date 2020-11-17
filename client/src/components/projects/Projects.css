@@ -1,5 +1,6 @@
 .projects {
     height: 100%;
+    user-select: none;
 }
 .projects__header {
     display: flex;
@@ -126,4 +127,5 @@
 }
 .projects__projectFooterUserIcon {
     font-size: 14px;
+    color: var(--text-primary);
 }

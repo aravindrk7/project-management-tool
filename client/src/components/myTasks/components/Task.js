@@ -29,20 +29,24 @@ function Task({ task, status, index, viewTask, refresh }) {
     const markCompleted = (e, id) => {
         e.preventDefault();
         e.stopPropagation();
-        const taskData = axios.patch(api_url + 'task/' + id + '/completed');
-        refresh();
+        axios.patch(api_url + 'task/' + id + '/completed').then(response => {
+            console.log(response);
+            refresh();
+        });
     };
     const markOpen = (e, id) => {
         e.preventDefault();
         e.stopPropagation();
-        const taskData = axios.patch(api_url + 'task/' + id + '/open');
-        refresh();
+        axios.patch(api_url + 'task/' + id + '/open').then(response => {
+            console.log(response);
+            refresh();
+        });
     };
     return (
         <animated.div className='task' onClick={() => viewTask(status, task._id)} style={slide}>
             <div title={task.title} className='task__item'>
                 {
-                    (task.status == 'open')
+                    (task.status === 'open')
                         ? (<FiCircle className='task__itemIcon fi-circle' onClick={(e) => { markCompleted(e, task._id) }} />)
                         : (<FiCheckCircle className='task__itemIcon fi-check-circle' onClick={(e) => { markOpen(e, task._id) }} />)
                 }
@@ -52,7 +56,7 @@ function Task({ task, status, index, viewTask, refresh }) {
                 <span className='task__itemValue'>{getDate(task.due_date)}</span>
             </div>
             <div title={task.status} className='task__item'>
-                <FaCircle className='task__itemIcon fa-circle' style={{ color: (task.status == 'open') ? 'var(--color-primary)' : 'var(--success-green)' }} />
+                <FaCircle className='task__itemIcon fa-circle' style={{ color: (task.status === 'open') ? 'var(--color-primary)' : 'var(--success-green)' }} />
                 <span className='task__itemValue'>{task.status}</span>
             </div>
             <div title={task.associated_team.name} className='task__item'>

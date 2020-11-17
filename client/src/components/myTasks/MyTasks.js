@@ -26,7 +26,6 @@ function MyTasks() {
             setTasks(taskData.data);
             setFilteredTasks(taskData.data);
             setCurrentProject("All");
-            console.log(taskData.data);
             setLoading(false);
         }
         if (typeof userData.user !== 'undefined') {
@@ -64,10 +63,10 @@ function MyTasks() {
             if (id === task._id) {
                 setCurrentTask(task);
             }
+            return 1;
         });
     };
     const filterByProject = (e) => {
-        console.log(e.currentTarget.value);
         let id = e.currentTarget.value.split(',')[0];
         let name = e.currentTarget.value.split(',')[1];
         setCurrentProject(name);
@@ -79,18 +78,20 @@ function MyTasks() {
             'Tomorrow': [],
             'Upcoming': []
         };
-        if (selectedProjectID == 'All') {
+        if (selectedProjectID === 'All') {
             setFilteredTasks(tasks);
             setCurrentProject("All");
         }
         else {
             Object.keys(tasks.splitedTasks).filter(due => {
                 filteredTask[due] = tasks.splitedTasks[due].filter(task => {
-                    if (task.associated_project.id == selectedProjectID) {
+                    if (task.associated_project.id === selectedProjectID) {
                         total++;
                         return true;
                     };
+                    return false;
                 });
+                return 1;
             });
             setFilteredTasks({
                 'splitedTasks': filteredTask,

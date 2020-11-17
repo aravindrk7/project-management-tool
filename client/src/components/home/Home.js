@@ -1,17 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { useSpring, animated } from 'react-spring';
+import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
-
 import './Home.css';
 import UserContext from './../../context/userContext';
-import { config } from './../../constants/apiRoute';
 
 function Home() {
-    const api_url = config.url.API_URL;
     const { userData } = useContext(UserContext);
-    console.log(userData);
-
     const history = useHistory();
 
     // const props = useSpring({ number: num, from: { number: 0 } })

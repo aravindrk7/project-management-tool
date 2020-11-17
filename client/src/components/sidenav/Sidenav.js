@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import './Sidenav.css';
 import { config } from './../../constants/apiRoute';
-import SidenavProjects from './components/SidenavProjects';
+// import SidenavProjects from './components/SidenavProjects';
 import SidenavTeams from './components/SidenavTeams';
 import SidenavFavorites from './components/SidenavFavorites';
 import Accordion from './../shared/accordion/Accordion';
@@ -11,19 +11,19 @@ import Logo from '../shared/logo/Logo';
 
 function Sidenav(props) {
     const api_url = config.url.API_URL;
-    const [projects, setProjects] = useState();
+    // const [projects, setProjects] = useState();
     const [teams, setTeams] = useState();
     const [favorites, setFavorites] = useState();
     const [refreshFavorites, setRefreshFavorites] = useState(0);
 
-    useEffect(() => {
-        const getProjects = async () => {
-            const projectData = await axios.get(api_url + 'project');
-            setProjects(projectData.data);
-        }
-        getProjects();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [refreshFavorites])
+    // useEffect(() => {
+    //     const getProjects = async () => {
+    //         const projectData = await axios.get(api_url + 'project');
+    //         setProjects(projectData.data);
+    //     }
+    //     getProjects();
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [refreshFavorites])
     useEffect(() => {
         const getTeams = async () => {
             const teamData = await axios.get(api_url + 'team');

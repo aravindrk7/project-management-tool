@@ -17,8 +17,8 @@ function Register() {
         if (userData.user) history.push('/');
     });
 
-    const [message, setMessage] = useState();
-    const [messageType, setMessageType] = useState();
+    // const [message, setMessage] = useState();
+    // const [messageType, setMessageType] = useState();
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -48,21 +48,21 @@ function Register() {
             // });
             // localStorage.setItem('auth-token', loginRes.data.token);
             // history.push('/');
-            setMessage('Registration Successful. Login to Continue.');
-            setMessageType('success');
+            // setMessage('Registration Successful. Login to Continue.');
+            // setMessageType('success');
 
         } catch (error) {
             if (error.response.data.msg) {
-                setMessage(error.response.data.msg);
-                setMessageType('error');
+                // setMessage(error.response.data.msg);
+                // setMessageType('error');
             }
         }
     };
 
-    const clearMessage = () => {
-        setMessage(undefined);
-        setMessageType(undefined);
-    };
+    // const clearMessage = () => {
+    //     setMessage(undefined);
+    //     setMessageType(undefined);
+    // };
 
     // Animations
     const fade = useSpring({

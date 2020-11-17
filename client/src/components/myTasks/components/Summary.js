@@ -7,12 +7,16 @@ import { config } from './../../../constants/apiRoute';
 function Summary({ task, refresh }) {
     const api_url = config.url.API_URL;
     const markCompleted = (id) => {
-        const taskData = axios.patch(api_url + 'task/' + id + '/completed');
-        refresh();
+        axios.patch(api_url + 'task/' + id + '/completed').then(response => {
+            console.log(response);
+            refresh();
+        });
     };
     const markOpen = (id) => {
-        const taskData = axios.patch(api_url + 'task/' + id + '/open');
-        refresh();
+        axios.patch(api_url + 'task/' + id + '/open').then(response => {
+            console.log(response);
+            refresh();
+        });
     };
     const getDate = (date) => {
         date = new Date(date);
@@ -26,7 +30,7 @@ function Summary({ task, refresh }) {
     return (
         <div className="summary">
             {task ? (<><header className="summary__heading">
-                <ButtonLite text="Mark Completed" active={task.status == 'completed' ? true : false} icon={<FiCheck />} clicked={() => task.status == 'completed' ? markOpen(task._id) : markCompleted(task._id)} />
+                <ButtonLite text="Mark Completed" active={task.status === 'completed' ? true : false} icon={<FiCheck />} clicked={() => task.status === 'completed' ? markOpen(task._id) : markCompleted(task._id)} />
             </header>
                 <section className="summary__main">
                     <div className="summary__details">
