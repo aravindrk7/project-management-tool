@@ -5,6 +5,7 @@ import axios from 'axios';
 import './App.css';
 import { config } from './../../constants/apiRoute';
 import UserContext from './../../context/userContext';
+import FavoritesContext from './../../context/favoritesContext';
 
 // import Header from '../header/Header';
 import Home from '../home/Home';
@@ -33,6 +34,7 @@ function App() {
     token: undefined,
     user: undefined
   });
+  const [favorites, setFavorites] = useState();
 
   useEffect(() => {
     const checkLoggedIn = async () => {
@@ -55,6 +57,7 @@ function App() {
           token,
           user: userRes.data
         });
+        getFavoritesData(userRes.data.id);
       }
       else {
         setUserData({
@@ -67,54 +70,62 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const getFavoritesData = (id) => {
+    axios.get(api_url + 'project/favorites/' + id).then(response => {
+      setFavorites(response.data);
+    });
+  }
+
   return (
     <Router>
       <UserContext.Provider value={{ userData, setUserData }}>
-        <div className="app">
-          <Header />
-          <Sidenav >
-            <SidenavRoute parent="/" path='home' name='Home' icon={<FiHome />} id='1' />
-            <SidenavRoute parent="/" path='myTasks' name='My Tasks' icon={<FiCheckCircle />} id='2' />
-            <SidenavRoute parent="/" path='projects' name='Projects' icon={<FiEdit />} id='4' />
-            <SidenavRoute parent="/" path='goals' name='Goals' icon={<FiTarget />} id='3' />
-          </Sidenav>
-          <div className="app__main">
+        <FavoritesContext.Provider value={{ favorites, setFavorites }}>
+          <div className="app">
+            <Header />
+            <Sidenav >
+              <SidenavRoute parent="/" path='home' name='Home' icon={<FiHome />} id='1' />
+              <SidenavRoute parent="/" path='myTasks' name='My Tasks' icon={<FiCheckCircle />} id='2' />
+              <SidenavRoute parent="/" path='projects' name='Projects' icon={<FiEdit />} id='4' />
+              <SidenavRoute parent="/" path='goals' name='Goals' icon={<FiTarget />} id='3' />
+            </Sidenav>
+            <div className="app__main">
 
-            <Switch>
-              <Route exact path="/">
-                <Redirect to="/home" />
-              </Route>
-              <Route path="/home">
-                <Home />
-              </Route>
-              <Route path="/myTasks">
-                <MyTasks />
-              </Route>
-              <Route path="/goals">
-                <Goals />
-              </Route>
-              <Route path="/projects">
-                <Projects />
-              </Route>
-              <Route path="/project/:id">
-                <ProjectDetails />
-              </Route>
-              <Route path="/team/:id">
-                <Team />
-              </Route>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/register">
-                <Register />
-              </Route>
-              <Route path="*">
-                <NoMatch />
-              </Route>
-            </Switch>
+              <Switch>
+                <Route exact path="/">
+                  <Redirect to="/home" />
+                </Route>
+                <Route path="/home">
+                  <Home />
+                </Route>
+                <Route path="/myTasks">
+                  <MyTasks />
+                </Route>
+                <Route path="/goals">
+                  <Goals />
+                </Route>
+                <Route path="/projects">
+                  <Projects />
+                </Route>
+                <Route path="/project/:id">
+                  <ProjectDetails />
+                </Route>
+                <Route path="/team/:id">
+                  <Team />
+                </Route>
+                <Route path="/login">
+                  <Login />
+                </Route>
+                <Route path="/register">
+                  <Register />
+                </Route>
+                <Route path="*">
+                  <NoMatch />
+                </Route>
+              </Switch>
+            </div>
+
           </div>
-
-        </div>
+        </FavoritesContext.Provider>
       </UserContext.Provider>
     </Router>
   );

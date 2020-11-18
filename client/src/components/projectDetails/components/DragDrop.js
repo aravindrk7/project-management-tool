@@ -4,6 +4,7 @@ import NoData from '../../shared/noData/NoData';
 import axios from 'axios';
 import { config } from '../../../constants/apiRoute';
 import './DragDrop.css';
+import { useSpring, animated } from 'react-spring';
 
 function DragDrop({ tasks, setTasks }) {
     const api_url = config.url.API_URL;
@@ -47,10 +48,8 @@ function DragDrop({ tasks, setTasks }) {
     const checkObjEquality = (obj1, obj2) => {
         return (obj1.status === obj2.status) && (obj1.index === obj2.index)
     };
-    const updateTasks = async (id) => {
+    const updateTasks = async () => {
         await axios.patch(api_url + 'task/update');
-        // setTasks(taskData.data.splitedTasks);
-        // setLoading(false);
     }
     const getStyles = (status, index) => {
         const currentItem = dragItem.current;
@@ -60,15 +59,21 @@ function DragDrop({ tasks, setTasks }) {
         return "dragDrop__item";
     };
     const getBorderStyles = (status) => {
-        if (status === "open") return "5px solid var(--open-blue)"
-        else if (status === "inProgress") return "5px solid var(--inProgress-yellow)"
-        else return "5px solid var(--success-green)"
+        if (status === "open") return "5px solid var(--blue)"
+        else if (status === "inProgress") return "5px solid var(--yellow)"
+        else return "5px solid var(--green)"
     };
     const toCamelCase = (str) => {
         return str
             .replace(/([A-Z])/g, ' $1')
             .replace(/^./, function (str) { return str.toUpperCase(); })
     }
+
+    const slide = useSpring({
+        from: { marginTop: -150, opacity: 0 },
+        opacity: 1,
+        marginTop: 0
+    });
 
     return (
         <div className="dragDrop">
@@ -79,11 +84,11 @@ function DragDrop({ tasks, setTasks }) {
                     onDragEnter={(dragging && !tasks[status].length > 0) ? ((e) => { handleDragEnter(e, { status, index: 0 }) }) : null}
                 >
                     <div style={{ borderLeft: getBorderStyles(status) }} className="dragDrop__groupHeading">{toCamelCase(status)}</div>
+
                     {tasks[status].length > 0
                         ? (tasks[status].map((task, index) => (
-                            <div key={index} className="dragDrop__box">
+                            <animated.div key={index} className="dragDrop__box" style={slide}>
                                 <div
-                                    // key={index}
                                     draggable
                                     onDragOver={(e) => { e.preventDefault() }}
                                     onDragStart={(e) => { handleDragStart(e, { status, index }) }}
@@ -92,9 +97,9 @@ function DragDrop({ tasks, setTasks }) {
                                 >
                                     <TaskCard task={task} index={index} />
                                 </div>
-                            </div>
+                            </animated.div>
                         )))
-                        : <NoData message={"No tasks"} top="20%" />}
+                        : <NoData message={"No tasks"} />}
                 </div>
             ))
             }

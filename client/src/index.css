@@ -30,9 +30,9 @@
   --border-radius: 3px;
   --speed: 500ms;
 
-  --success-green: rgb(0, 177, 0);
-  --open-blue: #313cd6;
-  --inProgress-yellow: rgb(231, 228, 14);
+  --green: rgb(0, 177, 0);
+  --blue: #313cd6;
+  --yellow: rgb(241, 238, 30);
 }
 
 * {

@@ -9,11 +9,12 @@ import { useSpring, animated } from 'react-spring';
 function Task({ task, status, index, viewTask, refresh }) {
     const api_url = config.url.API_URL;
 
-    // Animations
     const slide = useSpring({
-        from: { marginTop: -150, opacity: 0 },
+        from: {
+            opacity: 0,
+        },
         opacity: 1,
-        marginTop: 0
+        config: { duration: 500 }
     });
 
     const getDate = (date) => {
@@ -56,7 +57,7 @@ function Task({ task, status, index, viewTask, refresh }) {
                 <span className='task__itemValue'>{getDate(task.due_date)}</span>
             </div>
             <div title={task.status} className='task__item'>
-                <FaCircle className='task__itemIcon fa-circle' style={{ color: (task.status === 'open') ? 'var(--color-primary)' : 'var(--success-green)' }} />
+                <FaCircle className='task__itemIcon fa-circle' style={{ color: (task.status === 'open') ? 'var(--color-primary)' : 'var(--green)' }} />
                 <span className='task__itemValue'>{task.status}</span>
             </div>
             <div title={task.associated_team.name} className='task__item'>

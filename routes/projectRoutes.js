@@ -13,9 +13,9 @@ router.get('/', async (req, res) => {
             .json({ error: error.message });
     }
 });
-router.get('/favorites', async (req, res) => {
+router.get('/favorites/:id', async (req, res) => {
     try {
-        const favorites = await Project.find({ favorite: true });
+        const favorites = await Project.find({ $and: [{ $or: [{ "members.id": req.params.id }, { "head.id": req.params.id }] }, { favorite: true }] }, { name: 1 });
         res.json(favorites);
     } catch (error) {
         res
@@ -55,9 +55,8 @@ router.get('/:id', async (req, res) => {
 });
 router.get('/user/:id', async (req, res) => {
     try {
-        // const project = await Project.find({ "head.id": req.params.id });
-        const project = await Project.find().or([{ "members.id": req.params.id },{ "head.id": req.params.id }]);
-        res.json(project);
+        const projects = await Project.find().or([{ "members.id": req.params.id }, { "head.id": req.params.id }]);
+        res.json(projects);
     } catch (error) {
         res
             .status(500)

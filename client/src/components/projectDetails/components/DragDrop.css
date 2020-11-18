@@ -5,8 +5,9 @@
     grid-gap: 24px;
 }
 .dragDrop__group {
-    position: relative;
     width: 100%;
+    position: relative;
+    min-height: 240px;
 }
 .dragDrop__groupHeading {
     cursor: pointer;
@@ -26,6 +27,7 @@
     transition: 0.3s;
     margin-bottom: 20px;
 }
+
 .dragDrop__box {
     background: #eee;
 }

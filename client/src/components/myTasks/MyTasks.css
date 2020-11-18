@@ -157,10 +157,14 @@
     display: flex;
     align-items: center;
     color: rgb(170, 170, 170);
+    font-family: poppins;
+    font-weight: 500;
 }
 .dueWhen {
-    font-size: 17px;
+    font-size: 16px;
     color: gray;
+    font-family: poppins;
+    font-weight: 500;
 }
 
 .dueTasks__Row {
@@ -222,7 +226,7 @@
     stroke-width: 4;
 }
 .fi-check-circle {
-    color: var(--success-green) !important;
+    color: var(--green) !important;
 }
 .fi-circle {
     color: var(--color-primary) !important;

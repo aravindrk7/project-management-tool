@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
 
@@ -9,12 +9,16 @@ import Loader from '../shared/loader/Loader';
 import Button from '../shared/button/Button';
 import { FiPlus } from "react-icons/fi";
 import { AiOutlineUser } from "react-icons/ai";
+import { AiOutlineStar } from "react-icons/ai";
+import { AiFillStar } from "react-icons/ai";
 import DragDrop from './components/DragDrop';
+import FavoritesContext from '../../context/favoritesContext';
 
 
 function ProjectDetails(props) {
     const api_url = config.url.API_URL;
-    const [project, setproject] = useState({});
+    const { favorites, setFavorites } = useContext(FavoritesContext);
+    const [project, setProject] = useState({});
     const [tasks, setTasks] = useState({});
     const [loading, setLoading] = useState(true);
 
@@ -22,11 +26,11 @@ function ProjectDetails(props) {
     useEffect(() => {
         const getprojectData = async () => {
             const projectData = await axios.get(api_url + 'project/' + id);
-            setproject(projectData.data);
-            getTaskData(projectData.data.user_id);
+            setProject(projectData.data);
+            getTaskData(projectData.data._id);
         }
         const getTaskData = async (id) => {
-            const taskData = await axios.get(api_url + 'task/user/' + id);
+            const taskData = await axios.get(api_url + 'task/project/' + id);
             setTasks(taskData.data.splitedTasks);
             setLoading(false);
         }
@@ -38,9 +42,28 @@ function ProjectDetails(props) {
     const addTask = () => {
         console.log('Add Task');
     };
+    const removeFromFavorites = (id) => {
+        axios.patch(api_url + 'project/remove-favorites/' + id).then(response => {
+            let fav = [...favorites];
+            var index = fav.findIndex(x => x._id === id)
+            if (index !== -1) {
+                fav.splice(index, 1);
+                setFavorites(fav);
+            }
+        });
+    };
 
-
-
+    const addToFavorites = (id, name) => {
+        axios.patch(api_url + 'project/add-favorites/' + id).then(response => {
+            setFavorites([...favorites, { _id: id, name: name }]);
+        });
+    };
+    const checkFavorite = (id) => {
+        let fav = favorites?.filter(favorite => {
+            return favorite._id === id;
+        });
+        return (fav?.length) ? true : false;
+    };
     return (
         <div className="projectDetails">
             <div className="projectDetails__header">
@@ -50,9 +73,14 @@ function ProjectDetails(props) {
                     </NavLink>
                     <span className="projectDetails__symbol">{'>'}</span>
                     <h1 className="projectDetails__subHeading">{project.name}</h1>
+                    {checkFavorite(project._id) ? <AiFillStar className="projectDetails__fillStar star" onClick={() => removeFromFavorites(project._id)} />
+                        : <AiOutlineStar className="projectDetails__outlineStar star" onClick={() => addToFavorites(project._id, project.name)} />}
                 </div>
                 <div className="projectDetails__rightSection">
                     <div className="projectDetails__members">
+                        {/* {favorites?.map(fav => (<div>sa
+                            { fav}
+                        </div>))} */}
                         <div className="projectDetails__memberCard center">
                             <AiOutlineUser className="projectDetails__memberIcon" />
                         </div>

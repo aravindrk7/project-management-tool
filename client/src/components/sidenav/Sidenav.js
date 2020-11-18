@@ -1,20 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useContext } from 'react';
+// import axios from 'axios';
 
 import './Sidenav.css';
-import { config } from './../../constants/apiRoute';
+// import { config } from './../../constants/apiRoute';
 // import SidenavProjects from './components/SidenavProjects';
-import SidenavTeams from './components/SidenavTeams';
+// import SidenavTeams from './components/SidenavTeams';
 import SidenavFavorites from './components/SidenavFavorites';
 import Accordion from './../shared/accordion/Accordion';
 import Logo from '../shared/logo/Logo';
+import FavoritesContext from '../../context/favoritesContext';
 
 function Sidenav(props) {
-    const api_url = config.url.API_URL;
+    // const api_url = config.url.API_URL;
+    const { favorites, setFavorites } = useContext(FavoritesContext);
+    // const [favorites, setFavorites] = useState();
+    // useEffect(() => {
+    //     let favorite = projects?.filter(project => {
+    //         return project.favorite;
+    //     });
+    //     setFavorites(favorite)
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [projects])
     // const [projects, setProjects] = useState();
-    const [teams, setTeams] = useState();
-    const [favorites, setFavorites] = useState();
-    const [refreshFavorites, setRefreshFavorites] = useState(0);
+    // const [teams, setTeams] = useState();
+    // const [favorites, setFavorites] = useState();
+    // const [refreshFavorites, setRefreshFavorites] = useState(0);
 
     // useEffect(() => {
     //     const getProjects = async () => {
@@ -24,27 +34,27 @@ function Sidenav(props) {
     //     getProjects();
     //     // eslint-disable-next-line react-hooks/exhaustive-deps
     // }, [refreshFavorites])
-    useEffect(() => {
-        const getTeams = async () => {
-            const teamData = await axios.get(api_url + 'team');
-            setTeams(teamData.data);
-        }
-        getTeams();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-    useEffect(() => {
-        const getFavorites = async () => {
-            const favoriteData = await axios.get(api_url + 'project/favorites');
-            setFavorites(favoriteData.data);
+    // useEffect(() => {
+    //     const getTeams = async () => {
+    //         const teamData = await axios.get(api_url + 'team');
+    //         setTeams(teamData.data);
+    //     }
+    //     getTeams();
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [])
+    // useEffect(() => {
+    //     const getFavorites = async () => {
+    //         const favoriteData = await axios.get(api_url + 'project/favorites');
+    //         setFavorites(favoriteData.data);
 
-        }
-        getFavorites();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [refreshFavorites])
+    //     }
+    //     getFavorites();
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [refreshFavorites])
 
-    const handleFavoritesChange = () => {
-        setRefreshFavorites(prev => prev + 1);
-    };
+    // const handleFavoritesChange = () => {
+    //     setRefreshFavorites(prev => prev + 1);
+    // };
 
     return (
         <div className="sidenav">
@@ -54,11 +64,12 @@ function Sidenav(props) {
             </div>
             <div className="sidenav__items">
                 <Accordion title="Favorites" value={favorites?.length}>
-                    <SidenavFavorites projects={favorites} refresh={handleFavoritesChange} />
+                    <SidenavFavorites favorites={favorites} setFavorites={setFavorites} />
+                    {/* <SidenavFavorites projects={favorites} refresh={handleFavoritesChange} /> */}
                 </Accordion>
-                <Accordion title="Teams" value={teams?.length}>
+                {/* <Accordion title="Teams" value={teams?.length}>
                     <SidenavTeams teams={teams} />
-                </Accordion>
+                </Accordion> */}
                 {/* <Accordion title="Projects" value={projects?.length}>
                     <SidenavProjects projects={projects} refresh={handleFavoritesChange} />
                 </Accordion> */}

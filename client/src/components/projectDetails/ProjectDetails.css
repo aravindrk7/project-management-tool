@@ -33,6 +33,18 @@
     font-size: 20px;
 }
 
+.star {
+    cursor: pointer;
+    margin-left: 5px;
+    transition: 0.3s ease-in-out;
+}
+.star:hover {
+    transform: translateY(-1px);
+}
+.projectDetails__fillStar {
+    color: var(--yellow);
+}
+
 .projectDetails__rightSection {
     display: flex;
     align-items: center;
@@ -70,5 +82,3 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
-
-

@@ -25,7 +25,7 @@ router.patch('/:id/:status', async (req, res) => {
             .json({ error: error.message });
     }
 });
-router.get('/all/:id', async (req, res) => {
+router.get('/user/:id', async (req, res) => {
     try {
         const tasks = await Task.find({ "assigned_to.id": req.params.id });
         const splitedTasks = splitDueTime(tasks);
@@ -36,9 +36,9 @@ router.get('/all/:id', async (req, res) => {
             .json({ error: error.message });
     }
 });
-router.get('/user/:id', async (req, res) => {
+router.get('/project/:id', async (req, res) => {
     try {
-        const tasks = await Task.find({ "assigned_to.id": req.params.id });
+        const tasks = await Task.find({ "associated_project.id": req.params.id });
         const splitedTasks = splitStatus(tasks);
         res.json(splitedTasks);
     } catch (error) {

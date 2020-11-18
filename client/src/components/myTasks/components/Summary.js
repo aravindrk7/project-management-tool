@@ -8,13 +8,11 @@ function Summary({ task, refresh }) {
     const api_url = config.url.API_URL;
     const markCompleted = (id) => {
         axios.patch(api_url + 'task/' + id + '/completed').then(response => {
-            console.log(response);
             refresh();
         });
     };
     const markOpen = (id) => {
         axios.patch(api_url + 'task/' + id + '/open').then(response => {
-            console.log(response);
             refresh();
         });
     };

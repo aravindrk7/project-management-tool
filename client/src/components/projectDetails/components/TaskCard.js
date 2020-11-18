@@ -18,16 +18,6 @@ function TaskStatus({ task, index }) {
         return month;
     };
 
-    // const handleDragEnd = ({ destination, source }) => {
-    //     console.log(destination);
-    //     // // dropped outside the list
-    //     if (!destination) {
-    //         return;
-    //     }
-
-    //     // setColors(reorderColors(colorMap, source, destination));
-    // };
-
     // Animations
     const slide = useSpring({
         from: { marginTop: -150, opacity: 0 },

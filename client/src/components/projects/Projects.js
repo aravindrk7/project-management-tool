@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext,useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
 
@@ -13,8 +13,9 @@ import Loader from '../shared/loader/Loader';
 import Button from '../shared/button/Button';
 import ProgressBar from '../shared/progressBar/ProgressBar';
 import UserContext from './../../context/userContext'
+import { useSpring, animated } from 'react-spring';
 
-function Projects(props) {
+function Projects() {
     const api_url = config.url.API_URL;
     const [projects, setProjects] = useState({});
     const [loading, setLoading] = useState(true);
@@ -37,6 +38,14 @@ function Projects(props) {
     const addProject = () => {
         console.log('Add Project');
     };
+    // Animations
+    const slide = useSpring({
+        from: {
+            opacity: 0,
+        },
+        opacity: 1,
+        config: { duration: 500 }
+    });
     return (
         <div className="projects">
             <div className="projects__header">
@@ -48,37 +57,39 @@ function Projects(props) {
             {!loading ?
                 (<div className="projects__main">
                     {projects?.map(project => (
-                        <NavLink to={`/project/${project._id}`} key={project._id} className="projects__project">
-                            <div className="projects__projectHeader">
-                                <div className="projects__projectCard center">
-                                    <FiAperture className="projects__projectIcon" />
+                        <animated.div key={project._id} style={slide}>
+                            <NavLink to={`/project/${project._id}`} className="projects__project">
+                                <div className="projects__projectHeader">
+                                    <div className="projects__projectCard center">
+                                        <FiAperture className="projects__projectIcon" />
+                                    </div>
+                                    <p className="project__dueTime">
+                                        <FiClock />
+                                        <span>12 days left</span>
+                                    </p>
                                 </div>
-                                <p className="project__dueTime">
-                                    <FiClock />
-                                    <span>12 days left</span>
-                                </p>
-                            </div>
-                            <div className="projects__projectDetails">
-                                <p className="projects__projectName">{project.name}</p>
-                                <p className="projects__projectDesc">A tool for tracking your personal work and managing profits</p>
-                                <p className="projects__projectTask">Task done :&nbsp;&nbsp;<span>16</span> / 25</p>
-                                <ProgressBar />
-                            </div>
-                            <div className="projects__projectFooter">
-                                <div className="projects__projectFooterCard center">
-                                    <AiOutlineUser className="projects__projectFooterUserIcon" />
+                                <div className="projects__projectDetails">
+                                    <p className="projects__projectName">{project.name}</p>
+                                    <p className="projects__projectDesc">A tool for tracking your personal work and managing profits</p>
+                                    <p className="projects__projectTask">Task done :&nbsp;&nbsp;<span>16</span> / 25</p>
+                                    <ProgressBar />
                                 </div>
-                                <div className="projects__projectFooterCard center">
-                                    <AiOutlineUser className="projects__projectFooterUserIcon" />
+                                <div className="projects__projectFooter">
+                                    <div className="projects__projectFooterCard center">
+                                        <AiOutlineUser className="projects__projectFooterUserIcon" />
+                                    </div>
+                                    <div className="projects__projectFooterCard center">
+                                        <AiOutlineUser className="projects__projectFooterUserIcon" />
+                                    </div>
+                                    <div className="projects__projectFooterCard center">
+                                        <AiOutlineUser className="projects__projectFooterUserIcon" />
+                                    </div>
+                                    <div className="projects__projectFooterCard--dashed center">
+                                        <FiPlus className="projects__projectFooterUserIcon" />
+                                    </div>
                                 </div>
-                                <div className="projects__projectFooterCard center">
-                                    <AiOutlineUser className="projects__projectFooterUserIcon" />
-                                </div>
-                                <div className="projects__projectFooterCard--dashed center">
-                                    <FiPlus className="projects__projectFooterUserIcon" />
-                                </div>
-                            </div>
-                        </NavLink>
+                            </NavLink>
+                        </animated.div>
                     ))
                     }
                 </div>) : (<Loader />)

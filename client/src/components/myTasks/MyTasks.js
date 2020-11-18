@@ -22,7 +22,7 @@ function MyTasks() {
     let id = userData.user?.id;
     useEffect(() => {
         const getTaskData = async () => {
-            const taskData = await axios.get(api_url + 'task/all/' + id);
+            const taskData = await axios.get(api_url + 'task/user/' + id);
             setTasks(taskData.data);
             setFilteredTasks(taskData.data);
             setCurrentProject("All");
@@ -63,7 +63,7 @@ function MyTasks() {
             if (id === task._id) {
                 setCurrentTask(task);
             }
-            return 1;
+            return null;
         });
     };
     const filterByProject = (e) => {
