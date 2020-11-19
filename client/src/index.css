@@ -31,8 +31,10 @@
   --speed: 500ms;
 
   --green: rgb(0, 177, 0);
-  --blue: #313cd6;
+  --blue: rgb(49, 60, 214);
   --yellow: rgb(241, 238, 30);
+  --red: rgb(241, 44, 30);
+  --orange: rgb(241, 114, 30);
 }
 
 * {

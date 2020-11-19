@@ -51,14 +51,14 @@
 }
 
 .taskCard__dueTime {
-    background: rgb(226, 226, 255);
+    /* background: rgb(226, 226, 255); */
     padding: 0px 8px;
     display: flex;
     align-items: center;
     height: 20px;
     border-radius: 2px;
     font-size: 10px;
-    color: var(--color-primary);
+    /* color: var(--color-primary); */
 }
 .taskCard__dueTime > span {
     margin-left: 5px;

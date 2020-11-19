@@ -1,4 +1,4 @@
-import React, { useState, useContext,useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
 
@@ -38,6 +38,23 @@ function Projects() {
     const addProject = () => {
         console.log('Add Project');
     };
+    const getDueStyles = (status, days) => {
+        let passedDue = { color: 'var(--red)', background: "rgba(241, 44, 30,.1)" };
+        let dueToday = { color: 'var(--orange)', background: "rgba(241, 114, 30,.1)" };
+        let dueLater = { color: 'var(--green)', background: "rgba(0, 177, 0,.1)" };
+        if (status === 'completed') return dueLater;
+        return days < 0 ? passedDue : (days === 0 || days === 1 ? dueToday : dueLater);
+    };
+    const getDueText = (status, days) => {
+        if (status === 'completed') return 'Completed';
+        return days < 0
+            ? Math.abs(days) + " d overdue"
+            : (days === 0
+                ? "Due today"
+                : (days === 1 ? "Due tomorrow" : days + " days left"));
+    };
+
+
     // Animations
     const slide = useSpring({
         from: {
@@ -63,14 +80,14 @@ function Projects() {
                                     <div className="projects__projectCard center">
                                         <FiAperture className="projects__projectIcon" />
                                     </div>
-                                    <p className="project__dueTime">
+                                    <p style={getDueStyles(project.status, project.days_left)} className="project__dueTime">
                                         <FiClock />
-                                        <span>12 days left</span>
+                                        <span>{getDueText(project.status, project.days_left)}</span>
                                     </p>
                                 </div>
                                 <div className="projects__projectDetails">
                                     <p className="projects__projectName">{project.name}</p>
-                                    <p className="projects__projectDesc">A tool for tracking your personal work and managing profits</p>
+                                    <p className="projects__projectDesc">{project.description}</p>
                                     <p className="projects__projectTask">Task done :&nbsp;&nbsp;<span>16</span> / 25</p>
                                     <ProgressBar />
                                 </div>

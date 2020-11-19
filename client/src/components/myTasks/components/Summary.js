@@ -4,6 +4,8 @@ import { FiCheck } from "react-icons/fi";
 import NoData from '../../shared/noData/NoData';
 import axios from 'axios';
 import { config } from './../../../constants/apiRoute';
+import { useSpring,animated } from 'react-spring';
+
 function Summary({ task, refresh }) {
     const api_url = config.url.API_URL;
     const markCompleted = (id) => {
@@ -25,8 +27,14 @@ function Summary({ task, refresh }) {
         let month = date.toLocaleString('default', { month: 'short' });
         return month;
     };
+
+    const fade = useSpring({
+        from: { opacity: 0 },
+        opacity: 1
+    });
+
     return (
-        <div className="summary">
+        <animated.div className="summary" style={fade}>
             {task ? (<><header className="summary__heading">
                 <ButtonLite text="Mark Completed" active={task.status === 'completed' ? true : false} icon={<FiCheck />} clicked={() => task.status === 'completed' ? markOpen(task._id) : markCompleted(task._id)} />
             </header>
@@ -60,7 +68,7 @@ function Summary({ task, refresh }) {
                         </div>
                     </div>
                 </section></>) : <NoData message="Click a task to view" />}
-        </div>
+        </animated.div>
     )
 }
 

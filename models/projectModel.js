@@ -8,9 +8,13 @@ const projectSchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique:true
+        unique: true
     },
     created_at: {
+        type: Date,
+        required: true
+    },
+    due_date: {
         type: Date,
         required: true
     },

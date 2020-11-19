@@ -93,16 +93,24 @@
     font-size: 13px;
     color: var(--text-secondary);
 }
-.projects__projectName {
-    color: var(--text-primary) !important;
-    font-size: 14px !important;
-    font-family: poppins-bold;
-}
+
 .projects__projectDetails > p > span {
     margin: 5px 0;
     color: var(--text-primary);
     font-weight: bold;
     font-size: 20px;
+}
+.projects__projectName {
+    color: var(--text-primary) !important;
+    font-size: 14px !important;
+    font-family: poppins-bold;
+}
+.projects__projectDesc{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Project Footer */

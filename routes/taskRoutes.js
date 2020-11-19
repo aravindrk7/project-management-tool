@@ -38,8 +38,11 @@ router.get('/user/:id', async (req, res) => {
 });
 router.get('/project/:id', async (req, res) => {
     try {
-        const tasks = await Task.find({ "associated_project.id": req.params.id });
-        const splitedTasks = splitStatus(tasks);
+        const tasks = await Task.find({ "associated_project.id": req.params.id }).lean();
+        let tasksNew = tasks.map(task => {
+            return { ...task, days_left: getDaysLeft(task.due_date) };
+        });
+        const splitedTasks = splitStatus(tasksNew);
         res.json(splitedTasks);
     } catch (error) {
         res
@@ -109,6 +112,12 @@ const withoutTime = (date) => {
     date = date.setHours(0, 0, 0, 0);
     return date;
 }
+
+const getDaysLeft = (dueDate) => {
+    const diffInTime = dueDate.getTime() - new Date().getTime();
+    const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
+    return diffInDays;
+};
 
 // router.delete('/delete', auth, async (req, res) => {
 //     try {

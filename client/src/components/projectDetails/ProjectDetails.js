@@ -78,9 +78,6 @@ function ProjectDetails(props) {
                 </div>
                 <div className="projectDetails__rightSection">
                     <div className="projectDetails__members">
-                        {/* {favorites?.map(fav => (<div>sa
-                            { fav}
-                        </div>))} */}
                         <div className="projectDetails__memberCard center">
                             <AiOutlineUser className="projectDetails__memberIcon" />
                         </div>

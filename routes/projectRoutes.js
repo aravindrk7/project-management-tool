@@ -55,8 +55,11 @@ router.get('/:id', async (req, res) => {
 });
 router.get('/user/:id', async (req, res) => {
     try {
-        const projects = await Project.find().or([{ "members.id": req.params.id }, { "head.id": req.params.id }]);
-        res.json(projects);
+        let projects = await Project.find().or([{ "members.id": req.params.id }, { "head.id": req.params.id }]).lean();
+        let projectsNew = projects.map(project => {
+            return { ...project, days_left: getDaysLeft(project.due_date) };
+        });
+        res.json(projectsNew);
     } catch (error) {
         res
             .status(500)
@@ -64,6 +67,20 @@ router.get('/user/:id', async (req, res) => {
     }
 });
 
+const getDaysLeft = (dueDate) => {
+    const diffInTime = dueDate.getTime() - new Date().getTime();
+    const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
+    return diffInDays;
+};
+
+// const getData = (projects) => {
+//     projects.map(project => {
+//         project.days_left = 24;
+//         return project;
+//     }
+//     );
+//     return projects;
+// };
 
 // router.delete('/delete', auth, async (req, res) => {
 //     try {
