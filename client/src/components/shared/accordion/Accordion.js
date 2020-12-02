@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { FiChevronDown } from "react-icons/fi";
+import './Accordion.css';
 
 function Accordion(props) {
-    const [showItems, setShowItems] = useState(false);
+    const [showItems, setShowItems] = useState(props.expand);
     const [rotation, setRotation] = useState({
-        transform: 'rotate(0deg)'
+        transform: (props.expand) ? 'rotate(180deg)' : 'rotate(0deg)'
     });
 
     const handleDropdown = () => {
@@ -27,9 +28,9 @@ function Accordion(props) {
             <header className="accordion__header" onClick={handleDropdown}>
                 <div>
                     <p className="accordion__title">{props.title}</p>
-                    {props.value
+                    {props.ItemsCount > 0
                         &&
-                        <span className="accordion__titleValue">({props.value})</span>
+                        <span className="accordion__itemsCount">({props.ItemsCount})</span>
                     }
                 </div>
                 <FiChevronDown className="accordion__headerIcon" style={rotation} />

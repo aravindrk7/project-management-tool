@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Project = require('../models/projectModel');
+const Task = require('../models/taskModel');
 
 const auth = require('./../middlewares/auth');
 
@@ -53,11 +54,36 @@ router.get('/:id', async (req, res) => {
             .json({ error: error.message });
     }
 });
+// router.get('/user/:id', async (req, res) => {
+//     try {
+//         let projects = await Project.find().or([{ "members.id": req.params.id }, { "head.id": req.params.id }]).lean()
+//         let projectsNew = projects.map(project => {
+//             // console.log(await Task.find({ '_id': { $in: project.tasks } }).exec());
+//             return {
+//                 ...project, list: getData(project),
+//             }
+//         });
+//         res.json(projectsNew);
+//     } catch (error) {
+//         res
+//             .status(500)
+//             .json({ error: error.message });
+//     }
+// });
+// const getData = (project) => {
+//     Task.find({ '_id': { $in: project.tasks } }).exec().then(response => {
+//         return response;
+//     })
+// }
 router.get('/user/:id', async (req, res) => {
     try {
         let projects = await Project.find().or([{ "members.id": req.params.id }, { "head.id": req.params.id }]).lean();
         let projectsNew = projects.map(project => {
-            return { ...project, days_left: getDaysLeft(project.due_date) };
+            return {
+                ...project,
+                days_left: getDaysLeft(project.due_date),
+                task_done: 20
+            };
         });
         res.json(projectsNew);
     } catch (error) {
@@ -72,26 +98,10 @@ const getDaysLeft = (dueDate) => {
     const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
     return diffInDays;
 };
-
-// const getData = (projects) => {
-//     projects.map(project => {
-//         project.days_left = 24;
-//         return project;
-//     }
-//     );
-//     return projects;
-// };
-
-// router.delete('/delete', auth, async (req, res) => {
-//     try {
-//         const deletedUser = await User.findByIdAndDelete(req.user);
-//         res.json(deletedUser);
-//     } catch (error) {
-//         res
-//             .status(500)
-//             .json({ error: error.message });
-//     }
-// });
+const getTaskCompletedCount = (id) => {
+    let tasks = Task.find({ "associated_project.id": id }).lean();
+    return tasks;
+};
 
 
 module.exports = router;

@@ -1,17 +1,3 @@
-.goals__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 24px;
-    height: 50px;
-    background: #fff;
-    border-bottom: var(--border);
-}
-.goals__heading {
-    color: var(--text-primary);
-    display: flex;
-}
-
 .goals__main {
     width: 100%;
     height: calc(100% - 105px);

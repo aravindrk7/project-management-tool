@@ -2,6 +2,8 @@ import React from 'react';
 import { FiCircle } from "react-icons/fi";
 import { FiCheckCircle } from "react-icons/fi";
 import { FaCircle } from "react-icons/fa";
+import { FaRegThumbsUp } from "react-icons/fa";
+// import { FaRegThumbsDown } from "react-icons/fa";
 import axios from 'axios';
 import { config } from './../../../constants/apiRoute';
 import { useSpring, animated } from 'react-spring';
@@ -43,6 +45,14 @@ function Task({ task, status, index, viewTask, refresh }) {
             refresh();
         });
     };
+    const updateLikeValue = (e, id, value) => {
+        e.preventDefault();
+        e.stopPropagation();
+        axios.patch(api_url + 'task/' + id + '/like/' + value).then(response => {
+            console.log(response);
+            refresh();
+        });
+    };
     return (
         <animated.div className='task' onClick={() => viewTask(status, task._id)} style={slide}>
             <div title={task.title} className='task__item'>
@@ -60,8 +70,12 @@ function Task({ task, status, index, viewTask, refresh }) {
                 <FaCircle className='task__itemIcon fa-circle' style={{ color: (task.status === 'open') ? 'var(--color-primary)' : 'var(--green)' }} />
                 <span className='task__itemValue'>{task.status}</span>
             </div>
-            <div title={task.associated_team.name} className='task__item'>
-                <span className='task__itemValue'>{task.associated_team.name}</span>
+            <div title={task.associated_project.name} className='task__item'>
+                <span className='task__itemValue'>{task.associated_project.name}</span>
+            </div>
+            <div title="Like this" className='task__item'>
+                <FaRegThumbsUp style={{ color: task.like ? 'var(--green)' : 'var(--text-secondary)' }} className="task__itemValue task__likeIcon" onClick={(e) => updateLikeValue(e, task._id, !task.like)} />
+
             </div>
         </animated.div>
     )

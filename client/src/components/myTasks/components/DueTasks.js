@@ -14,7 +14,7 @@ function DueTasks({ tasks, viewTask, refresh }) {
                         <h2 className="dueTasks__columnHeading dueWhen">{dueWhen}</h2>
                         <h2 className="dueTasks__columnHeading">Due Date</h2>
                         <h2 className="dueTasks__columnHeading">Status</h2>
-                        <h2 className="dueTasks__columnHeading">Team</h2>
+                        <h2 className="dueTasks__columnHeading">Project</h2>
                     </TaskHeader>
 
                     <div className='dueTasks__Row'>

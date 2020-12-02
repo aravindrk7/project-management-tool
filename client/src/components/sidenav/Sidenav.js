@@ -1,83 +1,46 @@
 import React, { useContext } from 'react';
-// import axios from 'axios';
-
 import './Sidenav.css';
-// import { config } from './../../constants/apiRoute';
-// import SidenavProjects from './components/SidenavProjects';
-// import SidenavTeams from './components/SidenavTeams';
-import SidenavFavorites from './components/SidenavFavorites';
+
+import SidenavRoute from './SidenavRoute';
+import SidenavItem from './SidenavItem';
 import Accordion from './../shared/accordion/Accordion';
+
 import Logo from '../shared/logo/Logo';
 import FavoritesContext from '../../context/favoritesContext';
 
+// icons
+import { FiHome } from "react-icons/fi";
+import { FiCheckCircle } from "react-icons/fi";
+import { FiTarget } from "react-icons/fi";
+import { FiEdit } from "react-icons/fi";
+
+
 function Sidenav(props) {
-    // const api_url = config.url.API_URL;
+
     const { favorites, setFavorites } = useContext(FavoritesContext);
-    // const [favorites, setFavorites] = useState();
-    // useEffect(() => {
-    //     let favorite = projects?.filter(project => {
-    //         return project.favorite;
-    //     });
-    //     setFavorites(favorite)
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [projects])
-    // const [projects, setProjects] = useState();
-    // const [teams, setTeams] = useState();
-    // const [favorites, setFavorites] = useState();
-    // const [refreshFavorites, setRefreshFavorites] = useState(0);
-
-    // useEffect(() => {
-    //     const getProjects = async () => {
-    //         const projectData = await axios.get(api_url + 'project');
-    //         setProjects(projectData.data);
-    //     }
-    //     getProjects();
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [refreshFavorites])
-    // useEffect(() => {
-    //     const getTeams = async () => {
-    //         const teamData = await axios.get(api_url + 'team');
-    //         setTeams(teamData.data);
-    //     }
-    //     getTeams();
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [])
-    // useEffect(() => {
-    //     const getFavorites = async () => {
-    //         const favoriteData = await axios.get(api_url + 'project/favorites');
-    //         setFavorites(favoriteData.data);
-
-    //     }
-    //     getFavorites();
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [refreshFavorites])
-
-    // const handleFavoritesChange = () => {
-    //     setRefreshFavorites(prev => prev + 1);
-    // };
 
     return (
         <div className="sidenav">
-            <Logo />
+            <div className="sidenav__logo">
+                <Logo />
+            </div>
             <div className="sidenav__routes">
-                {props.children}
+                <SidenavRoute parent="/" path='home' name='Home' icon={<FiHome />} id='1' />
+                <SidenavRoute parent="/" path='myTasks' name='My Tasks' icon={<FiCheckCircle />} id='2' />
+                <SidenavRoute parent="/" path='projects' name='Projects' icon={<FiEdit />} id='4' />
+                <SidenavRoute parent="/" path='goals' name='Goals' icon={<FiTarget />} id='3' />
             </div>
             <div className="sidenav__items">
-                <Accordion title="Favorites" value={favorites?.length}>
-                    <SidenavFavorites favorites={favorites} setFavorites={setFavorites} />
-                    {/* <SidenavFavorites projects={favorites} refresh={handleFavoritesChange} /> */}
+                <Accordion title="Favorites" ItemsCount={favorites?.length} expand>
+                    <SidenavItem
+                        data={favorites}
+                        setData={setFavorites}
+                        noDataMessage="Mark ⭐ to make favorite"
+                        showOptions />
                 </Accordion>
-                {/* <Accordion title="Teams" value={teams?.length}>
-                    <SidenavTeams teams={teams} />
-                </Accordion> */}
-                {/* <Accordion title="Projects" value={projects?.length}>
-                    <SidenavProjects projects={projects} refresh={handleFavoritesChange} />
-                </Accordion> */}
             </div>
         </div>
     )
-
-
 }
 
 export default Sidenav;

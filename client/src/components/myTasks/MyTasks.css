@@ -3,32 +3,9 @@
     --cols: 3;
     --grid-gap: 10px;
     --task-column: 200px;
+    --like-column: 30px;
     height: 100%;
     user-select: none;
-}
-.myTasks__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 24px;
-    height: 50px;
-    background: #fff;
-    border-bottom: var(--border);
-}
-.myTasks__heading {
-    color: var(--text-primary);
-    display: flex;
-    align-items: center;
-}
-
-.myTasks__subHeading,
-.myTasks__symbol {
-    color: var(--text-primary);
-    display: flex;
-    margin-left: 5px;
-}
-.myTasks__symbol {
-    font-size: 20px;
 }
 
 .myTasks__dropdown select {
@@ -55,12 +32,13 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 0 8px;
     overflow-y: auto;
     overflow-x: hidden;
     background: var(--bg-primary);
     box-shadow: var(--box-shadow);
     z-index: 10;
+    padding: 0 24px;
+
 }
 .myTasks__summary {
     height: 100%;
@@ -86,30 +64,51 @@
     height: calc(100% - 50px);
     display: flex;
     flex-direction: column;
-    padding: 24px;
 }
-.summary__details {
+.summary__details,
+.summary__subDetails {
     width: 100%;
     display: flex;
     flex-direction: column;
+    padding: 24px;
 }
 .summary__details div {
     margin-bottom: 25px;
     display: flex;
     flex-direction: column;
 }
+.summary__subDetails div {
+    margin: 12px 0;
+    display: flex;
+}
 .summary__details label {
     font-size: 12px;
     color: var(--text-secondary);
     margin-bottom: 5px;
 }
-.summary__details p {
+.summary__subDetails label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+}
+.summary__details p,
+.summary__subDetails p {
     font-size: 13px;
     color: var(--text-primary);
     font-family: poppins-medium;
 }
-
+.summary__taskName{
+    font-size: 20px !important;
+}
+.summary__subDetails p {
+    background: red;
+    padding: 3px 15px;
+    border-radius: 15px;
+}
 .summary__AdditionalDetails {
+    padding: 0 24px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -137,19 +136,53 @@
     font-family: poppins-medium;
 }
 
+/* Summary Activity */
+.summary__activities {
+    background: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    padding: 10px 24px;
+}
+.summary__activity {
+    display: flex;
+    margin-bottom: 20px;
+}
+.summary__activityUserIcon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.summary__activityText {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    color: var(--text-primary);
+    margin-right: 10px;
+    font-family: poppins-bold;
+}
+.summary__activityTime {
+    font-size: 11px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+}
+
 /* Due Tasks */
 .dueTasks__dueWhen {
     margin-bottom: 40px;
 }
 .dueTasks__columnHeadingContainer {
     display: grid;
-    grid-template-columns: var(--task-column) repeat(
+    grid-template-columns:
+        var(--task-column) repeat(
             var(--cols),
-            calc((100% - (var(--task-column) + (var(--cols) * var(--grid-gap)))) / var(--cols))
-        );
+            calc((100% - (var(--task-column) + (var(--cols) * var(--grid-gap)) + var(--like-column))) / var(--cols))
+        )
+        var(--like-column);
     grid-gap: var(--grid-gap);
     min-height: 40px;
-    padding: 0 10px;
+    /* padding: 0 10px; */
 }
 
 .dueTasks__columnHeading {
@@ -174,13 +207,15 @@
 /* Task */
 .task {
     display: grid;
-    grid-template-columns: var(--task-column) repeat(
+    grid-template-columns:
+        var(--task-column) repeat(
             var(--cols),
-            calc((100% - (var(--task-column) + (var(--cols) * var(--grid-gap)))) / var(--cols))
-        );
+            calc((100% - (var(--task-column) + (var(--cols) * var(--grid-gap)) + var(--like-column))) / var(--cols))
+        )
+        var(--like-column);
     grid-gap: var(--grid-gap);
     border-bottom: 1px solid gainsboro;
-    padding: 0 10px;
+    /* padding: 0 10px; */
     cursor: pointer;
     user-select: none;
     transition: transform 0.3s ease-in-out;
@@ -190,7 +225,7 @@
 }
 .task:hover {
     background: rgb(251, 253, 255);
-    transform: scale(1.03);
+    /* transform: scale(1.03); */
 }
 .task__item {
     width: 100%;
@@ -233,4 +268,14 @@
 }
 .fa-circle {
     font-size: 10px;
+}
+.task__likeIcon {
+    cursor: pointer !important;
+    font-size: 14px;
+    align-items: right;
+    color: var(--text-secondary);
+    transition: 0.3s ease-in-out;
+}
+.task__likeIcon:hover {
+    color: var(--text-primary) !important;
 }

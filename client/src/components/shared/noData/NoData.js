@@ -8,7 +8,7 @@ function NoData(props) {
 
     return (
         <div className="noData" style={style}>
-            <p className="noData__message">{props.message}</p>
+            <p style={{ fontSize: props.size }} className="noData__message">{props.message}</p>
         </div>
     )
 }

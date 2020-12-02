@@ -1,0 +1,16 @@
+.message {
+    font-weight: bold;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 3px;
+    margin: 5px 0;
+    font-size: 14px;
+}
+.message__clear {
+    cursor: pointer;
+    font-size: 18px !important;
+}
+.message__clear:hover {
+    color: rgb(63, 63, 63);
+}

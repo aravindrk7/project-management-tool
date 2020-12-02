@@ -3,9 +3,6 @@
     border-bottom: var(--border);
 }
 
-.accordion__content{
-    overflow: hidden;
-}
 .accordion__header {
     cursor: pointer;
     display: flex;
@@ -17,8 +14,8 @@
 }
 .accordion__header:hover .accordion__title,
 .accordion__header:hover .accordion__headerIcon,
-.accordion__header:hover .accordion__titleValue {
-    color:var(--color-primary);
+.accordion__header:hover .accordion__itemsCount {
+    color: var(--color-primary);
 }
 .accordion__header > div {
     display: flex;
@@ -26,12 +23,16 @@
 
 .accordion__title,
 .accordion__headerIcon,
-.accordion__titleValue {
+.accordion__itemsCount {
     font-size: 13px;
     color: var(--text-secondary);
     transition: 0.3s;
     font-family: poppins-bold;
 }
-.accordion__titleValue {
+.accordion__itemsCount {
     margin-left: 5px;
+}
+
+.accordion__content {
+    overflow: hidden;
 }

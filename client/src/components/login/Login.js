@@ -6,14 +6,12 @@ import axios from 'axios';
 import './Login.css';
 import { config } from './../../constants/apiRoute';
 import UserContext from './../../context/userContext';
-
-// import MessageNotice from '../shared/messageNoticie/messageNotice';
-
+import Alert from '../shared/alert/Alert';
 
 function Login() {
     const api_url = config.url.API_URL;
-    // const [message, setMessage] = useState();
-    // const [messageType, setMessageType] = useState();
+    const [message, setMessage] = useState();
+    const [messageType, setMessageType] = useState();
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -46,16 +44,16 @@ function Login() {
             history.push('/');
         } catch (error) {
             if (error.response.data.msg) {
-                // setMessage(error.response.data.msg);
-                // setMessageType('error');
+                setMessage(error.response.data.msg);
+                setMessageType('error');
             }
         }
     };
 
-    // const clearMessage = () => {
-    //     setMessage(undefined);
-    //     setMessageType(undefined);
-    // };
+    const clearMessage = () => {
+        setMessage(undefined);
+        setMessageType(undefined);
+    };
 
     // Animations
     const fade = useSpring({
@@ -66,9 +64,9 @@ function Login() {
     return (
         <animated.div className="login" style={fade}>
             <h1 className="login__heading">Login</h1>
-            {/* {message && (
-                <MessageNotice message={message} clearMessage={clearMessage} type={messageType} />
-            )} */}
+            {message && (
+                <Alert message={message} clearMessage={clearMessage} type={messageType} />
+            )}
             <form className="login__form" onSubmit={handleSubmit}>
                 <div className="login__field">
                     <input className="login__input" type="text" placeholder=" " value={formData.email} name="email" onChange={handleFormData} required autoComplete='off' />

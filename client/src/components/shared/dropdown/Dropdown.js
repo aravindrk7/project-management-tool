@@ -14,7 +14,7 @@ function Dropdown(props) {
         config: { duration: 200 }
     });
     return (
-        <animated.div className="dropdown" style={Object.assign(style, slide)} onClick={(e) => props.close(e)}>
+        <animated.div className="dropdown" style={Object.assign(style, slide,props.options)} onClick={(e) => props.close(e)}>
             {props.children}
         </animated.div>
     )

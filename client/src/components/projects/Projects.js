@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 import axios from 'axios';
 import { config } from '../../constants/apiRoute';
 import { FiAperture } from "react-icons/fi";
-import { AiOutlineUser } from "react-icons/ai";
 import { FiClock } from "react-icons/fi";
 import { FiPlus } from "react-icons/fi";
 import './Projects.css';
@@ -14,6 +13,11 @@ import Button from '../shared/button/Button';
 import ProgressBar from '../shared/progressBar/ProgressBar';
 import UserContext from './../../context/userContext'
 import { useSpring, animated } from 'react-spring';
+import dp1 from '../../images/dp/dp1.PNG';
+import dp2 from '../../images/dp/dp2.PNG';
+import dp3 from '../../images/dp/dp3.PNG';
+import dp4 from '../../images/dp/dp4.PNG';
+import SubHeader from '../shared/subHeader/SubHeader';
 
 function Projects() {
     const api_url = config.url.API_URL;
@@ -54,9 +58,8 @@ function Projects() {
                 : (days === 1 ? "Due tomorrow" : days + " days left"));
     };
 
-
     // Animations
-    const slide = useSpring({
+    const fade = useSpring({
         from: {
             opacity: 0,
         },
@@ -65,16 +68,13 @@ function Projects() {
     });
     return (
         <div className="projects">
-            <div className="projects__header">
-                <div className="projects__heading">
-                    <h1>Projects</h1>
-                </div>
+            <SubHeader heading="Projects">
                 <Button text={"Add Project"} icon={<FiPlus />} clicked={addProject} />
-            </div>
+            </SubHeader>
             {!loading ?
                 (<div className="projects__main">
                     {projects?.map(project => (
-                        <animated.div key={project._id} style={slide}>
+                        <animated.div key={project._id} className="projects__projectContainer" style={fade}>
                             <NavLink to={`/project/${project._id}`} className="projects__project">
                                 <div className="projects__projectHeader">
                                     <div className="projects__projectCard center">
@@ -93,16 +93,19 @@ function Projects() {
                                 </div>
                                 <div className="projects__projectFooter">
                                     <div className="projects__projectFooterCard center">
-                                        <AiOutlineUser className="projects__projectFooterUserIcon" />
+                                        <img className="projects__projectFooterUserIcon" src={dp1} alt="" />
                                     </div>
                                     <div className="projects__projectFooterCard center">
-                                        <AiOutlineUser className="projects__projectFooterUserIcon" />
+                                        <img className="projects__projectFooterUserIcon" src={dp2} alt="" />
                                     </div>
                                     <div className="projects__projectFooterCard center">
-                                        <AiOutlineUser className="projects__projectFooterUserIcon" />
+                                        <img className="projects__projectFooterUserIcon" src={dp3} alt="" />
                                     </div>
                                     <div className="projects__projectFooterCard--dashed center">
-                                        <FiPlus className="projects__projectFooterUserIcon" />
+                                        <img className="projects__projectFooterUserIcon" src={dp4} alt="" />
+                                    </div>
+                                    <div className="projects__projectFooterCard--dashed center">
+                                        <FiPlus className="projects__projectFooterUserIcon--new" />
                                     </div>
                                 </div>
                             </NavLink>

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Tasks = require('../models/taskModel');
 
 const projectSchema = mongoose.Schema({
     user_id: {
@@ -9,6 +10,10 @@ const projectSchema = mongoose.Schema({
         type: String,
         required: true,
         unique: true
+    },
+    description: {
+        type: String,
+        required: true
     },
     created_at: {
         type: Date,
@@ -26,8 +31,8 @@ const projectSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    owner: {
-        type: String,
+    head: {
+        type: Array,
         required: true
     },
     privacy: {
@@ -36,6 +41,22 @@ const projectSchema = mongoose.Schema({
     },
     favorite: {
         type: Boolean,
+        required: true
+    },
+    tasks: {
+        type: Array,
+        required: true
+    },
+    // tasks: {
+    //     type: [String],
+    //     required: true,
+    // },
+    // tasks: {
+    //     type: Array,
+    //     required: true
+    // },
+    members: {
+        type: Array,
         required: true
     },
 });

@@ -11,12 +11,16 @@
     box-shadow: var(--box-shadow);
     z-index: 20;
 }
-
+.sidenav__logo {
+    display: flex;
+    align-items: center;
+    height: 80px;
+}
 .sidenav__routes {
-    border-bottom: var(--border);
-    padding-bottom: 16px;
     display: flex;
     flex-direction: column;
+    padding-bottom: 16px;
+    border-bottom: var(--border);
 }
 
 .sidenav__items {
@@ -25,6 +29,8 @@
     overflow-y: overlay;
 }
 
+
+/* Sidenav Item */
 .sidenav__itemContents {
     display: flex;
     flex-direction: column;

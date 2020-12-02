@@ -1,5 +1,4 @@
 .logo {
-    height: 80px;
     display: flex;
     align-items: center;
     padding: 0 24px;
@@ -10,10 +9,7 @@
     border-radius: 50%;
 } 
 .logo__name{
-    display: flex;
-    align-items: center;
     font-size: 18px;
     color: var(--text-primary);
     margin-left: 5px;
-    height: 30px;
 }

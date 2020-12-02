@@ -7,7 +7,7 @@ import { config } from './../../constants/apiRoute';
 import UserContext from './../../context/userContext';
 import FavoritesContext from './../../context/favoritesContext';
 
-// import Header from '../header/Header';
+import Header from '../shared/header/Header';
 import Home from '../home/Home';
 import Login from '../login/Login';
 import Register from '../register/Register';
@@ -16,17 +16,7 @@ import MyTasks from '../myTasks/MyTasks';
 import Goals from '../goals/Goals';
 import Projects from '../projects/Projects';
 import ProjectDetails from '../projectDetails/ProjectDetails';
-import Team from '../team/Team';
 import Sidenav from '../sidenav/Sidenav';
-import SidenavRoute from '../sidenav/components/sidenavRoute/SidenavRoute';
-
-// icons
-import { FiHome } from "react-icons/fi";
-import { FiCheckCircle } from "react-icons/fi";
-import { FiTarget } from "react-icons/fi";
-import { FiEdit } from "react-icons/fi";
-
-import Header from '../shared/header/Header';
 
 function App() {
   const api_url = config.url.API_URL;
@@ -82,14 +72,8 @@ function App() {
         <FavoritesContext.Provider value={{ favorites, setFavorites }}>
           <div className="app">
             <Header />
-            <Sidenav >
-              <SidenavRoute parent="/" path='home' name='Home' icon={<FiHome />} id='1' />
-              <SidenavRoute parent="/" path='myTasks' name='My Tasks' icon={<FiCheckCircle />} id='2' />
-              <SidenavRoute parent="/" path='projects' name='Projects' icon={<FiEdit />} id='4' />
-              <SidenavRoute parent="/" path='goals' name='Goals' icon={<FiTarget />} id='3' />
-            </Sidenav>
+            <Sidenav />
             <div className="app__main">
-
               <Switch>
                 <Route exact path="/">
                   <Redirect to="/home" />
@@ -108,9 +92,6 @@ function App() {
                 </Route>
                 <Route path="/project/:id">
                   <ProjectDetails />
-                </Route>
-                <Route path="/team/:id">
-                  <Team />
                 </Route>
                 <Route path="/login">
                   <Login />

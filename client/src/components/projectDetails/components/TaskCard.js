@@ -1,11 +1,12 @@
 import React from 'react';
-import { useSpring, animated } from 'react-spring';
 import './TaskCard.css';
-import { FiPlus } from "react-icons/fi";
-import { AiOutlineUser } from "react-icons/ai";
+import { config } from './../../../constants/apiRoute';
+import axios from 'axios';
+import { FaRegThumbsUp } from "react-icons/fa";
 import { FiClock } from "react-icons/fi";
 
-function TaskStatus({ task, index }) {
+function TaskStatus({ task, index, refresh }) {
+    const api_url = config.url.API_URL;
 
     const getDate = (date) => {
         date = new Date(date);
@@ -27,23 +28,24 @@ function TaskStatus({ task, index }) {
     const getDueText = (status, days) => {
         if (status === 'completed') return 'Completed';
         return days < 0
-            ? Math.abs(days) + " d overdue"
+            ? Math.abs(days) + " days overdue"
             : (days === 0
                 ? "Due today"
                 : (days === 1 ? "Due tomorrow" : days + " days left"));
     };
 
-
-    // Animations
-    const slide = useSpring({
-        from: { marginTop: -150, opacity: 0 },
-        opacity: 1,
-        marginTop: 0
-    });
+    const updateLikeValue = (e, id, value) => {
+        e.preventDefault();
+        e.stopPropagation();
+        axios.patch(api_url + 'task/' + id + '/like/' + value).then(response => {
+            console.log(response.data);
+            refresh();
+        });
+    };
 
     return (
 
-        <animated.div className="taskCard" style={slide}>
+        <div className="taskCard" >
             <div className="taskCard__header">
                 <div className="taskCard_headerDetails">
                     <div>
@@ -65,20 +67,9 @@ function TaskStatus({ task, index }) {
                 <p title={task.description} className="taskCard__desc">{task.description}</p>
             </div>
             <div className="taskCard__footer">
-                <div className="taskCard__memberCard center">
-                    <AiOutlineUser className="taskCard__memberIcon" />
-                </div>
-                <div className="taskCard__memberCard center">
-                    <AiOutlineUser className="taskCard__memberIcon" />
-                </div>
-                <div className="taskCard__memberCard center">
-                    <AiOutlineUser className="taskCard__memberIcon" />
-                </div>
-                <div className="taskCard__memberCard--dashed center">
-                    <FiPlus className="taskCard__memberIcon" />
-                </div>
+                <FaRegThumbsUp className="task__likeIcon" title="Like this" style={{ color: task.like ? 'var(--green)' : 'var(--text-secondary)' }} onClick={(e) => updateLikeValue(e, task._id, !task.like)} />
             </div>
-        </animated.div >
+        </div >
 
     )
 }

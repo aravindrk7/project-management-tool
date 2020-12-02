@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
-import { NavLink } from "react-router-dom";
-
 import axios from 'axios';
 import { config } from '../../constants/apiRoute';
 import './ProjectDetails.css';
 import Loader from '../shared/loader/Loader';
 import Button from '../shared/button/Button';
 import { FiPlus } from "react-icons/fi";
-import { AiOutlineUser } from "react-icons/ai";
 import { AiOutlineStar } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
 import DragDrop from './components/DragDrop';
 import FavoritesContext from '../../context/favoritesContext';
-
+import dp1 from '../../images/dp/dp1.PNG';
+// import dp2 from '../../images/dp/dp2.PNG';
+// import dp3 from '../../images/dp/dp3.PNG';
+// import dp4 from '../../images/dp/dp4.PNG';
+import SubHeader from '../shared/subHeader/SubHeader';
 
 function ProjectDetails(props) {
     const api_url = config.url.API_URL;
@@ -21,6 +22,7 @@ function ProjectDetails(props) {
     const [project, setProject] = useState({});
     const [tasks, setTasks] = useState({});
     const [loading, setLoading] = useState(true);
+    const [refreshTasks, setRefreshTasks] = useState(0);
 
     let id = props.match.params.id;
     useEffect(() => {
@@ -37,8 +39,11 @@ function ProjectDetails(props) {
         getprojectData();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id]);
+    }, [id, refreshTasks]);
 
+    const addMember = () => {
+        console.log('Add Member');
+    };
     const addTask = () => {
         console.log('Add Task');
     };
@@ -64,40 +69,35 @@ function ProjectDetails(props) {
         });
         return (fav?.length) ? true : false;
     };
+    const handleTaskChange = () => {
+        setRefreshTasks(prev => prev + 1);
+    };
     return (
         <div className="projectDetails">
-            <div className="projectDetails__header">
-                <div className="projectDetails__heading">
-                    <NavLink to="/projects" className="projectDetails__mainHeading">
-                        <h1>Projects</h1>
-                    </NavLink>
-                    <span className="projectDetails__symbol">{'>'}</span>
-                    <h1 className="projectDetails__subHeading">{project.name}</h1>
-                    {checkFavorite(project._id) ? <AiFillStar className="projectDetails__fillStar star" onClick={() => removeFromFavorites(project._id)} />
-                        : <AiOutlineStar className="projectDetails__outlineStar star" onClick={() => addToFavorites(project._id, project.name)} />}
-                </div>
+            <SubHeader
+                heading="Projects"
+                subHeading={project.name}
+                navLink='/projects'>
                 <div className="projectDetails__rightSection">
                     <div className="projectDetails__members">
-                        <div className="projectDetails__memberCard center">
-                            <AiOutlineUser className="projectDetails__memberIcon" />
-                        </div>
-                        <div className="projectDetails__memberCard center">
-                            <AiOutlineUser className="projectDetails__memberIcon" />
-                        </div>
-                        <div className="projectDetails__memberCard center">
-                            <AiOutlineUser className="projectDetails__memberIcon" />
-                        </div>
-                        <div className="projectDetails__memberCard--dashed center">
-                            <FiPlus className="projectDetails__memberIcon" />
+                        {project.members?.map((member,index) => (
+                            <div title={member.name} key={member.id} className="projectDetails__memberCard center">
+                                <img className="projectDetails__memberIcon" src={dp1} alt="" />
+                            </div>
+                        ))}
+                        <div className="projectDetails__memberCard--dashed center" onClick={addMember}>
+                            <FiPlus className="projectDetails__memberIcon--new" />
                         </div>
                     </div>
                     <Button text={"Add Task"} icon={<FiPlus />} clicked={addTask} />
                 </div>
+                {checkFavorite(project._id) ? <AiFillStar className="projectDetails__fillStar star" onClick={() => removeFromFavorites(project._id)} />
+                    : <AiOutlineStar className="projectDetails__outlineStar star" onClick={() => addToFavorites(project._id, project.name)} />}
+            </SubHeader>
 
-            </div>
             {!loading ?
                 (<div className="projectDetails__main">
-                    <DragDrop tasks={tasks} setTasks={setTasks} />
+                    <DragDrop tasks={tasks} setTasks={setTasks} refresh={handleTaskChange} />
                 </div>) : (<Loader />)
             }
         </div >

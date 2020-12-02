@@ -7,6 +7,7 @@ import NoData from '../shared/noData/NoData';
 import Loader from '../shared/loader/Loader';
 import DueTasks from './components/DueTasks';
 import Summary from './components/Summary';
+import SubHeader from '../shared/subHeader/SubHeader';
 function MyTasks() {
     const api_url = config.url.API_URL;
     const [tasks, setTasks] = useState();
@@ -103,12 +104,7 @@ function MyTasks() {
 
     return (
         <div className="myTasks">
-            <div className="myTasks__header">
-                <div className="myTasks__heading">
-                    <h1>My Tasks</h1>
-                    <span className="myTasks__symbol">{'>'}</span>
-                    <h1 className="myTasks__subHeading">{currentProject}</h1>
-                </div>
+            <SubHeader heading="My Tasks" subHeading={currentProject}>
                 <div className="myTasks__dropdown">
                     <select onChange={(e) => filterByProject(e)}>
                         <option defaultChecked value="All">All</option>
@@ -117,7 +113,7 @@ function MyTasks() {
                         ))}
                     </select>
                 </div>
-            </div>
+            </SubHeader>
             <main className="myTasks__main">
                 <section className="myTasks__list">
                     {!loading

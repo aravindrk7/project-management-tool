@@ -33,6 +33,10 @@ const taskSchema = mongoose.Schema({
         type: Date,
         required: true
     },
+    like: {
+        type: Boolean,
+        required: true
+    }
 });
 
 module.exports = mongoose.model('tasks', taskSchema);

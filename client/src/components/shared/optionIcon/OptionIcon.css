@@ -1,10 +1,10 @@
-.sidenav__itemContentIcon {
+.optionIcon {
     font-size: 15px;
     color:var(--text-primary);
     transition: 0.5s;
     display: flex;
     align-items: center;
 }
-.sidenav__itemContentIcon:hover {
+.optionIcon:hover {
     color: var(--color-primary);
 }

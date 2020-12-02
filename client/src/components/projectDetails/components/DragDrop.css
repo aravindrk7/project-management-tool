@@ -1,13 +1,14 @@
 .dragDrop {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 300px);
     grid-gap: 24px;
 }
 .dragDrop__group {
     width: 100%;
     position: relative;
     min-height: 240px;
+    /* background: rgba(0, 0, 0, .03); */
 }
 .dragDrop__groupHeading {
     cursor: pointer;

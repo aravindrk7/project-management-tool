@@ -1,19 +1,6 @@
 .home {
     height: 100%;
 }
-.home__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 24px;
-    height: 50px;
-    background: #fff;
-    border-bottom: var(--border);
-}
-.home__heading {
-    color: var(--text-primary);
-    display: flex;
-}
 
 .home__main {
     width: 100%;

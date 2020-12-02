@@ -3,17 +3,17 @@ const Task = require('../models/taskModel');
 
 const auth = require('./../middlewares/auth');
 
-router.patch('/update', async (req, res) => {
-    console.log("updated");
-    // try {
-    //     const updatedTask = await Task.findByIdAndUpdate(req.params.id, { status: req.params.status });
-    //     res.json(updatedTask);
-    // } catch (error) {
-    //     res
-    //         .status(500)
-    //         .json({ error: error.message });
-    // }
-});
+// router.patch('/update', async (req, res) => {
+//     res.json({ msg: "Updated" });
+//     // try {
+//     //     const updatedTask = await Task.findByIdAndUpdate(req.params.id, { status: req.params.status });
+//     //     res.json(updatedTask);
+//     // } catch (error) {
+//     //     res
+//     //         .status(500)
+//     //         .json({ error: error.message });
+//     // }
+// });
 
 router.patch('/:id/:status', async (req, res) => {
     try {
@@ -44,6 +44,16 @@ router.get('/project/:id', async (req, res) => {
         });
         const splitedTasks = splitStatus(tasksNew);
         res.json(splitedTasks);
+    } catch (error) {
+        res
+            .status(500)
+            .json({ error: error.message });
+    }
+});
+router.patch('/:id/like/:value', async (req, res) => {
+    try {
+        const updatedTask = await Task.findByIdAndUpdate(req.params.id, { like: req.params.value }).lean();
+        res.json(updatedTask);
     } catch (error) {
         res
             .status(500)

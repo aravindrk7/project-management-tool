@@ -13,7 +13,7 @@
     height: 100%;
     width: 80%;
 }
-.header__searchIcon{
+.header__searchIcon {
     font-size: 18px;
     height: 100%;
     margin-right: 10px;
@@ -33,7 +33,6 @@
     display: flex;
     align-items: center;
     user-select: none;
-    transition: 0.3s ease-in-out;
 }
 .header__userDetails {
     display: flex;
@@ -53,11 +52,27 @@
 }
 
 .header__userCard {
+    position: relative;
     border-radius: 50%;
     border: var(--border);
     width: 35px;
     height: 35px;
 }
 .header__userIcon {
-    font-size: 17px;
+    width: 40px;
+    height: 40px;
+}
+.header__icon{
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    margin-left: 20px;
+    cursor: pointer;
+    transition: background .3s ease-in-out;
+
+}
+.header__icon:hover{
+   background: var(--bg-secondary);
+   border:var(--border);
+
 }

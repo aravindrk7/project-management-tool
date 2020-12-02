@@ -6,19 +6,18 @@ import axios from 'axios';
 import './Register.css';
 import { config } from './../../constants/apiRoute';
 import UserContext from './../../context/userContext';
-
-// import MessageNotice from '../shared/messageNoticie/messageNotice';
+import Alert from '../shared/alert/Alert';
 
 function Register() {
-    const { userData } = useContext(UserContext);
+    const { userData, setUserData } = useContext(UserContext);
     const history = useHistory();
- 
+
     useEffect(() => {
         if (userData.user) history.push('/');
     });
 
-    // const [message, setMessage] = useState();
-    // const [messageType, setMessageType] = useState();
+    const [message, setMessage] = useState();
+    const [messageType, setMessageType] = useState();
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -38,31 +37,31 @@ function Register() {
         e.preventDefault();
         try {
             await axios.post(api_url + 'user/register', formData);
-            // const loginRes = await axios.post(api_url + 'user/login', {
-            //     email: formData.email,
-            //     password: formData.password
-            // });
-            // setUserData({
-            //     token: loginRes.data.token,
-            //     user: loginRes.data.user
-            // });
-            // localStorage.setItem('auth-token', loginRes.data.token);
+            const loginRes = await axios.post(api_url + 'user/login', {
+                email: formData.email,
+                password: formData.password
+            });
+            setUserData({
+                token: loginRes.data.token,
+                user: loginRes.data.user
+            });
+            localStorage.setItem('auth-token', loginRes.data.token);
             // history.push('/');
             // setMessage('Registration Successful. Login to Continue.');
             // setMessageType('success');
 
         } catch (error) {
             if (error.response.data.msg) {
-                // setMessage(error.response.data.msg);
-                // setMessageType('error');
+                setMessage(error.response.data.msg);
+                setMessageType('error');
             }
         }
     };
 
-    // const clearMessage = () => {
-    //     setMessage(undefined);
-    //     setMessageType(undefined);
-    // };
+    const clearMessage = () => {
+        setMessage(undefined);
+        setMessageType(undefined);
+    };
 
     // Animations
     const fade = useSpring({
@@ -73,9 +72,9 @@ function Register() {
     return (
         <animated.div className="register" style={fade}>
             <h1 className="register__heading">Register</h1>
-            {/* {message && (
-                <MessageNotice message={message} clearMessage={clearMessage} type={messageType} />
-            )} */}
+            {message && (
+                <Alert message={message} clearMessage={clearMessage} type={messageType} />
+            )}
             <form className="register__form" onSubmit={handleSubmit}>
                 <div className="register__field">
                     <input className="register__input" type="text" placeholder=" " value={formData.email} name="email" onChange={handleFormData} required autoComplete='off' />

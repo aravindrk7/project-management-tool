@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import './Home.css';
 import UserContext from './../../context/userContext';
+import SubHeader from '../shared/subHeader/SubHeader';
 
 function Home() {
     const { userData } = useContext(UserContext);
@@ -23,11 +24,7 @@ function Home() {
 
     return (
         <div className="home">
-            <div className="home__header">
-                <div className="home__heading">
-                    <h1>Home</h1>
-                </div>
-            </div>
+            <SubHeader heading="Home" />
             <main className="home__main">
                 <span className="home__greeting">
                     <p className="home__greetingText">Hello,&nbsp;</p>

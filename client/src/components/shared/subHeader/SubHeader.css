@@ -1,0 +1,38 @@
+.subHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 24px;
+    height: 50px;
+    background: #fff;
+    border-bottom: var(--border);
+}
+.subHeader__left {
+    display: flex;
+    align-items: center;
+}
+
+.subHeader__left h2,
+.subHeader__left span {
+    color: var(--text-primary);
+    display: flex;
+    margin-left: 5px;
+}
+.subHeader__left span {
+    font-size: 20px;
+}
+
+.subHeader__left h1 {
+    color: var(--text-primary);
+}
+
+.subHeader__link {
+    text-decoration: none;
+}
+.subHeader__link h1{
+    color: var(--color-primary);
+}
+
+.subHeader__right {
+    display: flex;
+}
