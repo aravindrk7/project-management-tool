@@ -6,7 +6,7 @@ function Logo() {
     return (
         <div className="logo">
             <img className="logo__image" src={logo} alt="" />
-            <h1 className="logo__name">Teamify</h1>
+            <h1 className="logo__name">Task Force</h1>
         </div>
     )
 }
