@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 const Tasks = require('../models/taskModel');
-
 const projectSchema = mongoose.Schema({
-    user_id: {
+    created_by: {
         type: String,
-        required: true,
+        required: true
     },
     name: {
         type: String,
@@ -17,6 +16,11 @@ const projectSchema = mongoose.Schema({
     },
     created_at: {
         type: Date,
+        required: true,
+        default: Date.now()
+    },
+    start_date: {
+        type: Date,
         required: true
     },
     due_date: {
@@ -25,39 +29,35 @@ const projectSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        required: true
+        required: true,
+        default: 'open'
     },
-    team_id: {
-        type: String,
-        required: true
-    },
+    // team_id: {
+    //     type: String,
+    //     required: true
+    // },
     head: {
         type: Array,
         required: true
     },
     privacy: {
         type: String,
-        required: true
+        required: true,
+        default: 'public'
     },
     favorite: {
         type: Boolean,
-        required: true
+        required: true,
+        default: false
     },
-    tasks: {
-        type: Array,
-        required: true
-    },
-    // tasks: {
-    //     type: [String],
-    //     required: true,
-    // },
-    // tasks: {
-    //     type: Array,
-    //     required: true
-    // },
+    tasks: [{
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'tasks',
+        default: []
+    }],
     members: {
         type: Array,
-        required: true
+        default: []
     },
 });
 

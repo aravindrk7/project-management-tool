@@ -11,13 +11,14 @@ const taskSchema = mongoose.Schema({
     },
     created_at: {
         type: Date,
-        required: true
+        required: true,
+        default: Date.now()
     },
     status: {
         type: String,
         required: true
     },
-    associated_team: {
+    associated_project: {
         type: Object,
         required: true
     },
@@ -27,6 +28,10 @@ const taskSchema = mongoose.Schema({
     },
     description: {
         type: String,
+        required: true
+    },
+    start_date: {
+        type: Date,
         required: true
     },
     due_date: {
@@ -40,3 +45,4 @@ const taskSchema = mongoose.Schema({
 });
 
 module.exports = mongoose.model('tasks', taskSchema);
+

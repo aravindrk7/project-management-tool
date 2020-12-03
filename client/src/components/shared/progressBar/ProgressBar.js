@@ -1,15 +1,15 @@
 import React from 'react';
 import './ProgressBar.css'
 
-function ProgressBar() {
+function ProgressBar(props) {
     return (
         <div className="progress">
             <p className="progress__details">
                 <label>Progress</label>
-                <label>67%</label>
+                <label>{props.value}%</label>
             </p>
             <span className="progress__bar">
-                <span className="progress__barFill"></span>
+                <span className="progress__barFill" style={{ width: props.value + "%" }}></span>
             </span>
         </div>
     )

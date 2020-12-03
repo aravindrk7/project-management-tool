@@ -21,8 +21,9 @@ function TaskStatus({ task, index, refresh }) {
     const getDueStyles = (status, days) => {
         let passedDue = { color: 'var(--red)', background: "rgba(241, 44, 30,.1)" };
         let dueToday = { color: 'var(--orange)', background: "rgba(241, 114, 30,.1)" };
-        let dueLater = { color: 'var(--green)', background: "rgba(0, 177, 0,.1)" };
-        if (status === 'completed') return dueLater;
+        let dueLater = { color: 'var(--blue)', background: "rgba(49, 60, 214,.1)" };
+        let completed = { color: 'var(--green)', background: "rgba(0, 177, 0,.1)" };
+        if (status === 'completed') return completed;
         return days < 0 ? passedDue : (days === 0 || days === 1 ? dueToday : dueLater);
     };
     const getDueText = (status, days) => {

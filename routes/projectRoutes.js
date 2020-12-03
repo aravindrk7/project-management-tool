@@ -4,6 +4,7 @@ const Task = require('../models/taskModel');
 
 const auth = require('./../middlewares/auth');
 
+
 router.get('/', async (req, res) => {
     try {
         const projects = await Project.find();
@@ -14,6 +15,28 @@ router.get('/', async (req, res) => {
             .json({ error: error.message });
     }
 });
+
+router.post('/add', async (req, res) => {
+    const newProject = new Project(req.body);
+    // const newProject = new Work({
+    //     category: req.body.category,
+    //     subCategory: req.body.subCategory,
+    //     status: req.body.status,
+    //     title: req.body.title,
+    //     earning: req.body.earning,
+    //     email: req.body.email,
+    //     startdate: Date.now()
+    // });
+    try {
+        const savedProject = await newProject.save();
+        res.json(savedProject);
+    }
+    catch (err) {
+        res.json({ message: err });
+    }
+
+});
+
 router.get('/favorites/:id', async (req, res) => {
     try {
         const favorites = await Project.find({ $and: [{ $or: [{ "members.id": req.params.id }, { "head.id": req.params.id }] }, { favorite: true }] }, { name: 1 });
@@ -54,38 +77,28 @@ router.get('/:id', async (req, res) => {
             .json({ error: error.message });
     }
 });
-// router.get('/user/:id', async (req, res) => {
-//     try {
-//         let projects = await Project.find().or([{ "members.id": req.params.id }, { "head.id": req.params.id }]).lean()
-//         let projectsNew = projects.map(project => {
-//             // console.log(await Task.find({ '_id': { $in: project.tasks } }).exec());
-//             return {
-//                 ...project, list: getData(project),
-//             }
-//         });
-//         res.json(projectsNew);
-//     } catch (error) {
-//         res
-//             .status(500)
-//             .json({ error: error.message });
-//     }
-// });
-// const getData = (project) => {
-//     Task.find({ '_id': { $in: project.tasks } }).exec().then(response => {
-//         return response;
-//     })
-// }
+
 router.get('/user/:id', async (req, res) => {
     try {
-        let projects = await Project.find().or([{ "members.id": req.params.id }, { "head.id": req.params.id }]).lean();
-        let projectsNew = projects.map(project => {
-            return {
-                ...project,
-                days_left: getDaysLeft(project.due_date),
-                task_done: 20
-            };
-        });
-        res.json(projectsNew);
+        // let projects = await Project.find().or([{ "members.id": req.params.id }, { "head.id": req.params.id }]).lean();
+        let projects = await Project.find().or([{ "members.id": req.params.id }, { "head.id": req.params.id }])
+            .lean()
+            .populate('tasks', 'status')
+            .exec()
+            .then(projects => {
+                if (!projects) {
+                    return null;
+                }
+                return res.json(projects.map(project => {
+                    return {
+                        ...project,
+                        days_left: getDaysLeft(project.due_date),
+                        total_task: project.tasks.length,
+                        task_done: project.tasks.filter(task => task.status === 'completed').length
+                    };
+                }))
+            });
+     
     } catch (error) {
         res
             .status(500)
@@ -98,10 +111,5 @@ const getDaysLeft = (dueDate) => {
     const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
     return diffInDays;
 };
-const getTaskCompletedCount = (id) => {
-    let tasks = Task.find({ "associated_project.id": id }).lean();
-    return tasks;
-};
-
 
 module.exports = router;

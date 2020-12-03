@@ -57,6 +57,7 @@
     border: var(--border);
     width: 35px;
     height: 35px;
+    margin-right: 10px;
 }
 .header__userIcon {
     width: 40px;
@@ -66,7 +67,7 @@
     width: 40px;
     height: 40px;
     font-size: 20px;
-    margin-left: 20px;
+    /* margin-left: 20px; */
     cursor: pointer;
     transition: background .3s ease-in-out;
 

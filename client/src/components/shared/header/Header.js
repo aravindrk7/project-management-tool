@@ -38,8 +38,8 @@ function Header() {
                 <div className="header__icon center">
                     <FiBell />
                 </div>
-                <div className="header__icon center" onClick={logout}>
-                    <FiLogOut title="Logout" />
+                <div title="Logout" className="header__icon center" onClick={logout}>
+                    <FiLogOut />
                 </div>
             </section>
         </header>

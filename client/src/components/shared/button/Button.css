@@ -7,22 +7,37 @@
     border-radius: 4px;
     cursor: pointer;
     height: 30px;
-    transition: .3s ease-in-out;
+    transition: 0.3s ease-in-out;
 }
-.button__icon {
+.button:disabled {
+    background: var(--bg-secondary);
+    border: var(--border);
+    /*display: flex;
+    align-items: center;
+    padding: 0px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 30px;
+    transition: .3s ease-in-out; */
+}
+.button:disabled .button__text,
+.button:disabled .button__icon {
+    color: var(--text-tertiary);
+}
+.button:not(disabled) .button__icon {
     display: flex;
     align-items: center;
     font-size: 18px;
     color: #fff;
     margin-right: 10px;
 }
-.button__text {
+.button:not(disabled) .button__text {
     display: flex;
     align-items: center;
     font-size: 13px;
     color: #fff;
     font-family: poppins-bold;
 }
-.button:hover{
+.button:not(disabled) .button:hover {
     background: rgb(6, 6, 224);
 }
