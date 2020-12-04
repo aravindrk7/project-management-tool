@@ -5,7 +5,6 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { FiBell } from "react-icons/fi";
 import { FiLogOut } from "react-icons/fi";
 import UserContext from '../../../context/userContext';
-import dp1 from '../../../images/dp/dp1.PNG';
 
 function Header() {
     const { userData, setUserData } = useContext(UserContext);
@@ -33,7 +32,11 @@ function Header() {
                     <div className="header__userEmail">{userData.user?.email}</div>
                 </div>
                 <div className="header__userCard center">
-                    <img className="header__userIcon" src={dp1} alt="" />
+                    {
+                        userData.user &&
+                        <img className="header__userIcon" src={"http://localhost:5000/uploads/" + userData.user?.displayPicture} alt="" />
+                    }
+
                 </div>
                 <div className="header__icon center">
                     <FiBell />

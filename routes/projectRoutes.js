@@ -69,8 +69,13 @@ router.patch('/remove-favorites/:id', async (req, res) => {
 });
 router.get('/:id', async (req, res) => {
     try {
-        const project = await Project.findOne({ _id: req.params.id });
-        res.json(project);
+        const project = await Project.findOne({ _id: req.params.id })
+            .lean()
+            .populate('members', '-password')
+            .exec()
+            .then(project => {
+                res.json(project);
+            })
     } catch (error) {
         res
             .status(500)
@@ -81,9 +86,10 @@ router.get('/:id', async (req, res) => {
 router.get('/user/:id', async (req, res) => {
     try {
         // let projects = await Project.find().or([{ "members.id": req.params.id }, { "head.id": req.params.id }]).lean();
-        let projects = await Project.find().or([{ "members.id": req.params.id }, { "head.id": req.params.id }])
+        let projects = await Project.find().or([{ "members": req.params.id }, { "head.id": req.params.id }])
             .lean()
             .populate('tasks', 'status')
+            .populate('members', '-password')
             .exec()
             .then(projects => {
                 if (!projects) {
@@ -98,7 +104,7 @@ router.get('/user/:id', async (req, res) => {
                     };
                 }))
             });
-     
+
     } catch (error) {
         res
             .status(500)

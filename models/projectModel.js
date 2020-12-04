@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Tasks = require('../models/taskModel');
 const projectSchema = mongoose.Schema({
     created_by: {
         type: String,
@@ -32,10 +31,6 @@ const projectSchema = mongoose.Schema({
         required: true,
         default: 'open'
     },
-    // team_id: {
-    //     type: String,
-    //     required: true
-    // },
     head: {
         type: Array,
         required: true
@@ -55,10 +50,15 @@ const projectSchema = mongoose.Schema({
         ref: 'tasks',
         default: []
     }],
-    members: {
-        type: Array,
+    members: [{
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'users',
         default: []
-    },
+    }],
+    // members: {
+    //     type: Array,
+    //     default: []
+    // },
 });
 
 module.exports = mongoose.model('projects', projectSchema);

@@ -13,10 +13,6 @@ import Button from '../shared/button/Button';
 import ProgressBar from '../shared/progressBar/ProgressBar';
 import UserContext from './../../context/userContext'
 import { useSpring, animated } from 'react-spring';
-import dp1 from '../../images/dp/dp1.PNG';
-// import dp2 from '../../images/dp/dp2.PNG';
-// import dp3 from '../../images/dp/dp3.PNG';
-// import dp4 from '../../images/dp/dp4.PNG';
 import SubHeader from '../shared/subHeader/SubHeader';
 import Popup from '../shared/popup/Popup';
 import CreateProjectForm from '../forms/project/CreateProjectForm';
@@ -32,16 +28,18 @@ function Projects() {
     useEffect(() => {
         const getprojectsData = async () => {
             try {
-                const projects = await axios.get(api_url + 'project/user/' + id);
-                setProjects(projects.data);
-                setLoading(false);
+                if (id) {
+                    const projects = await axios.get(api_url + 'project/user/' + id);
+                    setProjects(projects.data);
+                    setLoading(false);
+                }
             } catch (error) {
                 console.log(error);
             }
         }
         getprojectsData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id,refreshProjects]);
+    }, [id, refreshProjects]);
 
     const getDueStyles = (status, days) => {
         let passedDue = { color: 'var(--red)', background: "rgba(241, 44, 30,.1)" };
@@ -70,8 +68,15 @@ function Projects() {
     const closePopup = () => {
         setPopup(false);
     }
-    const addMember = () => {
+    const addMember = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         console.log('Add Member');
+    };
+    const viewMember = (e, id) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Member : ' + id);
     };
     const getCompletedPercentage = (completed, total) => {
         if (total === 0) return 0;
@@ -117,28 +122,13 @@ function Projects() {
                                 </div>
                                 <div className="projects__projectFooter">
                                     {project.members?.map((member, index) => (
-                                        <div title={member.name} key={member.id} className="projects__projectFooterCard center">
-                                            <img className="projects__projectFooterUserIcon" src={dp1} alt="" />
+                                        <div title={member.displayName} key={member._id} className="projects__projectFooterCard center" onClick={(e) => viewMember(e, member._id)}>
+                                            <img className="projects__projectFooterUserIcon" src={"http://localhost:5000/uploads/" + member.displayPicture} alt="" />
                                         </div>
                                     ))}
-                                    <div className="projects__projectFooterCard--dashed center" onClick={addMember}>
+                                    <div className="projects__projectFooterCard--dashed center" onClick={(e) => addMember(e)}>
                                         <FiPlus className="projects__projectFooterUserIcon--new" />
                                     </div>
-                                    {/* <div className="projects__projectFooterCard center">
-                                        <img className="projects__projectFooterUserIcon" src={dp1} alt="" />
-                                    </div>
-                                    <div className="projects__projectFooterCard center">
-                                        <img className="projects__projectFooterUserIcon" src={dp2} alt="" />
-                                    </div>
-                                    <div className="projects__projectFooterCard center">
-                                        <img className="projects__projectFooterUserIcon" src={dp3} alt="" />
-                                    </div>
-                                    <div className="projects__projectFooterCard--dashed center">
-                                        <img className="projects__projectFooterUserIcon" src={dp4} alt="" />
-                                    </div>
-                                    <div className="projects__projectFooterCard--dashed center">
-                                        <FiPlus className="projects__projectFooterUserIcon--new" />
-                                    </div> */}
                                 </div>
                             </NavLink>
                         </animated.div>

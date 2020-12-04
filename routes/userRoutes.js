@@ -3,12 +3,30 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 const auth = require('./../middlewares/auth');
+const multer = require('multer');
 
 router.get('/', async (req, res) => {
     res.send("User API 👨‍💻");
 });
 
-router.post('/register', async (req, res) => {
+// Multer for storing photos
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, getCurrentTime() + '_' + file.originalname)
+    }
+});
+const upload = multer({ storage: storage });
+function getCurrentTime() {
+    let today = new Date();
+    let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    let time = today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds();
+    return dateTime = date + '_' + time;
+}
+router.post('/register', upload.single('displayPicture'), async (req, res) => {
+    console.log(req.file.filename);
     try {
         let { displayName, email, password, passwordCheck } = req.body;
 
@@ -43,7 +61,8 @@ router.post('/register', async (req, res) => {
         const newUser = new User({
             email,
             password: passwordHash,
-            displayName
+            displayName,
+            displayPicture: req.file.filename
         });
 
         const savedUser = await newUser.save();
@@ -84,7 +103,8 @@ router.post('/login', async (req, res) => {
             user: {
                 id: user._id,
                 email: user.email,
-                displayName: user.displayName
+                displayName: user.displayName,
+                displayPicture: user.displayPicture
             }
         });
     } catch (error) {
@@ -123,7 +143,8 @@ router.get('/currentUser', auth, async (req, res) => {
         res.json({
             displayName: user.displayName,
             email: user.email,
-            id: user._id
+            id: user._id,
+            displayPicture: user.displayPicture
         });
     } catch (error) {
         res
@@ -147,7 +168,7 @@ router.get('/projects/:id', async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         res.json({
-            projects:user.projects,
+            projects: user.projects,
         });
     } catch (error) {
         res

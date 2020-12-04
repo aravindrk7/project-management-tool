@@ -81,8 +81,8 @@ function ProjectDetails(props) {
                 <div className="projectDetails__rightSection">
                     <div className="projectDetails__members">
                         {project.members?.map((member,index) => (
-                            <div title={member.name} key={member.id} className="projectDetails__memberCard center">
-                                <img className="projectDetails__memberIcon" src={dp1} alt="" />
+                            <div title={member.displayName} key={member._id} className="projectDetails__memberCard center">
+                                <img className="projectDetails__memberIcon" src={"http://localhost:5000/uploads/" + member.displayPicture} alt="" />
                             </div>
                         ))}
                         <div className="projectDetails__memberCard--dashed center" onClick={addMember}>

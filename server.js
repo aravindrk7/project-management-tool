@@ -3,7 +3,6 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-
 //Routes
 const userRoutes = require('./routes/userRoutes');
 const projectRoutes = require('./routes/projectRoutes');
@@ -18,7 +17,7 @@ mongoose.connect(process.env.DATABASE_URL_DEV, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
-    useFindAndModify:true
+    useFindAndModify: true
 }, (err) => {
     if (err) throw err;
     console.log('Connected to MongoDB');
@@ -27,15 +26,16 @@ mongoose.connect(process.env.DATABASE_URL_DEV, {
 
 app.get('/', (req, res) => {
     res.json({ message: 'Welcome' });
-    
+
 });
 
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static('uploads'));
 
-app.use('/api/user',userRoutes);
-app.use('/api/project',projectRoutes);
-app.use('/api/task',taskRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/project', projectRoutes);
+app.use('/api/task', taskRoutes);
 
 app.listen(port, () => {
     console.log(`Server running in ${port}`);
