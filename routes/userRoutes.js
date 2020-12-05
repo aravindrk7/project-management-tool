@@ -26,7 +26,6 @@ function getCurrentTime() {
     return dateTime = date + '_' + time;
 }
 router.post('/register', upload.single('displayPicture'), async (req, res) => {
-    console.log(req.file.filename);
     try {
         let { displayName, email, password, passwordCheck } = req.body;
 

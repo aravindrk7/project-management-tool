@@ -13,6 +13,7 @@ import { FiHome } from "react-icons/fi";
 import { FiCheckCircle } from "react-icons/fi";
 import { FiTarget } from "react-icons/fi";
 import { FiEdit } from "react-icons/fi";
+import { FiCalendar } from "react-icons/fi";
 
 
 function Sidenav(props) {
@@ -27,8 +28,9 @@ function Sidenav(props) {
             <div className="sidenav__routes">
                 <SidenavRoute parent="/" path='home' name='Home' icon={<FiHome />} id='1' />
                 <SidenavRoute parent="/" path='myTasks' name='My Tasks' icon={<FiCheckCircle />} id='2' />
-                <SidenavRoute parent="/" path='projects' name='Projects' icon={<FiEdit />} id='4' />
-                <SidenavRoute parent="/" path='goals' name='Goals' icon={<FiTarget />} id='3' />
+                <SidenavRoute parent="/" path='projects' name='Projects' icon={<FiEdit />} id='3' />
+                <SidenavRoute parent="/" path='goals' name='Goals' icon={<FiTarget />} id='4' />
+                <SidenavRoute parent="/" path='calendar' name='Calendar' icon={<FiCalendar />} id='5' />
             </div>
             <div className="sidenav__items">
                 <Accordion title="Favorites" ItemsCount={favorites?.length} expand>

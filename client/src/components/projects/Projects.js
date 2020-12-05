@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory, withRouter } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
 
 import axios from 'axios';
@@ -10,12 +10,13 @@ import { FiPlus } from "react-icons/fi";
 import './Projects.css';
 import Loader from '../shared/loader/Loader';
 import Button from '../shared/button/Button';
+import ButtonLite from '../shared/buttonLite/ButtonLite';
 import ProgressBar from '../shared/progressBar/ProgressBar';
-import UserContext from './../../context/userContext'
 import { useSpring, animated } from 'react-spring';
 import SubHeader from '../shared/subHeader/SubHeader';
 import Popup from '../shared/popup/Popup';
 import CreateProjectForm from '../forms/project/CreateProjectForm';
+import UserContext from './../../context/userContext';
 
 function Projects() {
     const api_url = config.url.API_URL;
@@ -24,6 +25,17 @@ function Projects() {
     const [loading, setLoading] = useState(true);
     const [refreshProjects, setRefreshProjects] = useState(0);
     const { userData } = useContext(UserContext);
+    const history = useHistory();
+    useEffect(() => {
+        if (typeof userData.user !== 'undefined') {
+            if (!userData.user) {
+                history.push('/login')
+            }
+            else {
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userData.user]);
     let id = userData.user?.id;
     useEffect(() => {
         const getprojectsData = async () => {
@@ -107,7 +119,7 @@ function Projects() {
                             <NavLink to={`/project/${project._id}`} className="projects__project">
                                 <div className="projects__projectHeader">
                                     <div className="projects__projectCard center">
-                                        <FiAperture className="projects__projectIcon" />
+                                        <img className="projects__projectAvatar" src={"http://localhost:5000/uploads/projectAvatars/" + project.displayPicture} alt="" />
                                     </div>
                                     <p style={getDueStyles(project.status, project.days_left)} className="project__dueTime">
                                         <FiClock />
@@ -126,9 +138,11 @@ function Projects() {
                                             <img className="projects__projectFooterUserIcon" src={"http://localhost:5000/uploads/" + member.displayPicture} alt="" />
                                         </div>
                                     ))}
-                                    <div className="projects__projectFooterCard--dashed center" onClick={(e) => addMember(e)}>
-                                        <FiPlus className="projects__projectFooterUserIcon--new" />
-                                    </div>
+                                    {project.members.length > 0
+                                        ? < div className="projects__projectFooterCard--dashed center" onClick={(e) => addMember(e)}>
+                                            <FiPlus className="projects__projectFooterUserIcon--new" />
+                                        </div>
+                                        : <ButtonLite text={"Add Member"} icon={<FiPlus />} clicked={addMember} />}
                                 </div>
                             </NavLink>
                         </animated.div>
@@ -136,7 +150,7 @@ function Projects() {
                     }
                 </div>) : (<Loader />)
             }
-        </div>
+        </div >
     )
 }
 

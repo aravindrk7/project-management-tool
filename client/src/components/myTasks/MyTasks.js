@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import UserContext from './../../context/userContext';
 import { config } from './../../constants/apiRoute';
@@ -8,6 +9,7 @@ import Loader from '../shared/loader/Loader';
 import DueTasks from './components/DueTasks';
 import Summary from './components/Summary';
 import SubHeader from '../shared/subHeader/SubHeader';
+
 function MyTasks() {
     const api_url = config.url.API_URL;
     const [tasks, setTasks] = useState();
@@ -20,6 +22,19 @@ function MyTasks() {
     const [loading, setLoading] = useState(true);
     const [refreshTask, setRefreshTask] = useState(0);
     const { userData } = useContext(UserContext);
+
+    const history = useHistory();
+    useEffect(() => {
+        if (typeof userData.user !== 'undefined') {
+            if (!userData.user) {
+                history.push('/login')
+            }
+            else {
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userData.user]);
+
     let id = userData.user?.id;
     useEffect(() => {
         const getTaskData = async () => {

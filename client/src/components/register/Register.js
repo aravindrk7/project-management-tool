@@ -150,7 +150,6 @@ function Register() {
                 }
                 onSubmit={async (data, { setSubmitting }) => {
                     try {
-                        console.log(data);
                         setSubmitting(true);
                         let formData = new FormData();
                         formData.append('email', data.email)
@@ -158,7 +157,6 @@ function Register() {
                         formData.append('passwordCheck', data.passwordCheck)
                         formData.append('displayName', data.displayName)
                         formData.append('displayPicture', data.displayPicture)
-                        console.log(formData);
                         await axios.post(api_url + 'user/register', formData);
                         const loginRes = await axios.post(api_url + 'user/login', {
                             email: data.email,

@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import React, { useState, useEffect, useContext } from 'react';
+import { withRouter } from "react-router-dom";
+import { __RouterContext } from 'react-router';
 import axios from 'axios';
+// import { useTransition, animated } from 'react-spring';
 
 import './App.css';
 import { config } from './../../constants/apiRoute';
@@ -8,18 +10,18 @@ import UserContext from './../../context/userContext';
 import FavoritesContext from './../../context/favoritesContext';
 
 import Header from '../shared/header/Header';
-import Home from '../home/Home';
-import Login from '../login/Login';
-import Register from '../register/Register';
-import NoMatch from '../noMatch/NoMatch';
-import MyTasks from '../myTasks/MyTasks';
-import Goals from '../goals/Goals';
-import Projects from '../projects/Projects';
-import ProjectDetails from '../projectDetails/ProjectDetails';
+
 import Sidenav from '../sidenav/Sidenav';
+import Main from '../main/Main';
 
 function App() {
   const api_url = config.url.API_URL;
+  const { location } = useContext(__RouterContext);
+  // const transitions = useTransition(location, location => location.pathname, {
+  //   from: { opacity: 0, transform: 'scale(0)' },
+  //   enter: { opacity: 1, transform: 'scale(1)' },
+  //   leave: { opacity: 0, transform: 'scale(0)' },
+  // });
   const [userData, setUserData] = useState({
     token: undefined,
     user: undefined
@@ -67,49 +69,30 @@ function App() {
   }
 
   return (
-    <Router>
-      <UserContext.Provider value={{ userData, setUserData }}>
-        <FavoritesContext.Provider value={{ favorites, setFavorites }}>
-          <div className="app">
-            <Header />
-            <Sidenav />
-            <div className="app__main">
-              <Switch>
-                <Route exact path="/">
-                  <Redirect to="/home" />
-                </Route>
-                <Route path="/home">
-                  <Home />
-                </Route>
-                <Route path="/myTasks">
-                  <MyTasks />
-                </Route>
-                <Route path="/goals">
-                  <Goals />
-                </Route>
-                <Route path="/projects">
-                  <Projects />
-                </Route>
-                <Route path="/project/:id">
-                  <ProjectDetails />
-                </Route>
-                <Route path="/login">
-                  <Login />
-                </Route>
-                <Route path="/register">
-                  <Register />
-                </Route>
-                <Route path="*">
-                  <NoMatch />
-                </Route>
-              </Switch>
-            </div>
-
+    // <Router>
+    <UserContext.Provider value={{ userData, setUserData }}>
+      <FavoritesContext.Provider value={{ favorites, setFavorites }}>
+        <div className="app">
+          {location.pathname !== '/login' && location.pathname !== '/register' &&
+            <>
+              <Header />
+              <Sidenav />
+            </>
+          }
+          <div className="app__main">
+            {/* {transitions.map(({ item, props, key }) => (
+              <animated.div key={key} style={props}> */}
+            <Main/>
+            {/* <Main transitions={transitions} /> */}
+            {/* </animated.div>
+            ))} */}
           </div>
-        </FavoritesContext.Provider>
-      </UserContext.Provider>
-    </Router>
+        </div>
+      </FavoritesContext.Provider>
+    </UserContext.Provider>
+    // </Router>
+
   );
 }
 
-export default App;
+export default withRouter(App);

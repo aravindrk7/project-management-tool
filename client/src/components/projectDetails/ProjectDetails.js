@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { config } from '../../constants/apiRoute';
 import './ProjectDetails.css';
@@ -10,11 +10,9 @@ import { AiOutlineStar } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
 import DragDrop from './components/DragDrop';
 import FavoritesContext from '../../context/favoritesContext';
-import dp1 from '../../images/dp/dp1.PNG';
-// import dp2 from '../../images/dp/dp2.PNG';
-// import dp3 from '../../images/dp/dp3.PNG';
-// import dp4 from '../../images/dp/dp4.PNG';
 import SubHeader from '../shared/subHeader/SubHeader';
+import UserContext from './../../context/userContext';
+import ButtonLite from '../shared/buttonLite/ButtonLite';
 
 function ProjectDetails(props) {
     const api_url = config.url.API_URL;
@@ -23,7 +21,18 @@ function ProjectDetails(props) {
     const [tasks, setTasks] = useState({});
     const [loading, setLoading] = useState(true);
     const [refreshTasks, setRefreshTasks] = useState(0);
-
+    const { userData } = useContext(UserContext);
+    const history = useHistory();
+    useEffect(() => {
+        if (typeof userData.user !== 'undefined') {
+            if (!userData.user) {
+                history.push('/login')
+            }
+            else {
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userData.user]);
     let id = props.match.params.id;
     useEffect(() => {
         const getprojectData = async () => {
@@ -80,14 +89,17 @@ function ProjectDetails(props) {
                 navLink='/projects'>
                 <div className="projectDetails__rightSection">
                     <div className="projectDetails__members">
-                        {project.members?.map((member,index) => (
+                        {project.members?.map((member, index) => (
                             <div title={member.displayName} key={member._id} className="projectDetails__memberCard center">
                                 <img className="projectDetails__memberIcon" src={"http://localhost:5000/uploads/" + member.displayPicture} alt="" />
                             </div>
                         ))}
-                        <div className="projectDetails__memberCard--dashed center" onClick={addMember}>
-                            <FiPlus className="projectDetails__memberIcon--new" />
-                        </div>
+                        {project.members?.length > 0
+                            ? <div className="projectDetails__memberCard--dashed center" onClick={addMember}>
+                                <FiPlus className="projectDetails__memberIcon--new" />
+                            </div>
+                            : <ButtonLite text={"Add Member"} icon={<FiPlus />} clicked={addMember} />}
+
                     </div>
                     <Button text={"Add Task"} icon={<FiPlus />} clicked={addTask} />
                 </div>

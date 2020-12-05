@@ -13,6 +13,10 @@ const projectSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    displayPicture: {
+        type: String,
+        required: true
+    },
     created_at: {
         type: Date,
         required: true,
@@ -32,7 +36,7 @@ const projectSchema = mongoose.Schema({
         default: 'open'
     },
     head: {
-        type: Array,
+        type: Object,
         required: true
     },
     privacy: {
@@ -55,10 +59,6 @@ const projectSchema = mongoose.Schema({
         ref: 'users',
         default: []
     }],
-    // members: {
-    //     type: Array,
-    //     default: []
-    // },
 });
 
 module.exports = mongoose.model('projects', projectSchema);

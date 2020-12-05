@@ -1,8 +1,8 @@
-.goals {
+.calender {
     height: 100%;
 }
 
-.goals__main {
+.calender__main {
     width: 100%;
     height: calc(100% - 105px);
     padding: 24px;

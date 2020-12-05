@@ -1,9 +1,25 @@
 const router = require('express').Router();
 const Project = require('../models/projectModel');
 const Task = require('../models/taskModel');
-
+const multer = require('multer');
 const auth = require('./../middlewares/auth');
 
+// Multer for storing photos
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads/projectAvatars');
+    },
+    filename: function (req, file, cb) {
+        cb(null, getCurrentTime() + '_' + file.originalname)
+    }
+});
+const upload = multer({ storage: storage });
+function getCurrentTime() {
+    let today = new Date();
+    let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    let time = today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds();
+    return dateTime = date + '_' + time;
+}
 
 router.get('/', async (req, res) => {
     try {
@@ -16,17 +32,17 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/add', async (req, res) => {
-    const newProject = new Project(req.body);
-    // const newProject = new Work({
-    //     category: req.body.category,
-    //     subCategory: req.body.subCategory,
-    //     status: req.body.status,
-    //     title: req.body.title,
-    //     earning: req.body.earning,
-    //     email: req.body.email,
-    //     startdate: Date.now()
-    // });
+router.post('/add', upload.single('displayPicture'), async (req, res) => {
+    const newProject = new Project({
+        name: req.body.name,
+        description: req.body.description,
+        start_date: req.body.start_date,
+        due_date: req.body.due_date,
+        created_by: req.body.created_by,
+        head: JSON.parse(req.body.head),
+        displayPicture: req.file.filename
+
+    });
     try {
         const savedProject = await newProject.save();
         res.json(savedProject);

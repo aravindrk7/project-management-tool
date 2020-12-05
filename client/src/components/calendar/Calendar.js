@@ -1,10 +1,10 @@
 import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import UserContext from './../../context/userContext';
+import UserContext from '../../context/userContext';
 import SubHeader from '../shared/subHeader/SubHeader';
-import './Goals.css';
+import './Calendar.css';
 
-function Goals() {
+function Calendar() {
     const { userData } = useContext(UserContext);
     const history = useHistory();
     useEffect(() => {
@@ -18,12 +18,11 @@ function Goals() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userData.user]);
     return (
-        <div className="goals">
-            <SubHeader heading="Goals" />
-            <div className="goals__main">
+            <div className="calender">
+                <SubHeader heading="Calender" />
+                <div className="calender__main"></div>
             </div>
-        </div>
     )
 }
 
-export default Goals;
+export default Calendar;

@@ -18,6 +18,7 @@ function CreateProjectForm(props) {
             initialValues={
                 {
                     name: '',
+                    displayPicture: '',
                     start_date: '',
                     due_date: '',
                     description: '',
@@ -26,47 +27,59 @@ function CreateProjectForm(props) {
                 }
             }
             onSubmit={async (data, { setSubmitting }) => {
-                setSubmitting(true);
-                const createRes = await axios.post(api_url + 'project/add', data);
-                console.log(createRes);
-                props.refresh();
-                setSubmitting(false);
+                try {
+                    setSubmitting(true);
+                    let formData = new FormData();
+                    formData.append('name', data.name)
+                    formData.append('description', data.description)
+                    formData.append('start_date', data.start_date)
+                    formData.append('due_date', data.due_date)
+                    formData.append('created_by', data.created_by)
+                    formData.append('head', JSON.stringify(data.head))
+                    formData.append('displayPicture', data.displayPicture)
+                    console.log(formData);
+
+                    await axios.post(api_url + 'project/add', formData)
+                        .then(response => {
+                            console.log(response);
+                            props.refresh();
+                            setSubmitting(false);
+                        })
+                } catch (error) {
+                    console.log(error);
+                }
 
             }}>
-            {({ values, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
-                // <form>
-                //     <input type="text" name='projectName' value={values.projectName} onChange={handleChange} onBlur={handleBlur} />
-                //     <Button disabled={isSubmitting} text="Create" clicked={handleSubmit} />
-                // </form>
+            {({ values, isSubmitting, handleChange, handleBlur, handleSubmit, setFieldValue }) => (
+
                 <form className="form">
                     <div className="form__field">
+                        <label htmlFor="name" className="form__label">Name</label>
                         <input className="form__input" type="text" placeholder=" " name="name" value={values.name} onChange={handleChange} onBlur={handleBlur} required autoComplete='off' />
-                        <label htmlFor="name" className="form__label">
-                            <span className="form__labelName">Name</span>
-                        </label>
+                    </div>
+
+                    <div className="form__row">
+                        <div className="form__field">
+                            <label htmlFor="start_date">Start Date</label>
+                            <input type="date" placeholder=" " name="start_date" value={values.start_date} onChange={handleChange} onBlur={handleBlur} required autoComplete='off' />
+                        </div>
+                        <div className="form__field">
+                            <label htmlFor="due_date">Due Date</label>
+                            <input type="date" placeholder=" " name="due_date" value={values.due_date} onChange={handleChange} onBlur={handleBlur} required autoComplete='off' />
+                        </div>
                     </div>
 
                     <div className="form__field">
-                        <label htmlFor="description" >
-                            Start Date
-                        </label>
-                        <input type="date" placeholder=" " name="start_date" value={values.start_date} onChange={handleChange} onBlur={handleBlur} required autoComplete='off' />
-                    </div>
-                    <div className="form__field">
-                        <label htmlFor="description" >
-                            Due Date
-                        </label>
-                        <input type="date" placeholder=" " name="due_date" value={values.due_date} onChange={handleChange} onBlur={handleBlur} required autoComplete='off' />
-                    </div>
-
-                    <div className="form__field">
-                        <label htmlFor="description" >
-                            Description
-                        </label>
+                        <label htmlFor="description" >Description</label>
                         <textarea placeholder=" " name="description" value={values.description} onChange={handleChange} onBlur={handleBlur} required autoComplete='off' />
                     </div>
 
-                    <div className="form__btnContainer">
+                    <div className="form__field">
+                        <label htmlFor="displayPicture">Display Picture</label>
+                        <input className="form__input" type="file" placeholder=" " name="displayPicture" onChange={(e) => setFieldValue('displayPicture', e.target.files[0])} required />
+                    </div>
+
+                    <div className="form__btnContainer center">
                         <Button disabled={isSubmitting} text="Create" clicked={handleSubmit} />
                     </div>
                 </form>
