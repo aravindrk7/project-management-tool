@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 
 import axios from 'axios';
 import { config } from '../../constants/apiRoute';
-import { FiAperture } from "react-icons/fi";
 import { FiClock } from "react-icons/fi";
 import { FiPlus } from "react-icons/fi";
 import './Projects.css';
@@ -15,8 +14,9 @@ import ProgressBar from '../shared/progressBar/ProgressBar';
 import { useSpring, animated } from 'react-spring';
 import SubHeader from '../shared/subHeader/SubHeader';
 import Popup from '../shared/popup/Popup';
-import CreateProjectForm from '../forms/project/CreateProjectForm';
+// import CreateProjectForm from '../forms/CreateProjectForm';
 import UserContext from './../../context/userContext';
+import MultiStepForm from '../forms/MultiStepForm';
 
 function Projects() {
     const api_url = config.url.API_URL;
@@ -107,7 +107,7 @@ function Projects() {
         <div className="projects">
             {popup
                 && <Popup closePopup={closePopup} title="Create a new Project" >
-                    <CreateProjectForm refresh={handleProjectsChange} />
+                    <MultiStepForm refresh={handleProjectsChange} />
                 </Popup>}
             <SubHeader heading="Projects">
                 <Button text={"Add Project"} icon={<FiPlus />} clicked={addProject} />

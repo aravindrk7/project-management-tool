@@ -37,6 +37,7 @@ function ProjectDetails(props) {
     useEffect(() => {
         const getprojectData = async () => {
             const projectData = await axios.get(api_url + 'project/' + id);
+            console.log(projectData.data);
             setProject(projectData.data);
             getTaskData(projectData.data._id);
         }

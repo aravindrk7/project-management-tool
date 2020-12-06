@@ -93,6 +93,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    height: 40px;
 }
 
 /* Project Footer */
@@ -118,8 +119,8 @@
     background: var(--bg-secondary);
 }
 .projects__projectFooterUserIcon {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
 }
 .projects__projectFooterUserIcon--new {

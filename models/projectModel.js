@@ -36,7 +36,8 @@ const projectSchema = mongoose.Schema({
         default: 'open'
     },
     head: {
-        type: Object,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users',
         required: true
     },
     privacy: {

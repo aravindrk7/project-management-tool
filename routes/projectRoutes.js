@@ -21,38 +21,43 @@ function getCurrentTime() {
     return dateTime = date + '_' + time;
 }
 
-router.get('/', async (req, res) => {
-    try {
-        const projects = await Project.find();
-        res.json(projects);
-    } catch (error) {
-        res
-            .status(500)
-            .json({ error: error.message });
-    }
-});
+// router.get('/', async (req, res) => {
+//     try {
+//         const projects = await Project.find();
+//         res.json(projects);
+//     } catch (error) {
+//         res
+//             .status(500)
+//             .json({ error: error.message });
+//     }
+// });
 
+
+
+// Add a new Project
 router.post('/add', upload.single('displayPicture'), async (req, res) => {
-    const newProject = new Project({
-        name: req.body.name,
-        description: req.body.description,
-        start_date: req.body.start_date,
-        due_date: req.body.due_date,
-        created_by: req.body.created_by,
-        head: JSON.parse(req.body.head),
-        displayPicture: req.file.filename
+    console.log(req.body);
+    // const newProject = new Project({
+    //     name: req.body.name,
+    //     description: req.body.description,
+    //     start_date: req.body.start_date,
+    //     due_date: req.body.due_date,
+    //     created_by: req.body.created_by,
+    //     head: req.body.head,
+    //     displayPicture: req.file.filename
 
-    });
-    try {
-        const savedProject = await newProject.save();
-        res.json(savedProject);
-    }
-    catch (err) {
-        res.json({ message: err });
-    }
+    // });
+    // try {
+    //     const savedProject = await newProject.save();
+    //     res.json(savedProject);
+    // }
+    // catch (err) {
+    //     res.json({ message: err });
+    // }
 
 });
 
+// Favorites
 router.get('/favorites/:id', async (req, res) => {
     try {
         const favorites = await Project.find({ $and: [{ $or: [{ "members.id": req.params.id }, { "head.id": req.params.id }] }, { favorite: true }] }, { name: 1 });
@@ -83,10 +88,14 @@ router.patch('/remove-favorites/:id', async (req, res) => {
             .json({ error: error.message });
     }
 });
+
+// Get Project Details
 router.get('/:id', async (req, res) => {
     try {
-        const project = await Project.findOne({ _id: req.params.id })
+        await Project.findOne({ _id: req.params.id })
             .lean()
+            .populate('head', '-password')
+            .populate('tasks')
             .populate('members', '-password')
             .exec()
             .then(project => {
@@ -99,11 +108,12 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+// Get all projects of user
 router.get('/user/:id', async (req, res) => {
     try {
-        // let projects = await Project.find().or([{ "members.id": req.params.id }, { "head.id": req.params.id }]).lean();
-        let projects = await Project.find().or([{ "members": req.params.id }, { "head.id": req.params.id }])
+        await Project.find().or([{ "members": req.params.id }, { "head": req.params.id }])
             .lean()
+            .populate('head', '-password')
             .populate('tasks', 'status')
             .populate('members', '-password')
             .exec()
