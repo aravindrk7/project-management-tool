@@ -62,7 +62,7 @@ function MultiStepForm(props) {
                     formData.append('head', data.head)
                     formData.append('displayPicture', data.displayPicture)
                     formData.append('tasks', [data.tasks])
-                    formData.append('members', [data.tasks])
+                    formData.append('members', [data.members])
                     console.log(formData);
 
                     await axios.post(api_url + 'project/add', formData)

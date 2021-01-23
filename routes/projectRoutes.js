@@ -36,31 +36,30 @@ function getCurrentTime() {
 
 // Add a new Project
 router.post('/add', upload.single('displayPicture'), async (req, res) => {
-    console.log(req.body);
-    // const newProject = new Project({
-    //     name: req.body.name,
-    //     description: req.body.description,
-    //     start_date: req.body.start_date,
-    //     due_date: req.body.due_date,
-    //     created_by: req.body.created_by,
-    //     head: req.body.head,
-    //     displayPicture: req.file.filename
+    const newProject = new Project({
+        name: req.body.name,
+        description: req.body.description,
+        start_date: req.body.start_date,
+        due_date: req.body.due_date,
+        created_by: req.body.created_by,
+        head: req.body.head,
+        displayPicture: req.file.filename
 
-    // });
-    // try {
-    //     const savedProject = await newProject.save();
-    //     res.json(savedProject);
-    // }
-    // catch (err) {
-    //     res.json({ message: err });
-    // }
+    });
+    try {
+        const savedProject = await newProject.save();
+        res.json(savedProject);
+    }
+    catch (err) {
+        res.json({ message: err });
+    }
 
 });
 
 // Favorites
 router.get('/favorites/:id', async (req, res) => {
     try {
-        const favorites = await Project.find({ $and: [{ $or: [{ "members.id": req.params.id }, { "head.id": req.params.id }] }, { favorite: true }] }, { name: 1 });
+        const favorites = await Project.find({ $and: [{ $or: [{ "members": req.params.id }, { "head": req.params.id }] }, { favorite: true }] }, { name: 1 });
         res.json(favorites);
     } catch (error) {
         res
@@ -81,6 +80,17 @@ router.patch('/add-favorites/:id', async (req, res) => {
 router.patch('/remove-favorites/:id', async (req, res) => {
     try {
         const project = await Project.findByIdAndUpdate(req.params.id, { favorite: false });
+        res.json(project);
+    } catch (error) {
+        res
+            .status(500)
+            .json({ error: error.message });
+    }
+});
+router.patch('/add-member/:projectId', async (req, res) => {
+    console.log(req.body);
+    try {
+        const project = await Project.findByIdAndUpdate(req.params.projectId, { $push: { members: req.body.member } });
         res.json(project);
     } catch (error) {
         res

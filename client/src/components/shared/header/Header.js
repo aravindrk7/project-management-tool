@@ -36,7 +36,6 @@ function Header() {
                         userData.user &&
                         <img className="header__userIcon" src={"http://localhost:5000/uploads/" + userData.user?.displayPicture} alt="" />
                     }
-
                 </div>
                 <div className="header__icon center">
                     <FiBell />

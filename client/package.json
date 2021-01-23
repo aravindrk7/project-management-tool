@@ -12,10 +12,8 @@
     "react": "^16.13.1",
     "react-big-calendar": "^0.29.0",
     "react-dom": "^16.13.1",
-    "react-hooks-helper": "^1.6.0",
     "react-icons": "^3.11.0",
     "react-router-dom": "^5.2.0",
-    "react-schedule-calendar": "^0.22.8",
     "react-scripts": "3.4.3",
     "react-spring": "^8.0.27"
   },

@@ -1,12 +1,31 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const User = require('../models/userModel');
+const Project = require('../models/projectModel');
 const jwt = require('jsonwebtoken');
 const auth = require('./../middlewares/auth');
 const multer = require('multer');
 
-router.get('/', async (req, res) => {
-    res.send("User API 👨‍💻");
+function getNonMembers(arr1, arr2) {
+    return arr1.filter(item => {
+        return arr2.indexOf(item._id) < 0;
+    })
+}
+
+router.get('/:projectID/nonMember', async (req, res) => {
+    try {
+        await User.find()
+            .select('displayName')
+            .then(async response => {
+                const membersData = await Project.findById(req.params.projectID).select('members');
+                const nonMembers = getNonMembers(response, membersData.members);
+                res.json(nonMembers)
+            })
+    } catch (error) {
+        res
+            .status(500)
+            .json({ error: error.message });
+    }
 });
 
 // Multer for storing photos

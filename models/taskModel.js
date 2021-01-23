@@ -2,11 +2,13 @@ const mongoose = require('mongoose');
 
 const taskSchema = mongoose.Schema({
     assigned_to: {
-        type: Object,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users',
         required: true,
     },
     assigned_by: {
-        type: Object,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users',
         required: true,
     },
     created_at: {
@@ -16,10 +18,12 @@ const taskSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        required: true
+        required: true,
+        default: 'open'
     },
     associated_project: {
-        type: Object,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'projects',
         required: true
     },
     title: {
@@ -40,7 +44,8 @@ const taskSchema = mongoose.Schema({
     },
     like: {
         type: Boolean,
-        required: true
+        required: true,
+        default: false
     }
 });
 
